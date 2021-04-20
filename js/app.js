@@ -1,14 +1,14 @@
-const pro = 'https://ivnapp-socket-server.herokuapp.com/api/product/products';
+const productos = 'https://ivnapp-socket-server.herokuapp.com/api/product/products';
 const gru = 'http://ivnapp-socket-server.herokuapp.com/api/product/menu';
 
-consulta(pro);
+consulta(productos);
 //let listaGru = consulta(gru);
 
-let lis;
-let sel = [];
+let listaProductos;
+let resultadoBusqueda = [];
 //let gru;
 
-function consulta(url) { //rescata los datos de la api
+function consulta( url ) { //rescata los datos de la api
     let requestOptions = {
         method: 'GET',
         redirect: 'follow'
@@ -19,8 +19,8 @@ function consulta(url) { //rescata los datos de la api
         .then(data => {
             console.log(data);
             //datos = JSON.parse(data);
-            lis = JSON.parse(JSON.stringify(data.data));
-            imprimirLista(lis);
+            listaProductos = JSON.parse(JSON.stringify(data.data));
+            imprimirLista(listaProductos);
         })
         .catch(err => console.log(err))
         // https://stackoverflow.com/questions/46522749/how-to-solve-redirect-has-been-blocked-by-cors-policy-no-access-control-allow
@@ -51,38 +51,33 @@ function imprimirLista(datos) { //imprime los datos entregados en lista html
 function buscar() { //busca las concidencias de la busqueda y una lista de resultados
 
     console.log("BUSCANDO")
-    let s = document.getElementById("search").value.toString();
-    let bus = cortaPalabras(s);
-    sel = [];
+    let palabras = document.getElementById("search").value.toString();
+    let busqueda = cortaPalabras( palabras );
+    resultadoBusqueda = [];
 
-    console.log(s);
-    console.log(bus);
-    console.log(bus.length);
+    console.log(palabras);
+    console.log(busqueda);
+    console.log(busqueda.length);
 
-    if (bus.length >= 1) { //si hay elementos en la busqueda, la busqueda se realiza
+    if (busqueda.length >= 1) { //si hay elementos en la busqueda, la busqueda se realiza
         document.getElementById("lista").innerHTML = "";
-        for (let i in lis) { //recorre filas de la lista
-            let data = lis[i]; //toma la fila
+        for (let i in listaProductos) { //recorre filas de la lista
+            let data = listaProductos[i]; //toma la fila
             for (let x in data) { // recorre columnas de la fila
                 let e = data[x]; //toma la columna 
-                let con = 0;
-                for (let b in bus) { //recorre elementos de la busqueda
-                    let s = bus[b]; //toma la palabra de la busqueda
-                    if (e.toString().includes(s) == true) { //compara elementos de la busqueda con los de la fila
-                        con++; //si existe coincidencia se suma al contador 
-                    }
+                let contador = 0;
+                for (let b in busqueda) { //recorre elementos de la busqueda
+                    if (e.toString().includes( busqueda[b] ) == true ) contador++;
                 }
-                if (con > 0) { //si el contador es mayor que cero, agrega esa fila a la seleccion
-                    sel.push(data);
-                }
+                if ( contador > 0) resultadoBusqueda.push( data );
             }
         }
     } else {
-        console.log("NO HAY DATOS")
+        console.log( "NO HAY DATOS" )
     }
 
-    imprimirLista(sel);
-    console.log(sel);
+    imprimirLista(resultadoBusqueda);
+    console.log(resultadoBusqueda);
 
 }
 
@@ -98,9 +93,7 @@ function cortaPalabras(srt) { //corta el string busqueda en un array de palabras
             num = '';
         }
 
-        if (i == srt.length - 1 && num !== '') {
-            fila.push(num);
-        }
+        if (i == srt.length - 1 && num !== '') fila.push(num);
     }
     console.log(fila);
     return fila;
