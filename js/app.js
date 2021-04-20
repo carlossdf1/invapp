@@ -8,7 +8,7 @@ let listaProductos;
 let resultadoBusqueda = [];
 //let gru;
 
-function consulta( url ) { //rescata los datos de la api
+function consulta(url) { //rescata los datos de la api
     let requestOptions = {
         method: 'GET',
         redirect: 'follow'
@@ -52,7 +52,7 @@ function buscar() { //busca las concidencias de la busqueda y una lista de resul
 
     console.log("BUSCANDO")
     let palabras = document.getElementById("search").value.toString();
-    let busqueda = cortaPalabras( palabras );
+    let busqueda = cortaPalabras(palabras);
     resultadoBusqueda = [];
 
     console.log(palabras);
@@ -63,17 +63,20 @@ function buscar() { //busca las concidencias de la busqueda y una lista de resul
         document.getElementById("lista").innerHTML = "";
         for (let i in listaProductos) { //recorre filas de la lista
             let data = listaProductos[i]; //toma la fila
-            for (let x in data) { // recorre columnas de la fila
-                let e = data[x]; //toma la columna 
-                let contador = 0;
-                for (let b in busqueda) { //recorre elementos de la busqueda
-                    if (e.toString().includes( busqueda[b] ) == true ) contador++;
+            let contador = 0;
+            for (let b in busqueda) { //recorre elementos de la busqueda
+                let coincidecia = false;
+                for (let x in data) { // recorre columnas de la fila
+                    let e = data[x]; //toma la columna 
+
+                    if (e.toString().includes(busqueda[b]) == true) coincidecia = true;
                 }
-                if ( contador > 0) resultadoBusqueda.push( data );
+                if (coincidecia == true) contador++;
             }
+            if (contador == busqueda.length) resultadoBusqueda.push(data);
         }
     } else {
-        console.log( "NO HAY DATOS" )
+        console.log("NO HAY DATOS")
     }
 
     imprimirLista(resultadoBusqueda);
