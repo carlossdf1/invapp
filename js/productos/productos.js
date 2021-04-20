@@ -101,8 +101,6 @@ function cortaPalabras(srt) { //corta el string busqueda en un array de palabras
     return fila;
 }
 
-document.getElementById('search').addEventListener('change', buscar, false);
-document.getElementById('buscar').addEventListener('click', buscar, false);
 //imprimirLista(listaPro);
 /* var requestOptions = {
     method: 'GET',

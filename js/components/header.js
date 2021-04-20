@@ -28,8 +28,8 @@ class Header extends HTMLElement {
                     </li>
                 </ul>
                 <div class="d-flex">
-                    <input id="search" class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-                    <button id="buscar" class="btn btn-outline-light" type="button">Buscar</button>
+                    <input id="search" class="form-control me-2" onchange="buscar()" type="search" placeholder="Buscar" aria-label="Search">
+                    <button id="buscar" class="btn btn-outline-light" onclick="buscar()" type="button">Buscar</button>
                 </div>
             </div>
         </div>
