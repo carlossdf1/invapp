@@ -1,6 +1,22 @@
-consulta(productos);
-setTimeout(() => { console.log("CANTIDAD DE PRODUCTOS EN LA LISTA: ", listaProductos.length) }, 1000);
-setTimeout(() => { document.getElementById("numeroProductos").innerHTML = listaProductos.length }, 500);
+
+
+function cantidadProduct() {
+    consulta(productos);
+    return setTimeout(() => { document.getElementById("numeroProductos").innerHTML = listaProductos.length }, 500);
+}
+
+// function cantidadGroup() {
+//     consulta(group);
+//     setTimeout(() => { document.getElementById("numeroGrupos").innerHTML = listaProductos.length }, 500);
+// }
+
+// function cantidadUsers() {
+//     consulta(users);
+//     setTimeout(() => { document.getElementById("numeroUsuarios").innerHTML = listaProductos.length }, 500);
+//}
+
+cantidadProduct()
+
 
 
 
