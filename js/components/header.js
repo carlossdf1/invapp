@@ -1,6 +1,6 @@
 class Header extends HTMLElement {
     constructor() {
-      super();
+        super();
     }
 
     connectedCallback() {
@@ -18,7 +18,7 @@ class Header extends HTMLElement {
                         <a class="nav-link" aria-current="page" href="../../index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Grupos</a>
+                        <a class="nav-link" href="/view/grupos/grupos.html">Grupos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/view/productos/productos.html">Inventario</a>
@@ -37,8 +37,7 @@ class Header extends HTMLElement {
     </header>
         `;
     }
-    
+
 }
 
 customElements.define('header-component', Header);
-  
