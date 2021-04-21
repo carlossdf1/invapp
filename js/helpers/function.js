@@ -1,4 +1,4 @@
-const api = "http://ivnapp-socket-server.herokuapp.com/api/";
+const api = "https://ivnapp-socket-server.herokuapp.com/api/";
 
 function cortaPalabras(srt) { //corta el string busqueda en un array de palabras para comparar
 
