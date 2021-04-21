@@ -4,7 +4,7 @@ const gru = 'http://ivnapp-socket-server.herokuapp.com/api/product/menu';
 consulta(productos);
 //let listaGru = consulta(gru);
 
-let listaProductos;
+let listaProductos = 0;
 let resultadoBusqueda = [];
 //let gru;
 
