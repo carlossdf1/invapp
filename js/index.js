@@ -1,7 +1,10 @@
-consulta(productos);
-setTimeout(() => { console.log("CANTIDAD DE PRODUCTOS EN LA LISTA: ", listaProductos.length) }, 1000);
-setTimeout(() => { document.getElementById("numeroProductos").innerHTML = listaProductos.length }, 500);
+async function imprimirNumeroProductos() {
+    let numeroProductos = await consultaProductos();
+    let numeroGrupos = await consultaGrupos();
+    let numeroUsuarios = await consultaUsuarios();
+    document.getElementById("numeroProductos").innerHTML = numeroProductos.length;
+    document.getElementById("numeroGrupos").innerHTML = numeroGrupos.length;
+    document.getElementById("numeroUsuarios").innerHTML = numeroUsuarios.length;
+}
 
-
-
-/* let numeroProductos = listaProductos.length(); */
+imprimirNumeroProductos();
