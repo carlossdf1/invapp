@@ -76,8 +76,8 @@ function buscar() { //busca las concidencias de la busqueda y una lista de resul
             for (let b in busqueda) { //recorre elementos de la busqueda
                 let coincidecia = false;
                 for (let x in data) { // recorre columnas de la fila
-                    let e = data[x]; //toma la columna 
-                    if (e.toString().includes(busqueda[b]) == true) coincidecia = true; //busca solo la concidencia por fila
+                    let e = data[x]; //toma la columna
+                    if (e != data._id && e.toString().includes(busqueda[b]) == true) coincidecia = true; //busca solo la concidencia por fila
                 }
                 if (coincidecia == true) contador++; //suma solo la existencia de la palabra en esa fila, no repite si conincide mas de una vez
             }
