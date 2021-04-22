@@ -18,13 +18,13 @@ class Header extends HTMLElement {
                         <a class="nav-link" aria-current="page" href="../../index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/view/grupos/grupos.html">Grupos</a>
+                        <a class="nav-link" href="~/view/grupos/grupos.html">Grupos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/view/productos/productos.html">Inventario</a>
+                        <a class="nav-link" href="~/view/productos/productos.html">Inventario</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/view/nosotros/nosotros.html">Nosotros</a>
+                        <a class="nav-link" href="~/view/nosotros/nosotros.html">Nosotros</a>
                     </li>
                 </ul>
                 <div class="d-flex">
