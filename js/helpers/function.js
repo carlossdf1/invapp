@@ -51,7 +51,7 @@ function imprimirLista(datos) { //imprime los datos entregados en lista html
             data.quantity + td +
             data.category + td +
             data.ubication + td +
-            data.img +
+            data.observations +
             '</td></tr>';
     }
 
