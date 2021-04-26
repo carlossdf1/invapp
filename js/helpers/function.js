@@ -103,16 +103,19 @@ function buscar() { //busca las concidencias de la busqueda y una lista de resul
 
 function imprimirElemento() {
     var elemento = document.getElementById('tabla');
-    console.log(elemento);
     var ventana = window.open('', 'PRINT', 'height=400,width=600');
     ventana.document.write('<html><head><title>' + document.title + '</title>');
+    ventana.document.write("<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6' crossorigin='anonymous'>");
     ventana.document.write('</head><body>');
-    ventana.document.write(elemento.innerHTML);
-    console.log(elemento.innerHTML)
+    ventana.document.write(elemento.outerHTML);
     ventana.document.write('</body></html>');
     ventana.document.close();
     ventana.focus();
-    ventana.print();
-    ventana.close();
+    //ventana.print();
+    setTimeout(() => {
+        ventana.print();
+        ventana.close();
+    }, 1000);
+    // ventana.close();
     return true;
 }
