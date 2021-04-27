@@ -17,27 +17,113 @@
     <header-component></header-component>
 
     <div class="container-xxl my-md-4 bd-layout ">
-        <div class="row">
-            <div class="col-11">
-                <table id="tabla" class="table table-striped table-bordered">
-                    <thead class="table-dark">
-                        <tr>
-                            <th scope="col ">N°</th>
-                            <th scope="col ">Nombre</th>
-                            <th scope="col ">Precio</th>
-                            <th scope="col ">Cantidad</th>
-                            <th scope="col ">Categoria</th>
-                            <th scope="col ">Ubication</th>
-                            <th scope="col ">Observación</th>
-                        </tr>
-                    </thead>
-                    <tbody id="lista">
-                    </tbody>
-                </table>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Ver
+        </button>
+
+        <!-- Modal -->
+        <div class="container">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Detalle</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col float-md-end mb-3 ms-md-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
+                                <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+                            </svg>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="nombre" class="col-sm-2 col-form-label">NOMBRE:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" id="nombre" value="Producto">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="cantidad" class="col-sm-2 col-form-label">CANTIDAD:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" id="cantidad" value="Cantidad">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="precio" class="col-sm-2 col-form-label">PRECIO:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" id="precio" value="Valor">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="grupo" class="col-sm-2 col-form-label">GRUPO:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" id="grupo" value="Producto">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="ubicacion" class="col-sm-2 col-form-label">UBICACION:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" id="ubicacion" value="Ubicado en">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="nombre" class="col-sm-2 col-form-label">NOMBRE:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" id="nombre" value="Producto">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="obs" class="col-sm-2 col-form-label">OBSERVACIÓN:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" id="obs" value="Detalles">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary">Imprimir</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-1">
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button id="imprimir" class="btn btn-primary me-md-2" type="button" onclick="imprimirElemento()">Imprimir</button>
+        </div>
+
+        <!--         <div class="container-lg" style="position: fixed; z-index: 1;">
+            <div class="row justify-content-center">
+                <div class="col-11">
+                    <div class="clearfix bg-white">
+
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="container">
+            <div class="row">
+                <div class="col-11">
+                    <table id="tabla" class="table table-striped table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col ">N°</th>
+                                <th scope="col ">Nombre</th>
+                                <th scope="col ">Precio</th>
+                                <th scope="col ">Cantidad</th>
+                                <!-- <th scope="col ">Categoria</th> -->
+                                <th scope="col ">Ubication</th>
+                                <th scope="col ">Observación</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lista">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-1">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button id="imprimir" class="btn btn-primary me-md-2" type="button" onclick="imprimirElemento()">Imprimir</button>
+                    </div>
                 </div>
             </div>
         </div>
