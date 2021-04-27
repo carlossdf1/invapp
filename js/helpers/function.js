@@ -49,7 +49,7 @@ function imprimirLista(datos) { //imprime los datos entregados en lista html
             data.name + td +
             data.price + td +
             data.quantity + td +
-            data.category + td +
+            //data.category + td +
             data.ubication + td +
             elementoVacio(data.observations) +
             '</td></tr>';
