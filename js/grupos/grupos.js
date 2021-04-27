@@ -4,13 +4,15 @@ let listaGrupos;
 async function consultaGrupos() {
     let respuesta   = await consulta( grupos );
     listaGrupos     = respuesta.data;
-    return imprimirLista( listaGrupos );
+    return listaGrupos;
 };
 
-function imprimirLista( datos ) { //imprime los datos entregados en lista html
+async function imprimirLista() { 
+    
+    const datos = await consultaGrupos()
     console.log( "DATOS RECIBIDOS" );
     let td = "</td><td>";
-    
+
     for ( let i in datos ) {
         let data = datos[i];
         document.getElementById( "lista" ).innerHTML +=
@@ -21,5 +23,3 @@ function imprimirLista( datos ) { //imprime los datos entregados en lista html
     }
     
 }
-
-consultaGrupos();
