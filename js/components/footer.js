@@ -13,9 +13,10 @@ class Footer extends HTMLElement {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          background-color: #dfdfe2;
-          bottom: 0;
           width: 100%;
+          position: fixed;
+          bottom: 0;
+          
       }
         
         ul li {
@@ -25,7 +26,7 @@ class Footer extends HTMLElement {
         
         a {
           margin: 0 15px;
-          color: inherit;
+          color: white;
           text-decoration: none;
         }
         
@@ -41,19 +42,36 @@ class Footer extends HTMLElement {
         .social-row li a {
           margin: 0 15px;
         }
+
+        .copyright{
+          color               : #C7C7C7;
+      }
+      
+      .copyright a{
+          text-decoration     : none;
+          color               : white;
+          /* font-weight         : bold; */
+      }
+      
         </style>
-        <footer>
+        <footer class="bg-dark">
           <ul>
             <li><a href="about.html">About</a></li>
             <li><a href="work.html">Work</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="/view/nosotros/nosotros.html">Nosotros</a></li>
           </ul>
-          <ul class="social-row">
-            <li><a href="https://github.com/my-github-profile"><i class="fab fa-github"></i></a></li>
-            <li><a href="https://twitter.com/my-twitter-profile"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://www.linkedin.com/in/my-linkedin-profile"><i class="fab fa-linkedin"></i></a></li>
-          </ul>
+          <div class="copyright">
+             © Derechos Reservados | <a href="https://impulsandonegocios.cl">ImpulsandoNegocios</a>
+          </div>
         </footer>
+
+        <script type="text/javascript">
+
+          copyright=new Date();
+          update=copyright.getFullYear();
+          document.write("© 2018 - " + update + " " + "Mi web");
+
+        </script>
       `;
     }
   }
