@@ -4,7 +4,7 @@ function cortaPalabras(srt) { //corta el string busqueda en un array de palabras
 
     let fila = [];
     let num = '';
-    for (var i = 0; i < srt.length; i++) {
+    for (let i = 0; i < srt.length; i++) {
         if (srt[i] !== ' ') {
             num += srt[i];
         } else if (num !== '') {
@@ -102,8 +102,8 @@ function buscar() { //busca las concidencias de la busqueda y una lista de resul
 }
 
 function imprimirElemento() {
-    var elemento = document.getElementById('tabla');
-    var ventana = window.open('', 'PRINT', 'height=400,width=600');
+    let elemento = document.getElementById('tabla');
+    let ventana = window.open('', 'PRINT', 'height=400,width=600');
     ventana.document.write('<html><head><title>' + document.title + '</title>');
     ventana.document.write("<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6' crossorigin='anonymous'>");
     ventana.document.write('</head><body>');
