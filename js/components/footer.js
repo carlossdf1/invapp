@@ -58,7 +58,11 @@ class Footer extends HTMLElement {
           <ul>
             <li><a href="about.html">About</a></li>
             <li><a href="work.html">Work</a></li>
+<<<<<<< HEAD
             <li><a href="../nosotros/nosotros.html">Nosotros</a></li>
+=======
+            <li><a href="view/nosotros/nosotros.html">Nosotros</a></li>
+>>>>>>> a7d66996f8b7eb666fb267885064af1ae828609b
           </ul>
           <div class="copyright">
              © Derechos Reservados | <a href="https://impulsandonegocios.cl">ImpulsandoNegocios</a>
