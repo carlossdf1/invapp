@@ -15,7 +15,7 @@ class Header extends HTMLElement {
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                        <a class="nav-link" aria-current="page" href="../../index.html">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../grupos/grupos.html">Grupos</a>
