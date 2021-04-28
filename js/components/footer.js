@@ -1,10 +1,10 @@
 class Footer extends HTMLElement {
     constructor() {
-      super();
+        super();
     }
-  
+
     connectedCallback() {
-      this.innerHTML = `
+        this.innerHTML = `
         <style>
         footer {
           height: 60px;
@@ -58,7 +58,7 @@ class Footer extends HTMLElement {
           <ul>
             <li><a href="about.html">About</a></li>
             <li><a href="work.html">Work</a></li>
-            <li><a href="/view/nosotros/nosotros.html">Nosotros</a></li>
+            <li><a href="../nosotros/nosotros.html">Nosotros</a></li>
           </ul>
           <div class="copyright">
              © Derechos Reservados | <a href="https://impulsandonegocios.cl">ImpulsandoNegocios</a>
@@ -74,7 +74,6 @@ class Footer extends HTMLElement {
         </script>
       `;
     }
-  }
-  
-  customElements.define('footer-component', Footer);
-  
+}
+
+customElements.define('footer-component', Footer);
