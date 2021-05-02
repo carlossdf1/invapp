@@ -44,6 +44,7 @@ function imprimirLista(datos) { //imprime los datos entregados en lista html
 
     for (let i in datos) {
         let data = datos[i];
+        let com = '"';
 
         document.getElementById("lista").innerHTML +=
             '<tr scope="row"><td>' +
@@ -54,7 +55,7 @@ function imprimirLista(datos) { //imprime los datos entregados en lista html
             //data.category + td +
             data.ubication + td +
             elementoVacio(data.observations) + td +
-            boton + "onclick='vistaModal(" + data._id + ");'>Ver</button>" +
+            boton + "onclick='vistaModal(" + com + data._id + com + ");'>Ver</button>" +
             '</td></tr>';
     }
 
@@ -64,15 +65,15 @@ function vistaModal(id) {
 
     let modalProducto = listaProductos.filter(listaProductos => listaProductos._id === id);
 
+    document.getElementById("nombreModal").value = modalProducto[0].name;
+    document.getElementById("cantidadModal").value = modalProducto[0].quantity;
+    document.getElementById("precioModal").value = modalProducto[0].price;
+    document.getElementById("grupoModal").value = modalProducto[0].group;
+    document.getElementById("ubicacionModal").value = modalProducto[0].ubication;
+    document.getElementById("categoriaModal").value = modalProducto[0].category;
+    document.getElementById("obsModal").value = elementoVacio(modalProducto[0].observations);
+
     console.log(modalProducto);
-
-    document.getElementById("nombreModal").innerHTML = modalProducto.name;
-    document.getElementById("cantidadModal").innerHTML = modalProducto.quantity;
-    document.getElementById("precioModal").innerHTML = modalProducto.price;
-    document.getElementById("ubicacionModal").innerHTML = modalProducto.ubicacion;
-    document.getElementById("categoriaModal").innerHTML = modalProducto.category;
-    document.getElementById("obsModal").innerHTML = elementoVacio(modalProducto.observations);
-
 
 }
 
