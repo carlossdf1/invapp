@@ -131,10 +131,8 @@ function imprimirElemento(id) {
     ventana.document.write('</body></html>');
     ventana.document.close();
     ventana.focus();
-    //ventana.print();
     setTimeout(() => {
         ventana.print();
-        //ventana.close();
     }, 1000);
     // ventana.close();
     return true;
