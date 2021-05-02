@@ -40,9 +40,11 @@ function consulta(url) { //rescata los datos de la api
 function imprimirLista(datos) { //imprime los datos entregados en lista html
     console.log("DATOS RECIBIDOS");
     let td = "</td><td>";
+    let boton = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal' ";
 
     for (let i in datos) {
         let data = datos[i];
+
         document.getElementById("lista").innerHTML +=
             '<tr scope="row"><td>' +
             i + td +
@@ -51,9 +53,26 @@ function imprimirLista(datos) { //imprime los datos entregados en lista html
             data.quantity + td +
             //data.category + td +
             data.ubication + td +
-            elementoVacio(data.observations) +
+            elementoVacio(data.observations) + td +
+            boton + "onclick='vistaModal(" + data._id + ");'>Ver</button>" +
             '</td></tr>';
     }
+
+}
+
+function vistaModal(id) {
+
+    let modalProducto = listaProductos.filter(listaProductos => listaProductos._id === id);
+
+    console.log(modalProducto);
+
+    document.getElementById("nombreModal").innerHTML = modalProducto.name;
+    document.getElementById("cantidadModal").innerHTML = modalProducto.quantity;
+    document.getElementById("precioModal").innerHTML = modalProducto.price;
+    document.getElementById("ubicacionModal").innerHTML = modalProducto.ubicacion;
+    document.getElementById("categoriaModal").innerHTML = modalProducto.category;
+    document.getElementById("obsModal").innerHTML = elementoVacio(modalProducto.observations);
+
 
 }
 
