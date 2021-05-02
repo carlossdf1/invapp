@@ -10,3 +10,10 @@ async function consultaProductos() {
 async function imprimir() {
     imprimirLista(await consultaProductos());
 }
+
+let myModal = document.getElementById('myModal')
+let myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', function() {
+    myInput.focus()
+});

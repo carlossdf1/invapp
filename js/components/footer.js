@@ -14,7 +14,7 @@ class Footer extends HTMLElement {
           justify-content: space-between;
           align-items: center;
           width: 100%;
-          position: fixed;
+          position: relative;
           bottom: 0;
           
       }
