@@ -40,20 +40,40 @@ function consulta(url) { //rescata los datos de la api
 function imprimirLista(datos) { //imprime los datos entregados en lista html
     console.log("DATOS RECIBIDOS");
     let td = "</td><td>";
+    let boton = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal' ";
 
     for (let i in datos) {
         let data = datos[i];
+        let com = '"';
+
         document.getElementById("lista").innerHTML +=
             '<tr scope="row"><td>' +
             i + td +
             data.name + td +
             data.price + td +
             data.quantity + td +
-            data.category + td +
+            //data.category + td +
             data.ubication + td +
-            elementoVacio(data.observations) +
+            elementoVacio(data.observations) + td +
+            boton + "onclick='vistaModal(" + com + data._id + com + ");'>Ver</button>" +
             '</td></tr>';
     }
+
+}
+
+function vistaModal(id) {
+
+    let modalProducto = listaProductos.filter(listaProductos => listaProductos._id === id);
+
+    document.getElementById("nombreModal").value = modalProducto[0].name;
+    document.getElementById("cantidadModal").value = modalProducto[0].quantity;
+    document.getElementById("precioModal").value = modalProducto[0].price;
+    document.getElementById("grupoModal").value = modalProducto[0].group;
+    document.getElementById("ubicacionModal").value = modalProducto[0].ubication;
+    document.getElementById("categoriaModal").value = modalProducto[0].category;
+    document.getElementById("obsModal").value = elementoVacio(modalProducto[0].observations);
+
+    console.log(modalProducto);
 
 }
 

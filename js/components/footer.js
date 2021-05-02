@@ -1,10 +1,10 @@
 class Footer extends HTMLElement {
     constructor() {
-      super();
+        super();
     }
-  
+
     connectedCallback() {
-      this.innerHTML = `
+        this.innerHTML = `
         <style>
         footer {
           height: 60px;
@@ -14,7 +14,7 @@ class Footer extends HTMLElement {
           justify-content: space-between;
           align-items: center;
           width: 100%;
-          position: fixed;
+          position: relative;
           bottom: 0;
           
       }
@@ -74,7 +74,6 @@ class Footer extends HTMLElement {
         </script>
       `;
     }
-  }
-  
-  customElements.define('footer-component', Footer);
-  
+}
+
+customElements.define('footer-component', Footer);
