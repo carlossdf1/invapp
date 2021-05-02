@@ -121,8 +121,8 @@ function buscar() { //busca las concidencias de la busqueda y una lista de resul
 
 }
 
-function imprimirElemento() {
-    let elemento = document.getElementById('tabla');
+function imprimirElemento(id) {
+    let elemento = document.getElementById(id);
     let ventana = window.open('', 'PRINT', 'height=400,width=600');
     ventana.document.write('<html><head><title>' + document.title + '</title>');
     ventana.document.write("<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6' crossorigin='anonymous'>");
@@ -134,7 +134,7 @@ function imprimirElemento() {
     //ventana.print();
     setTimeout(() => {
         ventana.print();
-        ventana.close();
+        //ventana.close();
     }, 1000);
     // ventana.close();
     return true;
