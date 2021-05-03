@@ -7,7 +7,7 @@ class Footer extends HTMLElement {
         this.innerHTML = `
         <style>
         footer {
-          height: 60px;
+          height: 80px;
           padding: 0 10px;
           list-style: none;
           display: flex;

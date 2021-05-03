@@ -50,11 +50,11 @@ function imprimirLista(datos) { //imprime los datos entregados en lista html
             '<tr scope="row"><td>' +
             i + td +
             data.name + td +
-            data.price + td +
+            //data.price + td +
             data.quantity + td +
             //data.category + td +
             data.ubication + td +
-            elementoVacio(data.observations) + td +
+            //elementoVacio(data.observations) + td +
             boton + "onclick='vistaModal(" + com + data._id + com + ");'>Ver</button>" +
             '</td></tr>';
     }
@@ -64,14 +64,25 @@ function imprimirLista(datos) { //imprime los datos entregados en lista html
 function vistaModal(id) {
 
     let modalProducto = listaProductos.filter(listaProductos => listaProductos._id === id);
+    let com = '"';
 
-    document.getElementById("nombreModal").value = modalProducto[0].name;
-    document.getElementById("cantidadModal").value = modalProducto[0].quantity;
-    document.getElementById("precioModal").value = modalProducto[0].price;
-    document.getElementById("grupoModal").value = modalProducto[0].group;
-    document.getElementById("ubicacionModal").value = modalProducto[0].ubication;
-    document.getElementById("categoriaModal").value = modalProducto[0].category;
-    document.getElementById("obsModal").value = elementoVacio(modalProducto[0].observations);
+    /*  document.getElementById("nombreModal").value = modalProducto[0].name;
+        document.getElementById("cantidadModal").value = modalProducto[0].quantity;
+        document.getElementById("precioModal").value = modalProducto[0].price;
+        document.getElementById("grupoModal").value = modalProducto[0].group;
+        document.getElementById("ubicacionModal").value = modalProducto[0].ubication;
+        document.getElementById("categoriaModal").value = modalProducto[0].category;
+        document.getElementById("obsModal").value = elementoVacio(modalProducto[0].observations); */
+
+    document.formModal.nombreModal.value = modalProducto[0].name;
+    document.formModal.cantidadModal.value = modalProducto[0].quantity;
+    document.formModal.precioModal.value = modalProducto[0].price;
+    document.formModal.grupoModal.value = modalProducto[0].group;
+    document.formModal.ubicacionModal.value = modalProducto[0].ubication;
+    document.formModal.categoriaModal.value = modalProducto[0].category;
+    document.formModal.obsModal.value = elementoVacio(modalProducto[0].observations);
+
+    /* document.getElementById("vistaModalVentana").innerHTML = "vistaModal(" + com + id + com + ")"; */
 
     console.log(modalProducto);
 
@@ -129,6 +140,9 @@ function imprimirElemento(id) {
     ventana.document.write('</head><body>');
     ventana.document.write(elemento.outerHTML);
     ventana.document.write('</body></html>');
+    if (elemento.id === "vistaModal") {
+        ventana = obtenerModal(ventana);
+    }
     ventana.document.close();
     ventana.focus();
     setTimeout(() => {
@@ -136,4 +150,17 @@ function imprimirElemento(id) {
     }, 1000);
     // ventana.close();
     return true;
+}
+
+function obtenerModal(ventana) {
+
+    ventana.document.formModal.nombreModal.value = document.formModal.nombreModal.value;
+    ventana.document.formModal.cantidadModal.value = document.formModal.cantidadModal.value;
+    ventana.document.formModal.precioModal.value = document.formModal.precioModal.value;
+    ventana.document.formModal.grupoModal.value = document.formModal.grupoModal.value;
+    ventana.document.formModal.ubicacionModal.value = document.formModal.ubicacionModal.value;
+    ventana.document.formModal.categoriaModal.value = document.formModal.categoriaModal.value;
+    ventana.document.formModal.obsModal.value = document.formModal.obsModal.value;
+
+    return ventana;
 }
