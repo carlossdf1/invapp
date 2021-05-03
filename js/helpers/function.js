@@ -64,7 +64,6 @@ function imprimirLista(datos) { //imprime los datos entregados en lista html
 function vistaModal(id) {
 
     let modalProducto = listaProductos.filter(listaProductos => listaProductos._id === id);
-    let com = '"';
 
     /*  document.getElementById("nombreModal").value = modalProducto[0].name;
         document.getElementById("cantidadModal").value = modalProducto[0].quantity;
@@ -82,8 +81,6 @@ function vistaModal(id) {
     document.formModal.categoriaModal.value = modalProducto[0].category;
     document.formModal.obsModal.value = elementoVacio(modalProducto[0].observations);
 
-    /* document.getElementById("vistaModalVentana").innerHTML = "vistaModal(" + com + id + com + ")"; */
-
     console.log(modalProducto);
 
 }
@@ -98,7 +95,7 @@ function elementoVacio(dato) {
 function buscar() { //busca las concidencias de la busqueda y una lista de resultados
 
     console.log("BUSCANDO")
-    let palabras = document.getElementById("search").value.toString();
+    let palabras = normalizar(document.getElementById("search").value);
     let busqueda = cortaPalabras(palabras);
     let resultadoBusqueda = [];
 
@@ -115,7 +112,7 @@ function buscar() { //busca las concidencias de la busqueda y una lista de resul
                 let coincidecia = false;
                 for (let x in data) { // recorre columnas de la fila
                     let e = data[x]; //toma la columna
-                    if (e != data._id && e.toString().includes(busqueda[b]) == true) coincidecia = true; //busca solo la concidencia por fila
+                    if (e != data._id && normalizar(e).includes(busqueda[b]) == true) coincidecia = true; //busca solo la concidencia por fila
                 }
                 if (coincidecia == true) contador++; //suma solo la existencia de la palabra en esa fila, no repite si conincide mas de una vez
             }
@@ -163,4 +160,11 @@ function obtenerModal(ventana) {
     ventana.document.formModal.obsModal.value = document.formModal.obsModal.value;
 
     return ventana;
+}
+
+function normalizar(str) {
+    str = str.toString();
+    str = str.toLowerCase();
+    str = str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    return str;
 }
