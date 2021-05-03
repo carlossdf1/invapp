@@ -165,6 +165,6 @@ function obtenerModal(ventana) {
 function normalizar(str) {
     str = str.toString();
     str = str.toLowerCase();
-    str = str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    str = str.normalize("NFD").replace(/[\u0300-\u0301]/g, "");
     return str;
 }
