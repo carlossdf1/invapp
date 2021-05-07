@@ -1,5 +1,5 @@
 const productos = api + "product/products";
-
+let listaProductos;
 /**
  * Función que muestra cada linea de informacion
  *
@@ -7,8 +7,8 @@ const productos = api + "product/products";
  * @version 2021-05-06
  */
 async function consultaProductos() {
-    const respuesta       = await consulta( productos );
-    const listaProductos  = respuesta.data;
+    const respuesta = await consulta( productos );
+    listaProductos  = respuesta.data;
     return listaProductos;
 };
 
