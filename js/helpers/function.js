@@ -168,3 +168,42 @@ function normalizar(str) {
     str = str.normalize("NFD").replace(/[\u0300-\u0301]/g, "");
     return str;
 }
+
+
+
+function agregarModal() {
+    document.formModal.nombreModal.readOnly = false;
+    document.formModal.cantidadModal.readOnly = false;
+    document.formModal.precioModal.readOnly = false;
+    document.formModal.grupoModal.readOnly = false;
+    document.formModal.ubicacionModal.readOnly = false;
+    document.formModal.categoriaModal.readOnly = false;
+    document.formModal.obsModal.readOnly = false;
+
+}
+
+function agregarProducto() {
+
+    let raw = {
+        "name": document.formModal.nombreModal.value,
+        "img": "",
+        "category": document.formModal.categoriaModal.value,
+        "quantity": document.formModal.cantidadModal.value,
+        "price": document.formModal.precioModal.value,
+        "ubication": document.formModal.ubicacionModal.value,
+        "group": document.formModal.grupoModal.value,
+        "observations": document.formModal.obsModal.value,
+    };
+
+    let requestOptions = {
+        method: 'POST',
+        body: raw,
+        redirect: 'follow'
+    };
+
+    fetch("localhost:3000/api/product/new", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+
+}
