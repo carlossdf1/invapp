@@ -15,16 +15,16 @@ class Header extends HTMLElement {
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/index.html">Home</a>
+                        <a class="nav-link" aria-current="page" href="/WebStore/index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/view/grupos/grupos.html">Grupos</a>
+                        <a class="nav-link" href="/WebStore/view/grupos/grupos.html">Grupos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/view/productos/productos.html">Inventario</a>
+                        <a class="nav-link" href="/WebStore/view/productos/productos.html">Inventario</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/view/nosotros/nosotros.html">Nosotros</a>
+                        <a class="nav-link" href="/WebStore/view/nosotros/nosotros.html">Nosotros</a>
                     </li>
                 </ul>
                 <div class="d-flex">

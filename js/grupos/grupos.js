@@ -1,24 +1,34 @@
 const grupos = api + 'product/menu';
-let listaGrupos;
 
+/**
+ * Función que imprime la lista de consulta de grupos
+ *
+ * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @version 2021-05-06
+ */
 async function consultaGrupos() {
-    let respuesta   = await consulta( grupos );
-    listaGrupos     = respuesta.data;
+    const respuesta   = await consulta( grupos );
+    const listaGrupos = respuesta.data;
     return listaGrupos;
 };
+
+/**
+ * Función que imprime la lista de consulta de grupos
+ *
+ * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @version 2021-05-06
+ */
 
 async function imprimirLista() { 
     
     const datos = await consultaGrupos()
-    console.log( "DATOS RECIBIDOS" );
-    let td = "</td><td>";
+    const td    = "</td><td>";
 
     for ( let i in datos ) {
-        let data = datos[i];
         document.getElementById( "lista" ).innerHTML +=
         '<tr scope="row"><td>' +
         i + td +
-        data.name +
+        datos[i].name +
         '</td></tr>';
     }
     
