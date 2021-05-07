@@ -1,52 +1,66 @@
 const api = "https://ivnapp-socket-server.herokuapp.com/api/";
 
-function cortaPalabras(srt) { //corta el string busqueda en un array de palabras para comparar
+/**
+ * Función que muestra cada linea de informacion
+ *
+ * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @version 2021-05-06
+ */
 
-    let fila = [];
-    let num = '';
-    for (let i = 0; i < srt.length; i++) {
-        if (srt[i] !== ' ') {
+function cortaPalabras( srt ) { //corta el string busqueda en un array de palabras para comparar
+
+    let fila    = [];
+    let num     = '';
+    for ( let i = 0; i < srt.length; i++ ) {
+        if ( srt[i] !== ' ' ) {
             num += srt[i];
-        } else if (num !== '') {
-            fila.push(num);
+        } else if ( num !== '' ) {
+            fila.push( num ) ;
             num = '';
         }
 
-        if (i == srt.length - 1 && num !== '') fila.push(num);
+        if ( i == srt.length - 1 && num !== '' ) fila.push( num );
     }
-    console.log(fila);
+
+    console.log( fila );
     return fila;
 }
 
-function consulta(url) { //rescata los datos de la api
-    return new Promise((resolve, reject) => {
-        let requestOptions = {
-            method: 'GET',
-            redirect: 'follow'
-        };
+/**
+ * Función que rescata los datos de la api
+ *
+ * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @version 2021-05-06
+ */
 
-        fetch(url, requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                resolve(JSON.parse(JSON.stringify(data)));
-                //datos = JSON.parse(data);
-            })
-            .catch(err => console.log(err))
-            // https://stackoverflow.com/questions/46522749/how-to-solve-redirect-has-been-blocked-by-cors-policy-no-access-control-allow
+function consulta( url ) { 
+    return new Promise( ( resolve, reject ) => {
+        const requestOptions = { method: 'GET', redirect: 'follow' };
+
+        fetch( url, requestOptions )
+        .then( response => response.json() )
+        .then( data => { resolve(JSON.parse(JSON.stringify( data ))); })
+        .catch( err => console.log( err ) )
     });
 }
 
-function imprimirLista(datos) { //imprime los datos entregados en lista html
-    console.log("DATOS RECIBIDOS");
-    let td = "</td><td>";
-    let boton = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal' ";
+/**
+ * Función que muestra cada linea de informacion
+ *
+ * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @version 2021-05-06
+ */
 
-    for (let i in datos) {
-        let data = datos[i];
-        let com = '"';
+function imprimirLista( datos ) { //imprime los datos entregados en lista html
+    console.log( "DATOS RECIBIDOS" );
+    const td    = "</td><td>";
+    let boton   = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal' ";
 
-        document.getElementById("lista").innerHTML +=
+    for ( let i in datos ) {
+        const data  = datos[i];
+        const com   = '"';
+
+        document.getElementById( "lista" ).innerHTML +=
             '<tr scope="row"><td>' +
             i + td +
             data.name + td +
@@ -61,111 +75,144 @@ function imprimirLista(datos) { //imprime los datos entregados en lista html
 
 }
 
-function vistaModal(id) {
+/**
+ * Función que muestra cada linea de informacion
+ *
+ * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @version 2021-05-06
+ */
 
-    let modalProducto = listaProductos.filter(listaProductos => listaProductos.uid === id);
+function vistaModal( id ) {
 
-    /*  document.getElementById("nombreModal").value = modalProducto[0].name;
-        document.getElementById("cantidadModal").value = modalProducto[0].quantity;
-        document.getElementById("precioModal").value = modalProducto[0].price;
-        document.getElementById("grupoModal").value = modalProducto[0].group;
-        document.getElementById("ubicacionModal").value = modalProducto[0].ubication;
-        document.getElementById("categoriaModal").value = modalProducto[0].category;
-        document.getElementById("obsModal").value = elementoVacio(modalProducto[0].observations); */
+    const modalProducto = listaProductos.filter( listaProductos => listaProductos.uid === id );
 
-    document.formModal.nombreModal.value = modalProducto[0].name;
-    document.formModal.cantidadModal.value = modalProducto[0].quantity;
-    document.formModal.precioModal.value = modalProducto[0].price;
-    document.formModal.grupoModal.value = modalProducto[0].group;
+    document.formModal.nombreModal.value    = modalProducto[0].name;
+    document.formModal.cantidadModal.value  = modalProducto[0].quantity;
+    document.formModal.precioModal.value    = modalProducto[0].price;
+    document.formModal.grupoModal.value     = modalProducto[0].group;
     document.formModal.ubicacionModal.value = modalProducto[0].ubication;
     document.formModal.categoriaModal.value = modalProducto[0].category;
-    document.formModal.obsModal.value = elementoVacio(modalProducto[0].observations);
+    document.formModal.obsModal.value       = elementoVacio( modalProducto[0].observations );
 
-    console.log(modalProducto);
+    console.log( modalProducto );
 
 }
 
-function elementoVacio(dato) {
-    if (dato === undefined) {
-        dato = "";
-    }
-    return dato;
-}
+/**
+ * Función que muestra cada linea de informacion
+ *
+ * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @version 2021-05-06
+ */
 
-function buscar() { //busca las concidencias de la busqueda y una lista de resultados
+function elementoVacio( dato ) { ( dato === undefined) ? dato = "" : dato; }
 
-    console.log("BUSCANDO")
-    let palabras = normalizar(document.getElementById("search").value);
-    let busqueda = cortaPalabras(palabras);
+/**
+ * Función que busca las concidencias de la busqueda y una lista de resultados
+ *
+ * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @version 2021-05-06
+ */
+
+function buscar() {
+
+    console.log( "BUSCANDO" )
+    const palabras        = normalizar( document.getElementById( "search" ).value );
+    let busqueda          = cortaPalabras( palabras );
     let resultadoBusqueda = [];
 
-    console.log(palabras);
-    console.log(busqueda);
-    console.log(busqueda.length);
+    console.log( busqueda );
 
-    if (busqueda.length >= 1) { //si hay elementos en la busqueda, la busqueda se realiza
-        document.getElementById("lista").innerHTML = "";
-        for (let i in listaProductos) { //recorre filas de la lista
-            let data = listaProductos[i]; //toma la fila
+    if ( busqueda.length >= 1 ) {
+
+        document.getElementById( "lista" ).innerHTML = "";
+
+        for ( let i in listaProductos ) {
+            
+            let data     = listaProductos[i];
             let contador = 0;
-            for (let b in busqueda) { //recorre elementos de la busqueda
-                let coincidecia = false;
-                for (let x in data) { // recorre columnas de la fila
-                    let e = data[x]; //toma la columna
-                    if (e != data.uid && normalizar(e).includes(busqueda[b]) == true) coincidecia = true; //busca solo la concidencia por fila
-                }
-                if (coincidecia == true) contador++; //suma solo la existencia de la palabra en esa fila, no repite si conincide mas de una vez
-            }
-            if (contador == busqueda.length) resultadoBusqueda.push(data); //si las concidencias en al fila son iguales a la cantidad de palabras se agrega
-        }
-    } else {
-        console.log("NO HAY DATOS")
-    }
 
-    imprimirLista(resultadoBusqueda);
-    console.log(resultadoBusqueda);
+            for ( let b in busqueda ) {
+
+                let coincidecia = false;
+
+                for ( let x in data ) { 
+                    let e = data[x];
+                    if ( e != data.uid && normalizar(e).includes( busqueda[b] ) == true ) coincidecia = true; //busca solo la concidencia por fila
+                }
+
+                if ( coincidecia == true ) contador++;
+            }
+
+            if ( contador == busqueda.length ) resultadoBusqueda.push( data );
+        }
+
+    } else { console.log( "NO HAY DATOS" ) }
+
+    imprimirLista( resultadoBusqueda );
+    console.log( resultadoBusqueda );
 
     return resultadoBusqueda
 
 }
 
-function imprimirElemento(id) {
-    let elemento = document.getElementById(id);
-    let ventana = window.open('', 'PRINT', 'height=400,width=600');
-    ventana.document.write('<html><head><title>' + document.title + '</title>');
-    ventana.document.write("<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6' crossorigin='anonymous'>");
-    ventana.document.write('</head><body>');
-    ventana.document.write(elemento.outerHTML);
-    ventana.document.write('</body></html>');
-    if (elemento.id === "vistaModal") {
-        ventana = obtenerModal(ventana);
-    }
+/**
+ * Función que permite imprimir o guardar en PDF
+ *
+ * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @version 2021-05-06
+ */
+
+function imprimirElemento( id ) {
+
+    let elemento    = document.getElementById( id );
+    let ventana     = window.open( '', 'PRINT', 'height=400,width=600' );
+
+    ventana.document.write( '<html><head><title>' + document.title + '</title>' );
+    ventana.document.write( "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6' crossorigin='anonymous'>");
+    ventana.document.write( '</head><body>' );
+    ventana.document.write( elemento.outerHTML );
+    ventana.document.write( '</body></html>' );
+
+    if ( elemento.id === "vistaModal" ) ventana = obtenerModal( ventana );
+
     ventana.document.close();
     ventana.focus();
-    setTimeout(() => {
-        ventana.print();
-    }, 1000);
-    // ventana.close();
+    setTimeout(() => ventana.print(), 1000);
     return true;
 }
 
-function obtenerModal(ventana) {
+/**
+ * Función que muestra cada linea de informacion en un modal
+ *
+ * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @version 2021-05-06
+ */
 
-    ventana.document.formModal.nombreModal.value = document.formModal.nombreModal.value;
-    ventana.document.formModal.cantidadModal.value = document.formModal.cantidadModal.value;
-    ventana.document.formModal.precioModal.value = document.formModal.precioModal.value;
-    ventana.document.formModal.grupoModal.value = document.formModal.grupoModal.value;
+function obtenerModal( ventana ) {
+
+    ventana.document.formModal.nombreModal.value    = document.formModal.nombreModal.value;
+    ventana.document.formModal.cantidadModal.value  = document.formModal.cantidadModal.value;
+    ventana.document.formModal.precioModal.value    = document.formModal.precioModal.value;
+    ventana.document.formModal.grupoModal.value     = document.formModal.grupoModal.value;
     ventana.document.formModal.ubicacionModal.value = document.formModal.ubicacionModal.value;
     ventana.document.formModal.categoriaModal.value = document.formModal.categoriaModal.value;
-    ventana.document.formModal.obsModal.value = document.formModal.obsModal.value;
+    ventana.document.formModal.obsModal.value       = document.formModal.obsModal.value;
 
     return ventana;
 }
 
-function normalizar(str) {
-    str = str.toString();
-    str = str.toLowerCase();
-    str = str.normalize("NFD").replace(/[\u0300-\u0301]/g, "");
+/**
+ * Función que formatea string
+ *
+ * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @version 2021-05-06
+ */
+
+function normalizar( str ) {
+    str    = str.toString();
+    str    = str.toLowerCase();
+    str    = str.normalize("NFD").replace(/[\u0300-\u0301]/g, "");
     return str;
 }
 
