@@ -14,7 +14,7 @@ class Footer extends HTMLElement {
           justify-content: space-between;
           align-items: center;
           width: 100%;
-          position: relative;
+          position: fixed;
           bottom: 0;
           
       }
@@ -50,26 +50,26 @@ class Footer extends HTMLElement {
       .copyright a{
           text-decoration     : none;
           color               : white;
-          /* font-weight         : bold; */
+          /* font-weight      : bold; */
       }
       
         </style>
         <footer class="bg-dark">
           <ul>
             <li><a href="about.html">About</a></li>
-            <li><a href="work.html">Work</a></li>
+            <li><a href="https://documenter.getpostman.com/view/9034494/TzJpjL63">Documentacion</a></li>
             <li><a href="/WebStore/view/nosotros/nosotros.html">Nosotros</a></li>
           </ul>
           <div class="copyright">
-             © Derechos Reservados | <a href="https://impulsandonegocios.cl">ImpulsandoNegocios</a>
+            © Derechos Reservados | <a href="https://impulsandonegocios.cl">ImpulsandoNegocios</a>
           </div>
         </footer>
 
         <script type="text/javascript">
 
-          copyright=new Date();
-          update=copyright.getFullYear();
-          document.write("© 2018 - " + update + " " + "Mi web");
+          copyright = new Date();
+          update    = copyright.getFullYear();
+          document.write("© 2021 - " + update + " " + "https://impulsandonegocios.cl");
 
         </script>
       `;

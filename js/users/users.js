@@ -1,9 +1,11 @@
 const users = api + 'login/users';
-
-let listaUsuarios;
-
+/**
+ *
+ * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @version 2021-05-06
+ */
 async function consultaUsuarios() {
-    let respuesta = await consulta(users);
-    listaUsuarios = respuesta.data;
-    return listaUsuarios;
+    let respuesta       = await consulta( users );
+    let listaUsuarios   = respuesta.data;
+    return  listaUsuarios;
 };
