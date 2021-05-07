@@ -55,7 +55,7 @@ function imprimirLista(datos) { //imprime los datos entregados en lista html
             //data.category + td +
             data.ubication + td +
             //elementoVacio(data.observations) + td +
-            boton + "onclick='vistaModal(" + com + data._id + com + ");'>Ver</button>" +
+            boton + "onclick='vistaModal(" + com + data.uid + com + ");'>Ver</button>" +
             '</td></tr>';
     }
 
@@ -63,7 +63,7 @@ function imprimirLista(datos) { //imprime los datos entregados en lista html
 
 function vistaModal(id) {
 
-    let modalProducto = listaProductos.filter(listaProductos => listaProductos._id === id);
+    let modalProducto = listaProductos.filter(listaProductos => listaProductos.uid === id);
 
     /*  document.getElementById("nombreModal").value = modalProducto[0].name;
         document.getElementById("cantidadModal").value = modalProducto[0].quantity;
@@ -112,7 +112,7 @@ function buscar() { //busca las concidencias de la busqueda y una lista de resul
                 let coincidecia = false;
                 for (let x in data) { // recorre columnas de la fila
                     let e = data[x]; //toma la columna
-                    if (e != data._id && normalizar(e).includes(busqueda[b]) == true) coincidecia = true; //busca solo la concidencia por fila
+                    if (e != data.uid && normalizar(e).includes(busqueda[b]) == true) coincidecia = true; //busca solo la concidencia por fila
                 }
                 if (coincidecia == true) contador++; //suma solo la existencia de la palabra en esa fila, no repite si conincide mas de una vez
             }
