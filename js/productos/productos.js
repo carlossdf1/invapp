@@ -1,6 +1,5 @@
 const productos = api + "product/products";
-let listaProductos = "";
-
+let listaProductos;
 /**
  * Función que muestra cada linea de informacion
  *
