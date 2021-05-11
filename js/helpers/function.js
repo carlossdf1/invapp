@@ -117,6 +117,7 @@ function vistaModal(id) {
 
 function elementoVacio(dato) {
     (dato === undefined) ? dato = "": dato;
+    return dato;
 }
 
 /**
