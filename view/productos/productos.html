@@ -22,8 +22,31 @@
     <hr>
     <div class="container-xxl my-md-4 bd-layout ">
 
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button id="imprimir" class="btn btn-primary me-md-2" tabindex="2" type="button" onclick="imprimirElemento('tabla')">Imprimir</button>
+        <!-- BOTONES FLOTANTES -->
+        <div id="imprimir" class="container-xxl d-grid gap-2 justify-content-md-end">
+            <!-- d-grid gap-2 d-md-flex justify-content-md-end-->
+            <div class="row">
+                <div class="col">
+                    <!-- BOTON IMPRIMIR -->
+                    <button class="btn btn-primary" tabindex="2" type="button" onclick="imprimirElemento('tabla')">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                          </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <!-- BOTON AGREGAR -->
+                    <button class="btn btn-success" tabindex="2" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button" onclick="agregarModal()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                          </svg>
+                    </button>
+                </div>
+            </div>
         </div>
 
         <!-- Modal -->
@@ -93,15 +116,17 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-danger">Editar</button>
-                        <button type="button" class="btn btn-primary" type="submit" onclick="imprimirElemento('vistaModal')">Imprimir</button>
+                        <button id="botonAgregar" type="button" class="d-none btn btn-success" type="submit" onclick="agregarProducto()">Agregar</button>
+                        <button id="botonGuardar" type="button" class="d-none btn btn-danger" type="submit" onclick="">Guardar</button>
+                        <button id="botonEditar" type="button" class="btn btn-danger" type="submit" onclick="editarModal()">Editar</button>
+                        <button id="botonImprimir" type="button" class="btn btn-primary" type="submit" onclick="imprimirElemento('vistaModal')">Imprimir</button>
+
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- <div class="container"> -->
-        <!--         <div class="row"> -->
+        <!-- TABLA -->
         <div class="table-responsive">
             <table id="tabla" class="table table-striped table-bordered">
                 <thead class="table-dark">
@@ -120,8 +145,6 @@
                 </tbody>
             </table>
         </div>
-        <!--         </div> -->
-        <!-- </div> -->
 
 
     </div>

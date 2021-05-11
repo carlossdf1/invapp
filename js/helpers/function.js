@@ -7,23 +7,23 @@ const api = "https://ivnapp-socket-server.herokuapp.com/api/";
  * @version 2021-05-06
  */
 
-function cortaPalabras( srt ) { //corta el string busqueda en un array de palabras para comparar
+function cortaPalabras(texto) { //corta el string busqueda en un array de palabras para comparar
 
-    let fila    = [];
-    let num     = '';
-    for ( let i = 0; i < srt.length; i++ ) {
-        if ( srt[i] !== ' ' ) {
-            num += srt[i];
-        } else if ( num !== '' ) {
-            fila.push( num ) ;
-            num = '';
+    let palabras = [];
+    let palabra = '';
+    for (let letra = 0; letra < texto.length; letra++) {
+        if (texto[letra] !== ' ') {
+            palabra += texto[letra];
+        } else if (palabra !== '') {
+            palabras.push(palabra);
+            palabra = '';
         }
 
-        if ( i == srt.length - 1 && num !== '' ) fila.push( num );
+        if (letra == texto.length - 1 && palabra !== '') palabras.push(palabra);
     }
 
-    console.log( fila );
-    return fila;
+    console.log(palabras);
+    return palabras;
 }
 
 /**
@@ -33,14 +33,14 @@ function cortaPalabras( srt ) { //corta el string busqueda en un array de palabr
  * @version 2021-05-06
  */
 
-function consulta( url ) { 
-    return new Promise( ( resolve, reject ) => {
+function consulta(url) {
+    return new Promise((resolve, reject) => {
         const requestOptions = { method: 'GET', redirect: 'follow' };
 
-        fetch( url, requestOptions )
-        .then( response => response.json() )
-        .then( data => { resolve(JSON.parse(JSON.stringify( data ))); })
-        .catch( err => console.log( err ) )
+        fetch(url, requestOptions)
+            .then(response => response.json())
+            .then(data => { resolve(JSON.parse(JSON.stringify(data))); })
+            .catch(err => console.log(err))
     });
 }
 
@@ -51,16 +51,16 @@ function consulta( url ) {
  * @version 2021-05-06
  */
 
-function imprimirLista( datos ) { //imprime los datos entregados en lista html
-    console.log( "DATOS RECIBIDOS" );
-    const td    = "</td><td>";
-    let boton   = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal' ";
+function imprimirLista(datos) { //imprime los datos entregados en lista html
+    console.log("DATOS RECIBIDOS");
+    const td = "</td><td>";
+    let boton = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal' ";
 
-    for ( let i in datos ) {
-        const data  = datos[i];
-        const com   = '"';
+    for (let i in datos) {
+        const data = datos[i];
+        const com = '"';
 
-        document.getElementById( "lista" ).innerHTML +=
+        document.getElementById("lista").innerHTML +=
             '<tr scope="row"><td>' +
             i + td +
             data.name + td +
@@ -82,19 +82,29 @@ function imprimirLista( datos ) { //imprime los datos entregados en lista html
  * @version 2021-05-06
  */
 
-function vistaModal( id ) {
+function vistaModal(id) {
 
-    const modalProducto = listaProductos.filter( listaProductos => listaProductos.uid === id );
+    if (document.getElementById("nombreModal").className !== "form-control-plaintext") {
+        bloquearModal();
+    }
 
-    document.formModal.nombreModal.value    = modalProducto[0].name;
-    document.formModal.cantidadModal.value  = modalProducto[0].quantity;
-    document.formModal.precioModal.value    = modalProducto[0].price;
-    document.formModal.grupoModal.value     = modalProducto[0].group;
+    const modalProducto = listaProductos.filter(listaProductos => listaProductos.uid === id);
+
+    console.log(modalProducto);
+
+    document.formModal.nombreModal.value = modalProducto[0].name;
+    document.formModal.cantidadModal.value = modalProducto[0].quantity;
+    document.formModal.precioModal.value = modalProducto[0].price;
+    document.formModal.grupoModal.value = modalProducto[0].group;
     document.formModal.ubicacionModal.value = modalProducto[0].ubication;
     document.formModal.categoriaModal.value = modalProducto[0].category;
-    document.formModal.obsModal.value       = elementoVacio( modalProducto[0].observations );
+    document.formModal.obsModal.value = elementoVacio(modalProducto[0].observations);
 
-    console.log( modalProducto );
+    document.getElementById("botonAgregar").className = "d-none btn btn-success";
+    document.getElementById("botonEditar").className = "btn btn-danger";
+    document.getElementById("botonImprimir").className = "btn btn-primary";
+
+    console.log(modalProducto);
 
 }
 
@@ -105,7 +115,9 @@ function vistaModal( id ) {
  * @version 2021-05-06
  */
 
-function elementoVacio( dato ) { ( dato === undefined) ? dato = "" : dato; }
+function elementoVacio(dato) {
+    (dato === undefined) ? dato = "": dato;
+}
 
 /**
  * Función que busca las concidencias de la busqueda y una lista de resultados
@@ -116,41 +128,41 @@ function elementoVacio( dato ) { ( dato === undefined) ? dato = "" : dato; }
 
 function buscar() {
 
-    console.log( "BUSCANDO" )
-    const palabras        = normalizar( document.getElementById( "search" ).value );
-    let busqueda          = cortaPalabras( palabras );
+    console.log("BUSCANDO")
+    const palabras = normalizar(document.getElementById("search").value);
+    let busqueda = cortaPalabras(palabras);
     let resultadoBusqueda = [];
 
-    console.log( busqueda );
+    console.log(busqueda);
 
-    if ( busqueda.length >= 1 ) {
+    if (busqueda.length >= 1) {
 
-        document.getElementById( "lista" ).innerHTML = "";
+        document.getElementById("lista").innerHTML = "";
 
-        for ( let i in listaProductos ) {
-            
-            let data     = listaProductos[i];
+        for (let i in listaProductos) {
+
+            let data = listaProductos[i];
             let contador = 0;
 
-            for ( let b in busqueda ) {
+            for (let b in busqueda) {
 
                 let coincidecia = false;
 
-                for ( let x in data ) { 
+                for (let x in data) {
                     let e = data[x];
-                    if ( e != data.uid && normalizar(e).includes( busqueda[b] ) == true ) coincidecia = true; //busca solo la concidencia por fila
+                    if (e != data.uid && normalizar(e).includes(busqueda[b]) == true) coincidecia = true; //busca solo la concidencia por fila
                 }
 
-                if ( coincidecia == true ) contador++;
+                if (coincidecia == true) contador++;
             }
 
-            if ( contador == busqueda.length ) resultadoBusqueda.push( data );
+            if (contador == busqueda.length) resultadoBusqueda.push(data);
         }
 
-    } else { console.log( "NO HAY DATOS" ) }
+    } else { console.log("NO HAY DATOS") }
 
-    imprimirLista( resultadoBusqueda );
-    console.log( resultadoBusqueda );
+    imprimirLista(resultadoBusqueda);
+    console.log(resultadoBusqueda);
 
     return resultadoBusqueda
 
@@ -163,18 +175,18 @@ function buscar() {
  * @version 2021-05-06
  */
 
-function imprimirElemento( id ) {
+function imprimirElemento(id) {
 
-    let elemento    = document.getElementById( id );
-    let ventana     = window.open( '', 'PRINT', 'height=400,width=600' );
+    let elemento = document.getElementById(id);
+    let ventana = window.open('', 'PRINT', 'height=400,width=600');
 
-    ventana.document.write( '<html><head><title>' + document.title + '</title>' );
-    ventana.document.write( "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6' crossorigin='anonymous'>");
-    ventana.document.write( '</head><body>' );
-    ventana.document.write( elemento.outerHTML );
-    ventana.document.write( '</body></html>' );
+    ventana.document.write('<html><head><title>' + document.title + '</title>');
+    ventana.document.write("<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6' crossorigin='anonymous'>");
+    ventana.document.write('</head><body>');
+    ventana.document.write(elemento.outerHTML);
+    ventana.document.write('</body></html>');
 
-    if ( elemento.id === "vistaModal" ) ventana = obtenerModal( ventana );
+    if (elemento.id === "vistaModal") ventana = obtenerModal(ventana);
 
     ventana.document.close();
     ventana.focus();
@@ -189,15 +201,15 @@ function imprimirElemento( id ) {
  * @version 2021-05-06
  */
 
-function obtenerModal( ventana ) {
+function obtenerModal(ventana) {
 
-    ventana.document.formModal.nombreModal.value    = document.formModal.nombreModal.value;
-    ventana.document.formModal.cantidadModal.value  = document.formModal.cantidadModal.value;
-    ventana.document.formModal.precioModal.value    = document.formModal.precioModal.value;
-    ventana.document.formModal.grupoModal.value     = document.formModal.grupoModal.value;
+    ventana.document.formModal.nombreModal.value = document.formModal.nombreModal.value;
+    ventana.document.formModal.cantidadModal.value = document.formModal.cantidadModal.value;
+    ventana.document.formModal.precioModal.value = document.formModal.precioModal.value;
+    ventana.document.formModal.grupoModal.value = document.formModal.grupoModal.value;
     ventana.document.formModal.ubicacionModal.value = document.formModal.ubicacionModal.value;
     ventana.document.formModal.categoriaModal.value = document.formModal.categoriaModal.value;
-    ventana.document.formModal.obsModal.value       = document.formModal.obsModal.value;
+    ventana.document.formModal.obsModal.value = document.formModal.obsModal.value;
 
     return ventana;
 }
@@ -209,9 +221,96 @@ function obtenerModal( ventana ) {
  * @version 2021-05-06
  */
 
-function normalizar( str ) {
-    str    = str.toString();
-    str    = str.toLowerCase();
-    str    = str.normalize("NFD").replace(/[\u0300-\u0301]/g, "");
+function normalizar(str) {
+    str = str.toString();
+    str = str.toLowerCase();
+    str = str.normalize("NFD").replace(/[\u0300-\u0301]/g, "");
     return str;
+}
+
+function editarModal() {
+    document.formModal.nombreModal.readOnly = false;
+    document.formModal.cantidadModal.readOnly = false;
+    document.formModal.precioModal.readOnly = false;
+    document.formModal.grupoModal.readOnly = false;
+    document.formModal.ubicacionModal.readOnly = false;
+    document.formModal.categoriaModal.readOnly = false;
+    document.formModal.obsModal.readOnly = false;
+
+    document.getElementById("nombreModal").className = "form-control";
+    document.getElementById("cantidadModal").className = "form-control";
+    document.getElementById("precioModal").className = "form-control";
+    document.getElementById("grupoModal").className = "form-control";
+    document.getElementById("ubicacionModal").className = "form-control";
+    document.getElementById("categoriaModal").className = "form-control";
+    document.getElementById("obsModal").className = "form-control";
+}
+
+function bloquearModal() {
+    document.formModal.nombreModal.readOnly = true;
+    document.formModal.cantidadModal.readOnly = true;
+    document.formModal.precioModal.readOnly = true;
+    document.formModal.grupoModal.readOnly = true;
+    document.formModal.ubicacionModal.readOnly = true;
+    document.formModal.categoriaModal.readOnly = true;
+    document.formModal.obsModal.readOnly = true;
+
+    document.getElementById("nombreModal").className = "form-control-plaintext";
+    document.getElementById("cantidadModal").className = "form-control-plaintext";
+    document.getElementById("precioModal").className = "form-control-plaintext";
+    document.getElementById("grupoModal").className = "form-control-plaintext";
+    document.getElementById("ubicacionModal").className = "form-control-plaintext";
+    document.getElementById("categoriaModal").className = "form-control-plaintext";
+    document.getElementById("obsModal").className = "form-control-plaintext";
+}
+
+function agregarModal() {
+    editarModal();
+
+    document.formModal.nombreModal.value = "";
+    document.formModal.cantidadModal.value = "";
+    document.formModal.precioModal.value = "";
+    document.formModal.grupoModal.value = "";
+    document.formModal.ubicacionModal.value = "";
+    document.formModal.categoriaModal.value = "";
+    document.formModal.obsModal.value = "";
+
+    document.getElementById("botonAgregar").className = "btn btn-success";
+    document.getElementById("botonEditar").className = "d-none btn btn-success";
+    document.getElementById("botonImprimir").className = "d-none btn-primary";
+
+}
+
+function agregarProducto() {
+
+
+    let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    let raw = JSON.stringify({
+        "name": document.formModal.nombreModal.value,
+        "img": "",
+        "category": document.formModal.categoriaModal.value,
+        "quantity": document.formModal.cantidadModal.value,
+        "price": document.formModal.precioModal.value,
+        "ubication": document.formModal.ubicacionModal.value,
+        "group": document.formModal.grupoModal.value,
+        "observations": document.formModal.obsModal.value,
+    });
+
+    let requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+
+    console.log(raw);
+    console.log(requestOptions);
+
+    fetch(api + "product/new", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+
 }
