@@ -1,4 +1,5 @@
 const productos = api + "product/products";
+let listaProductos = "";
 
 /**
  * Función que muestra cada linea de informacion
@@ -7,8 +8,8 @@ const productos = api + "product/products";
  * @version 2021-05-06
  */
 async function consultaProductos() {
-    const respuesta       = await consulta( productos );
-    const listaProductos  = respuesta.data;
+    const respuesta = await consulta(productos);
+    listaProductos = respuesta.data;
     return listaProductos;
 };
 
@@ -18,9 +19,9 @@ async function consultaProductos() {
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
  * @version 2021-05-06
  */
-async function imprimir() { imprimirLista( await consultaProductos() ); }
+async function imprimir() { imprimirLista(await consultaProductos()); }
 
-let myModal = document.getElementById( 'myModal' );
-let myInput = document.getElementById( 'myInput' );
+/* let myModal = document.getElementById('myModal');
+let myInput = document.getElementById('myInput');
 
-myModal.addEventListener( 'shown.bs.modal', function() { myInput.focus() });
+myModal.addEventListener('shown.bs.modal', function() { myInput.focus() }); */
