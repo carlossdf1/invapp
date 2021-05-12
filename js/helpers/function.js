@@ -160,7 +160,7 @@ function buscar() {
             if (contador == busqueda.length) resultadoBusqueda.push(data);
         }
 
-    } else { console.log("NO HAY DATOS") }
+    } else { console.log( "NO HAY DATOS" ) }
 
     imprimirLista(resultadoBusqueda);
     console.log(resultadoBusqueda);
@@ -176,18 +176,18 @@ function buscar() {
  * @version 2021-05-06
  */
 
-function imprimirElemento(id) {
+function imprimirElemento( id ) {
 
-    let elemento = document.getElementById(id);
-    let ventana = window.open('', 'PRINT', 'height=400,width=600');
+    let elemento    = document.getElementById( id );
+    let ventana     = window.open('', 'PRINT', 'height=400,width=600');
 
     ventana.document.write('<html><head><title>' + document.title + '</title>');
     ventana.document.write("<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6' crossorigin='anonymous'>");
     ventana.document.write('</head><body>');
-    ventana.document.write(elemento.outerHTML);
+    ventana.document.write( elemento.outerHTML );
     ventana.document.write('</body></html>');
 
-    if (elemento.id === "vistaModal") ventana = obtenerModal(ventana);
+    if ( elemento.id === "vistaModal" ) ventana = obtenerModal( ventana );
 
     ventana.document.close();
     ventana.focus();
@@ -204,13 +204,13 @@ function imprimirElemento(id) {
 
 function obtenerModal(ventana) {
 
-    ventana.document.formModal.nombreModal.value = document.formModal.nombreModal.value;
-    ventana.document.formModal.cantidadModal.value = document.formModal.cantidadModal.value;
-    ventana.document.formModal.precioModal.value = document.formModal.precioModal.value;
-    ventana.document.formModal.grupoModal.value = document.formModal.grupoModal.value;
+    ventana.document.formModal.nombreModal.value    = document.formModal.nombreModal.value;
+    ventana.document.formModal.cantidadModal.value  = document.formModal.cantidadModal.value;
+    ventana.document.formModal.precioModal.value    = document.formModal.precioModal.value;
+    ventana.document.formModal.grupoModal.value     = document.formModal.grupoModal.value;
     ventana.document.formModal.ubicacionModal.value = document.formModal.ubicacionModal.value;
     ventana.document.formModal.categoriaModal.value = document.formModal.categoriaModal.value;
-    ventana.document.formModal.obsModal.value = document.formModal.obsModal.value;
+    ventana.document.formModal.obsModal.value       = document.formModal.obsModal.value;
 
     return ventana;
 }
@@ -223,95 +223,139 @@ function obtenerModal(ventana) {
  */
 
 function normalizar(str) {
+
     str = str.toString();
     str = str.toLowerCase();
     str = str.normalize("NFD").replace(/[\u0300-\u0301]/g, "");
     return str;
+
 }
+
+/**
+ * Función que desbloqea los input del modal para ingresar datos.
+ *
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
+ * @author Emmanuel Correa <ebcorreac[at]gmail.com>
+ * 
+ * @version 2021-05-11
+ */
 
 function editarModal() {
-    document.formModal.nombreModal.readOnly = false;
-    document.formModal.cantidadModal.readOnly = false;
-    document.formModal.precioModal.readOnly = false;
-    document.formModal.grupoModal.readOnly = false;
-    document.formModal.ubicacionModal.readOnly = false;
-    document.formModal.categoriaModal.readOnly = false;
-    document.formModal.obsModal.readOnly = false;
 
-    document.getElementById("nombreModal").className = "form-control";
-    document.getElementById("cantidadModal").className = "form-control";
-    document.getElementById("precioModal").className = "form-control";
-    document.getElementById("grupoModal").className = "form-control";
+    document.formModal.nombreModal.readOnly     = false;
+    document.formModal.cantidadModal.readOnly   = false;
+    document.formModal.precioModal.readOnly     = false;
+    document.formModal.grupoModal.readOnly      = false;
+    document.formModal.ubicacionModal.readOnly  = false;
+    document.formModal.categoriaModal.readOnly  = false;
+    document.formModal.obsModal.readOnly        = false;
+
+    document.getElementById("nombreModal").className    = "form-control";
+    document.getElementById("cantidadModal").className  = "form-control";
+    document.getElementById("precioModal").className    = "form-control";
+    document.getElementById("grupoModal").className     = "form-control";
     document.getElementById("ubicacionModal").className = "form-control";
     document.getElementById("categoriaModal").className = "form-control";
-    document.getElementById("obsModal").className = "form-control";
+    document.getElementById("obsModal").className       = "form-control";
 }
+
+/**
+ * Función que bloquea los elemetos del modal
+ *
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
+ * @author Emmanuel Correa <ebcorreac[at]gmail.com>
+ * 
+ * @version 2021-05-11
+ */
 
 function bloquearModal() {
-    document.formModal.nombreModal.readOnly = true;
-    document.formModal.cantidadModal.readOnly = true;
-    document.formModal.precioModal.readOnly = true;
-    document.formModal.grupoModal.readOnly = true;
-    document.formModal.ubicacionModal.readOnly = true;
-    document.formModal.categoriaModal.readOnly = true;
-    document.formModal.obsModal.readOnly = true;
 
-    document.getElementById("nombreModal").className = "form-control-plaintext";
-    document.getElementById("cantidadModal").className = "form-control-plaintext";
-    document.getElementById("precioModal").className = "form-control-plaintext";
-    document.getElementById("grupoModal").className = "form-control-plaintext";
+    document.formModal.nombreModal.readOnly     = true;
+    document.formModal.cantidadModal.readOnly   = true;
+    document.formModal.precioModal.readOnly     = true;
+    document.formModal.grupoModal.readOnly      = true;
+    document.formModal.ubicacionModal.readOnly  = true;
+    document.formModal.categoriaModal.readOnly  = true;
+    document.formModal.obsModal.readOnly        = true;
+
+    document.getElementById("nombreModal").className    = "form-control-plaintext";
+    document.getElementById("cantidadModal").className  = "form-control-plaintext";
+    document.getElementById("precioModal").className    = "form-control-plaintext";
+    document.getElementById("grupoModal").className     = "form-control-plaintext";
     document.getElementById("ubicacionModal").className = "form-control-plaintext";
     document.getElementById("categoriaModal").className = "form-control-plaintext";
-    document.getElementById("obsModal").className = "form-control-plaintext";
+    document.getElementById("obsModal").className       = "form-control-plaintext";
 }
+
+/**
+ * Función que resetea los input y botones del model
+ *
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
+ * @author Emmanuel Correa <ebcorreac[at]gmail.com>
+ * 
+ * @version 2021-05-11
+ */
 
 function agregarModal() {
+
     editarModal();
 
-    document.formModal.nombreModal.value = "";
-    document.formModal.cantidadModal.value = "";
-    document.formModal.precioModal.value = "";
-    document.formModal.grupoModal.value = "";
+    document.formModal.nombreModal.value    = "";
+    document.formModal.cantidadModal.value  = "";
+    document.formModal.precioModal.value    = "";
+    document.formModal.grupoModal.value     = "";
     document.formModal.ubicacionModal.value = "";
     document.formModal.categoriaModal.value = "";
-    document.formModal.obsModal.value = "";
+    document.formModal.obsModal.value       = "";
 
-    document.getElementById("botonAgregar").className = "btn btn-success";
-    document.getElementById("botonEditar").className = "d-none btn btn-success";
-    document.getElementById("botonImprimir").className = "d-none btn-primary";
+    document.getElementById("botonAgregar").className   = "btn btn-success";
+    document.getElementById("botonEditar").className    = "d-none btn btn-success";
+    document.getElementById("botonImprimir").className  = "d-none btn-primary";
 
 }
+
+/**
+ * Función que permite agregar atravez de un objeto un nuevo producto a la bd
+ *
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
+ * @author Emmanuel Correa <ebcorreac[at]gmail.com>
+ * 
+ * @version 2021-05-11
+ */
 
 function agregarProducto() {
 
+    const myHeaders = new Headers();
+    myHeaders.append( "Content-Type", "application/json" );
 
-    let myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    let data = JSON.stringify({
 
-    let raw = JSON.stringify({
-        "name": document.formModal.nombreModal.value,
-        "img": "",
-        "category": document.formModal.categoriaModal.value,
-        "quantity": document.formModal.cantidadModal.value,
-        "price": document.formModal.precioModal.value,
-        "ubication": document.formModal.ubicacionModal.value,
-        "group": document.formModal.grupoModal.value,
+        "name"        : document.formModal.nombreModal.value,
+        "img"         : "",
+        "category"    : document.formModal.categoriaModal.value,
+        "quantity"    : document.formModal.cantidadModal.value,
+        "price"       : document.formModal.precioModal.value,
+        "ubication"   : document.formModal.ubicacionModal.value,
+        "group"       : document.formModal.grupoModal.value,
         "observations": document.formModal.obsModal.value,
+    
     });
 
-    let requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
+    const requestOptions = {
+    
+        method  : 'POST',
+        headers : myHeaders,
+        body    : data,
         redirect: 'follow'
+    
     };
 
-    console.log(raw);
-    console.log(requestOptions);
+    console.log( raw );
+    console.log( requestOptions );
 
-    fetch(api + "product/new", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+    fetch( api + "product/new", requestOptions )
+        .then( response => response.text() )
+        .then( result => console.log( result ) )
+        .catch( error => console.log('error', error) );
 
 }
