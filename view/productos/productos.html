@@ -13,7 +13,7 @@
     <script src="../../js/helpers/function.js"></script>
 </head>
 
-<body>
+<body onLoad="myOnLoad()">
     <header-component></header-component>
     <p></p>
     <h1>
@@ -95,7 +95,11 @@
                                     <div class="mb-3 row">
                                         <label for="categoria" class="col-sm-3 col-form-label">CATEGORIA:</label>
                                         <div class="col-sm-6 align-items-end">
-                                            <input type="text" readonly class="form-control-plaintext" id="categoriaModal" value="">
+                                            <!-- <input type="text" readonly class="form-control-plaintext" id="categoriaModal" value=""> -->
+                                            <select id="categoriaModal" name="categoriaModal"  class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                                <option value="" disabled selected>Seleccione una categoria...</option>
+                                                <option>Nave</option>
+                                              </select>
                                         </div>
                                     </div>
                                     <div class="mb-3 row">

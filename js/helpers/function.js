@@ -48,14 +48,15 @@ function consulta(url) {
  * Función que muestra cada linea de informacion
  *
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
- * @version 2021-05-06
+ * @version 2021-05-11
  */
 
 function imprimirLista(datos) { //imprime los datos entregados en lista html
     console.log("DATOS RECIBIDOS");
     const td = "</td><td>";
     let boton = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal' ";
-
+    datos.sort((a, b) => a.name.localeCompare ( b.name ));
+    
     for (let i in datos) {
         const data = datos[i];
         const com = '"';
