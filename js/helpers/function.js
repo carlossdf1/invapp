@@ -1,8 +1,9 @@
 const api = "https://ivnapp-socket-server.herokuapp.com/api/";
 
 /**
- * Función que muestra cada linea de informacion
+ * Función que corta las palabras en un array de un string de texto
  *
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
  * @version 2021-05-06
  */
@@ -30,6 +31,7 @@ function cortaPalabras(texto) { //corta el string busqueda en un array de palabr
  * Función que rescata los datos de la api
  *
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @version 2021-05-06
  */
 
@@ -45,9 +47,11 @@ function consulta(url) {
 }
 
 /**
- * Función que muestra cada linea de informacion
- *
+ * Función que imprime la tabla productos en la vista
+ * 
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * 
  * @version 2021-05-06
  */
 
@@ -76,9 +80,11 @@ function imprimirLista(datos) { //imprime los datos entregados en lista html
 }
 
 /**
- * Función que muestra cada linea de informacion
+ * Función que muestra la vista modal del producto especifico
  *
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
+ * 
  * @version 2021-05-06
  */
 
@@ -109,8 +115,9 @@ function vistaModal(id) {
 }
 
 /**
- * Función que muestra cada linea de informacion
+ * Función identifica si el valor esta defenido o no, si lo esta devuelve un string vacio si no devuelve el dato
  *
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
  * @version 2021-05-06
  */
@@ -124,6 +131,7 @@ function elementoVacio(dato) {
  * Función que busca las concidencias de la busqueda y una lista de resultados
  *
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @version 2021-05-06
  */
 
@@ -173,6 +181,7 @@ function buscar() {
  * Función que permite imprimir o guardar en PDF
  *
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @version 2021-05-06
  */
 
@@ -199,6 +208,7 @@ function imprimirElemento( id ) {
  * Función que muestra cada linea de informacion en un modal
  *
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @version 2021-05-06
  */
 
@@ -219,6 +229,8 @@ function obtenerModal(ventana) {
  * Función que formatea string
  *
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
+ * 
  * @version 2021-05-06
  */
 
@@ -350,7 +362,7 @@ function agregarProducto() {
     
     };
 
-    console.log( raw );
+    console.log( data );
     console.log( requestOptions );
 
     fetch( api + "product/new", requestOptions )
@@ -358,4 +370,18 @@ function agregarProducto() {
         .then( result => console.log( result ) )
         .catch( error => console.log('error', error) );
 
+}
+
+/**
+ * Permite agregar un producto y recargar la lista para que sea visualizado
+ *
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
+ * @author Emmanuel Correa <ebcorreac[at]gmail.com>
+ * 
+ * @version 2021-05-12
+ */
+
+function agregarRecargar(){
+    agregarProducto();
+    setTimeout(() => imprimir(), 1000);
 }
