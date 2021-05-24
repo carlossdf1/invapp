@@ -20,6 +20,14 @@ async function consultaProductos()
   return listaProductos;
 };
 
+/**
+* Función consulta los datos de ubicacion en la api
+*
+* @author Carlos Correa   <carlos.sdf1[at]gmail.com>
+* 
+* @version 2021-05-24
+*/
+
 async function consultaUbicacion() 
 {
   const respuesta 	= await consulta( ubicacion );
@@ -27,15 +35,20 @@ async function consultaUbicacion()
   return listaUbicacion;
 };
 
+/**
+* Función que consulta los datos de categoria a api
+*
+* @author Carlos Correa   <carlos.sdf1[at]gmail.com>
+* 
+* @version 2021-05-24
+*/
+
 async function consultaCategoria() 
 {
   const respuesta 	= await consulta( categoria );
   listaCategoria 	  = respuesta.data;
   return listaCategoria;
 };
-
-
-
 
 /**
  * Función que imprime los datos seleccionados, en este caso toda la lista de productos
@@ -70,9 +83,13 @@ myModal.addEventListener('shown.bs.modal', function() { myInput.focus() }); */
 
 } */
 
-
-
-
+/**
+* Función que toma los datos de la api toma el name, crea un array y lo envia addOptions
+*
+* @author Carlos Correa   <carlos.sdf1[at]gmail.com>
+* 
+* @version 2021-05-24
+*/
 
 function selectNamesArray(lista, selectId) {
  

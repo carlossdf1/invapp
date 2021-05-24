@@ -1,13 +1,14 @@
 const api = "https://ivnapp-socket-server.herokuapp.com/api/";
 
 /**
- * Función que muestra cada linea de informacion
+ * corta el string busqueda en un array de palabras para comparar
  *
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
  * @version 2021-05-06
  */
 
-function cortaPalabras(texto) { //corta el string busqueda en un array de palabras para comparar
+function cortaPalabras(texto) {
 
     let palabras = [];
     let palabra = '';
@@ -30,6 +31,7 @@ function cortaPalabras(texto) { //corta el string busqueda en un array de palabr
  * Función que rescata los datos de la api
  *
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @version 2021-05-06
  */
 
@@ -48,6 +50,7 @@ function consulta(url) {
  * Función que muestra cada linea de informacion
  *
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @version 2021-05-11
  */
 
@@ -80,6 +83,7 @@ function imprimirLista(datos) { //imprime los datos entregados en lista html
  * Función que muestra cada linea de informacion
  *
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @version 2021-05-06
  */
 
@@ -111,7 +115,7 @@ function vistaModal(id) {
 
 /**
  * Función que muestra cada linea de informacion
- *
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
  * @version 2021-05-06
  */
@@ -125,6 +129,7 @@ function elementoVacio(dato) {
  * Función que busca las concidencias de la busqueda y una lista de resultados
  *
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @version 2021-05-06
  */
 
@@ -174,6 +179,7 @@ function buscar() {
  * Función que permite imprimir o guardar en PDF
  *
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @version 2021-05-06
  */
 
@@ -200,6 +206,7 @@ function imprimirElemento( id ) {
  * Función que muestra cada linea de informacion en un modal
  *
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @version 2021-05-06
  */
 
@@ -220,6 +227,7 @@ function obtenerModal(ventana) {
  * Función que formatea string
  *
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @version 2021-05-06
  */
 
@@ -238,7 +246,7 @@ function normalizar(str) {
  * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @author Emmanuel Correa <ebcorreac[at]gmail.com>
  * 
- * @version 2021-05-11
+ * @version 2021-05-24
  */
 
 function editarModal() {
@@ -246,9 +254,6 @@ function editarModal() {
     document.formModal.nombreModal.readOnly     = false;
     document.formModal.cantidadModal.readOnly   = false;
     document.formModal.precioModal.readOnly     = false;
-/*     document.formModal.grupoModal.readOnly      = false;
-    document.formModal.ubicacionModal.readOnly  = false;
-    document.formModal.categoriaModal.readOnly  = false; */
     document.formModal.obsModal.readOnly        = false;
 
     document.formModal.cantidadModal.type   = "number";
@@ -272,7 +277,7 @@ function editarModal() {
  * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @author Emmanuel Correa <ebcorreac[at]gmail.com>
  * 
- * @version 2021-05-11
+ * @version 2021-05-24
  */
 
 function bloquearModal() {
@@ -306,7 +311,7 @@ function bloquearModal() {
  * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @author Emmanuel Correa <ebcorreac[at]gmail.com>
  * 
- * @version 2021-05-11
+ * @version 2021-05-24
  */
 
 function agregarModal() {
@@ -343,7 +348,7 @@ function agregarModal() {
  * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @author Emmanuel Correa <ebcorreac[at]gmail.com>
  * 
- * @version 2021-05-11
+ * @version 2021-05-24
  */
 
 function agregarProducto() {
