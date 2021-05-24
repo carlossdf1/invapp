@@ -1,5 +1,10 @@
 const productos = api + "product/products";
+const ubicacion = api + "ubication";
+const categoria = api + "category";
+
 let listaProductos;
+let listaUbicacion=consultaUbicacion();
+let listaCategoria=consultaCategoria();
 
 /**
  * Función que muestra cada linea de informacion
@@ -15,6 +20,23 @@ async function consultaProductos()
   return listaProductos;
 };
 
+async function consultaUbicacion() 
+{
+  const respuesta 	= await consulta( ubicacion );
+  listaUbicacion 	  = respuesta.data;
+  return listaUbicacion;
+};
+
+async function consultaCategoria() 
+{
+  const respuesta 	= await consulta( categoria );
+  listaCategoria 	  = respuesta.data;
+  return listaCategoria;
+};
+
+
+
+
 /**
  * Función que imprime los datos seleccionados, en este caso toda la lista de productos
  *
@@ -22,7 +44,9 @@ async function consultaProductos()
  * @version 2021-05-06
  */
 
-async function imprimir() { imprimirLista( await consultaProductos( ) ); }
+async function imprimir() { 
+  imprimirLista( await consultaProductos( ) );
+ }
 
 /* let myModal = document.getElementById('myModal');
 let myInput    = document.getElementById('myInput');
@@ -30,14 +54,41 @@ let myInput    = document.getElementById('myInput');
 myModal.addEventListener('shown.bs.modal', function() { myInput.focus() }); */
 
 //Codigo a Ejecutar al Cargar la Pagina
-function myOnLoad() { cargar_provincias() }
+//function myOnLoad() { cargar_provincias() }
    
 // funcion para Cargar Provincias al campo <select>
-function cargar_provincias() {
- 
-  const array = ["Cantabria", "Asturias", "Galicia", "Andalucia", "Extremadura"].sort();
-  addOptions( "categoriaModal", array );
 
+/* function selectUbicacion() {
+ 
+  const selectUbicacion=[];
+  listaUbicacion.forEach(element => {
+    selectUbicacion.push(element.name);
+  });
+  console.log(selectUbicacion);
+  //selectUbicacion.sort();
+  addOptions( "selectUbicacionModal", selectUbicacion );
+
+} */
+
+
+
+
+
+function selectNamesArray(lista, selectId) {
+ 
+  let select=[];
+
+  for (let i in lista) {
+    const fila=lista[i];
+    select.push(fila.name);
+  }
+/*   lista.forEach(element => {
+    select.push(element.name);
+  }); */
+  console.log(select);
+  //selectUbicacion.sort();
+  addOptions( selectId, select );
+  return select;
 }
 
 // Rutina para agregar opciones a un <select>
@@ -54,11 +105,11 @@ function addOptions( domElement, array ) {
   }
 }
 
-  let select = document.getElementById('categoriaModal');
+/*   let select = document.getElementById('categoriaModal');
   select.addEventListener('change',
   function(){
 
-  let selectedOption = this.options[ select.selectedIndex ];
-  console.log( selectedOption.value + ': ' + selectedOption.text );
+    let selectedOption = this.options[ select.selectedIndex ];
+    console.log( selectedOption.value + ': ' + selectedOption.text );
 
-});
+  }); */

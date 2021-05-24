@@ -246,18 +246,24 @@ function editarModal() {
     document.formModal.nombreModal.readOnly     = false;
     document.formModal.cantidadModal.readOnly   = false;
     document.formModal.precioModal.readOnly     = false;
-    document.formModal.grupoModal.readOnly      = false;
+/*     document.formModal.grupoModal.readOnly      = false;
     document.formModal.ubicacionModal.readOnly  = false;
-    document.formModal.categoriaModal.readOnly  = false;
+    document.formModal.categoriaModal.readOnly  = false; */
     document.formModal.obsModal.readOnly        = false;
+
+    document.formModal.cantidadModal.type   = "number";
+    document.formModal.precioModal.type     = "number";
 
     document.getElementById("nombreModal").className    = "form-control";
     document.getElementById("cantidadModal").className  = "form-control";
     document.getElementById("precioModal").className    = "form-control";
-    document.getElementById("grupoModal").className     = "form-control";
-    document.getElementById("ubicacionModal").className = "form-control";
-    document.getElementById("categoriaModal").className = "form-control";
+    document.getElementById("grupoModal").className     = "d-none form-control";
+    document.getElementById("ubicacionModal").className = "d-none form-control";
+    document.getElementById("categoriaModal").className = "d-none form-control";
     document.getElementById("obsModal").className       = "form-control";
+    document.getElementById("selectCategoriaModal").className  = "form-select";
+    document.getElementById("selectUbicacionModal").className  = "form-select";
+    document.getElementById("selectGrupoModal").className      = "form-select";
 }
 
 /**
@@ -279,6 +285,9 @@ function bloquearModal() {
     document.formModal.categoriaModal.readOnly  = true;
     document.formModal.obsModal.readOnly        = true;
 
+    document.formModal.cantidadModal.type   = "text";
+    document.formModal.precioModal.type     = "text";
+
     document.getElementById("nombreModal").className    = "form-control-plaintext";
     document.getElementById("cantidadModal").className  = "form-control-plaintext";
     document.getElementById("precioModal").className    = "form-control-plaintext";
@@ -286,6 +295,9 @@ function bloquearModal() {
     document.getElementById("ubicacionModal").className = "form-control-plaintext";
     document.getElementById("categoriaModal").className = "form-control-plaintext";
     document.getElementById("obsModal").className       = "form-control-plaintext";
+    document.getElementById("selectCategoriaModal").className  = "d-none form-select";
+    document.getElementById("selectUbicacionModal").className  = "d-none form-select";
+    document.getElementById("selectGrupoModal").className      = "d-none form-select";
 }
 
 /**
@@ -309,9 +321,19 @@ function agregarModal() {
     document.formModal.categoriaModal.value = "";
     document.formModal.obsModal.value       = "";
 
+    document.formModal.selectCategoriaModal.value = "";
+    document.formModal.selectUbicacionModal.value = "";
+    document.formModal.selectGrupoModal.value     = "";
+
     document.getElementById("botonAgregar").className   = "btn btn-success";
     document.getElementById("botonEditar").className    = "d-none btn btn-success";
     document.getElementById("botonImprimir").className  = "d-none btn-primary";
+    document.getElementById("botonImprimir").className  = "d-none btn-primary";
+    document.getElementById("botonImprimir").className  = "d-none btn-primary";
+
+    selectNamesArray(listaUbicacion, "selectUbicacionModal");
+    selectNamesArray(listaGrupos, "selectGrupoModal");
+    selectNamesArray(listaCategoria, "selectCategoriaModal");
 
 }
 
@@ -333,11 +355,11 @@ function agregarProducto() {
 
         "name"        : document.formModal.nombreModal.value,
         "img"         : "",
-        "category"    : document.formModal.categoriaModal.value,
+        "category"    : document.formModal.selectCategoriaModal.value,
         "quantity"    : document.formModal.cantidadModal.value,
         "price"       : document.formModal.precioModal.value,
-        "ubication"   : document.formModal.ubicacionModal.value,
-        "group"       : document.formModal.grupoModal.value,
+        "ubication"   : document.formModal.selectUbicacionModal.value,
+        "group"       : document.formModal.selectGrupoModal.value,
         "observations": document.formModal.obsModal.value,
     
     });
@@ -351,7 +373,7 @@ function agregarProducto() {
     
     };
 
-    console.log( raw );
+    console.log( data );
     console.log( requestOptions );
 
     fetch( api + "product/new", requestOptions )
