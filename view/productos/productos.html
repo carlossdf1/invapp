@@ -13,7 +13,7 @@
     <script src="../../js/helpers/function.js"></script>
 </head>
 
-<body>
+<body><!-- onLoad="myOnLoad()" -->
     <header-component></header-component>
     <p></p>
     <h1>
@@ -71,31 +71,40 @@
                                     <div class="mb-3 row">
                                         <label for="cantidad" class="col-sm-3 col-form-label">CANTIDAD:</label>
                                         <div class="col-sm-6">
-                                            <input type="number" readonly class="form-control-plaintext" min="1" id="cantidadModal" value="" placeholder="1">
+                                            <input type="text" readonly class="form-control-plaintext" min="1" id="cantidadModal" value="" placeholder="1">
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="precio" class="col-sm-3 col-form-label">PRECIO:</label>
                                         <div class="col-sm-6">
-                                            <input type="number" readonly class="form-control-plaintext" min="0" id="precioModal" value="" placeholder="0">
+                                            <input type="text" readonly class="form-control-plaintext" min="0" id="precioModal" value="" placeholder="0">
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="grupo" class="col-sm-3 col-form-label">GRUPO:</label>
                                         <div class="col-sm-6">
                                             <input type="text" readonly class="form-control-plaintext" id="grupoModal" value="" placeholder="">
+                                            <select id="selectGrupoModal" name="selectGrupoModal" class="d-none form-select" aria-label=".form-select-lg">
+                                                <option value="" disabled selected>Seleccione una categoria...</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="ubicacion" class="col-sm-3 col-form-label">UBICACION:</label>
                                         <div class="col-sm-6">
                                             <input type="text" readonly class="form-control-plaintext" id="ubicacionModal" value="">
+                                            <select id="selectUbicacionModal" name="selectUbicacionModal" class="d-none form-select" aria-label=".form-select-lg">
+                                                <option value="" disabled selected>Seleccione una ubicación...</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="categoria" class="col-sm-3 col-form-label">CATEGORIA:</label>
                                         <div class="col-sm-6 align-items-end">
                                             <input type="text" readonly class="form-control-plaintext" id="categoriaModal" value="">
+                                            <select id="selectCategoriaModal" name="selectCategoriaModal" class="d-none form-select" aria-label=".form-select-lg">
+                                                <option value="" disabled selected>Seleccione una categoria...</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
@@ -154,6 +163,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js " integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf " crossorigin="anonymous "></script>
     <script src='../../js/productos/productos.js'></script>
+    <script src='../../js/grupos/grupos.js'></script>
     <script>
         imprimir();
     </script>

@@ -1,14 +1,14 @@
 const api = "https://ivnapp-socket-server.herokuapp.com/api/";
 
 /**
- * Función que corta las palabras en un array de un string de texto
+ * corta el string busqueda en un array de palabras para comparar
  *
  * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
  * @version 2021-05-06
  */
 
-function cortaPalabras(texto) { //corta el string busqueda en un array de palabras para comparar
+function cortaPalabras(texto) {
 
     let palabras = [];
     let palabra = '';
@@ -51,15 +51,15 @@ function consulta(url) {
  * 
  * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
- * 
- * @version 2021-05-06
+ * @version 2021-05-11
  */
 
 function imprimirLista(datos) { //imprime los datos entregados en lista html
     console.log("DATOS RECIBIDOS");
     const td = "</td><td>";
     let boton = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal' ";
-
+    datos.sort((a, b) => a.name.localeCompare ( b.name ));
+    
     for (let i in datos) {
         const data = datos[i];
         const com = '"';
@@ -81,11 +81,10 @@ function imprimirLista(datos) { //imprime los datos entregados en lista html
 
 /**
  * Función que muestra la vista modal del producto especifico
- *
- * @author Emmanuel Correa <ebcorrea[at]gmail.com>
- * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * 
- * @version 2021-05-06
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
+ * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @version 2021-05-24
  */
 
 function vistaModal(id) {
@@ -105,6 +104,10 @@ function vistaModal(id) {
     document.formModal.ubicacionModal.value = modalProducto[0].ubication;
     document.formModal.categoriaModal.value = modalProducto[0].category;
     document.formModal.obsModal.value = elementoVacio(modalProducto[0].observations);
+
+    document.formModal.selectCategoriaModal.value = modalProducto[0].category;
+    document.formModal.selectUbicacionModal.value = modalProducto[0].ubication;
+    document.formModal.selectGrupoModal.value     = modalProducto[0].group;
 
     document.getElementById("botonAgregar").className = "d-none btn btn-success";
     document.getElementById("botonEditar").className = "btn btn-danger";
@@ -230,7 +233,6 @@ function obtenerModal(ventana) {
  *
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
  * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
- * 
  * @version 2021-05-06
  */
 
@@ -249,7 +251,7 @@ function normalizar(str) {
  * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @author Emmanuel Correa <ebcorreac[at]gmail.com>
  * 
- * @version 2021-05-11
+ * @version 2021-05-24
  */
 
 function editarModal() {
@@ -257,18 +259,21 @@ function editarModal() {
     document.formModal.nombreModal.readOnly     = false;
     document.formModal.cantidadModal.readOnly   = false;
     document.formModal.precioModal.readOnly     = false;
-    document.formModal.grupoModal.readOnly      = false;
-    document.formModal.ubicacionModal.readOnly  = false;
-    document.formModal.categoriaModal.readOnly  = false;
     document.formModal.obsModal.readOnly        = false;
+
+    document.formModal.cantidadModal.type   = "number";
+    document.formModal.precioModal.type     = "number";
 
     document.getElementById("nombreModal").className    = "form-control";
     document.getElementById("cantidadModal").className  = "form-control";
     document.getElementById("precioModal").className    = "form-control";
-    document.getElementById("grupoModal").className     = "form-control";
-    document.getElementById("ubicacionModal").className = "form-control";
-    document.getElementById("categoriaModal").className = "form-control";
+    document.getElementById("grupoModal").className     = "d-none form-control";
+    document.getElementById("ubicacionModal").className = "d-none form-control";
+    document.getElementById("categoriaModal").className = "d-none form-control";
     document.getElementById("obsModal").className       = "form-control";
+    document.getElementById("selectCategoriaModal").className  = "form-select";
+    document.getElementById("selectUbicacionModal").className  = "form-select";
+    document.getElementById("selectGrupoModal").className      = "form-select";
 }
 
 /**
@@ -277,7 +282,7 @@ function editarModal() {
  * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @author Emmanuel Correa <ebcorreac[at]gmail.com>
  * 
- * @version 2021-05-11
+ * @version 2021-05-24
  */
 
 function bloquearModal() {
@@ -290,6 +295,9 @@ function bloquearModal() {
     document.formModal.categoriaModal.readOnly  = true;
     document.formModal.obsModal.readOnly        = true;
 
+    document.formModal.cantidadModal.type   = "text";
+    document.formModal.precioModal.type     = "text";
+
     document.getElementById("nombreModal").className    = "form-control-plaintext";
     document.getElementById("cantidadModal").className  = "form-control-plaintext";
     document.getElementById("precioModal").className    = "form-control-plaintext";
@@ -297,6 +305,9 @@ function bloquearModal() {
     document.getElementById("ubicacionModal").className = "form-control-plaintext";
     document.getElementById("categoriaModal").className = "form-control-plaintext";
     document.getElementById("obsModal").className       = "form-control-plaintext";
+    document.getElementById("selectCategoriaModal").className  = "d-none form-select";
+    document.getElementById("selectUbicacionModal").className  = "d-none form-select";
+    document.getElementById("selectGrupoModal").className      = "d-none form-select";
 }
 
 /**
@@ -305,7 +316,7 @@ function bloquearModal() {
  * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @author Emmanuel Correa <ebcorreac[at]gmail.com>
  * 
- * @version 2021-05-11
+ * @version 2021-05-24
  */
 
 function agregarModal() {
@@ -315,13 +326,19 @@ function agregarModal() {
     document.formModal.nombreModal.value    = "";
     document.formModal.cantidadModal.value  = "";
     document.formModal.precioModal.value    = "";
-    document.formModal.grupoModal.value     = "";
+/*     document.formModal.grupoModal.value     = "";
     document.formModal.ubicacionModal.value = "";
-    document.formModal.categoriaModal.value = "";
+    document.formModal.categoriaModal.value = ""; */
     document.formModal.obsModal.value       = "";
+
+    document.formModal.selectCategoriaModal.value = "";
+    document.formModal.selectUbicacionModal.value = "";
+    document.formModal.selectGrupoModal.value     = "";
 
     document.getElementById("botonAgregar").className   = "btn btn-success";
     document.getElementById("botonEditar").className    = "d-none btn btn-success";
+    document.getElementById("botonImprimir").className  = "d-none btn-primary";
+    document.getElementById("botonImprimir").className  = "d-none btn-primary";
     document.getElementById("botonImprimir").className  = "d-none btn-primary";
 
 }
@@ -332,7 +349,7 @@ function agregarModal() {
  * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @author Emmanuel Correa <ebcorreac[at]gmail.com>
  * 
- * @version 2021-05-11
+ * @version 2021-05-24
  */
 
 function agregarProducto() {
@@ -344,11 +361,11 @@ function agregarProducto() {
 
         "name"        : document.formModal.nombreModal.value,
         "img"         : "",
-        "category"    : document.formModal.categoriaModal.value,
+        "category"    : document.formModal.selectCategoriaModal.value,
         "quantity"    : document.formModal.cantidadModal.value,
         "price"       : document.formModal.precioModal.value,
-        "ubication"   : document.formModal.ubicacionModal.value,
-        "group"       : document.formModal.grupoModal.value,
+        "ubication"   : document.formModal.selectUbicacionModal.value,
+        "group"       : document.formModal.selectGrupoModal.value,
         "observations": document.formModal.obsModal.value,
     
     });
