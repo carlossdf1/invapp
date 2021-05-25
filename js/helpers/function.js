@@ -47,10 +47,10 @@ function consulta(url) {
 }
 
 /**
- * Función que muestra cada linea de informacion
- *
- * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * Función que imprime la tabla productos en la vista
+ * 
  * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
+ * @author Emmanuel Correa <ebcorrea[at]gmail.com>
  * @version 2021-05-11
  */
 
@@ -80,11 +80,11 @@ function imprimirLista(datos) { //imprime los datos entregados en lista html
 }
 
 /**
- * Función que muestra cada linea de informacion
- *
- * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * Función que muestra la vista modal del producto especifico
+ * 
  * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
- * @version 2021-05-06
+ * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @version 2021-05-24
  */
 
 function vistaModal(id) {
@@ -118,7 +118,8 @@ function vistaModal(id) {
 }
 
 /**
- * Función que muestra cada linea de informacion
+ * Función identifica si el valor esta defenido o no, si lo esta devuelve un string vacio si no devuelve el dato
+ *
  * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
  * @version 2021-05-06
@@ -386,4 +387,18 @@ function agregarProducto() {
         .then( result => console.log( result ) )
         .catch( error => console.log('error', error) );
 
+}
+
+/**
+ * Permite agregar un producto y recargar la lista para que sea visualizado
+ *
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
+ * @author Emmanuel Correa <ebcorreac[at]gmail.com>
+ * 
+ * @version 2021-05-12
+ */
+
+function agregarRecargar(){
+    agregarProducto();
+    setTimeout(() => imprimir(), 1000);
 }
