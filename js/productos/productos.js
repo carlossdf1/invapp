@@ -59,7 +59,11 @@ async function consultaCategoria()
 
 async function imprimir() { 
   imprimirLista( await consultaProductos( ) );
- }
+  selectNamesArray( await consultaUbicacion( ), "selectUbicacionModal");
+  selectNamesArray( await consultaGrupos( ), "selectGrupoModal");
+  selectNamesArray( await consultaCategoria( ), "selectCategoriaModal");
+
+}
 
 /* let myModal = document.getElementById('myModal');
 let myInput    = document.getElementById('myInput');
@@ -84,7 +88,7 @@ myModal.addEventListener('shown.bs.modal', function() { myInput.focus() }); */
 } */
 
 /**
-* Función que toma los datos de la api toma el name, crea un array y lo envia addOptions
+* Función que separa el name de los datos, crea un array y lo envia addOptions
 *
 * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
 * 

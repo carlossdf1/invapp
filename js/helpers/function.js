@@ -105,6 +105,10 @@ function vistaModal(id) {
     document.formModal.categoriaModal.value = modalProducto[0].category;
     document.formModal.obsModal.value = elementoVacio(modalProducto[0].observations);
 
+    document.formModal.selectCategoriaModal.value = modalProducto[0].category;
+    document.formModal.selectUbicacionModal.value = modalProducto[0].ubication;
+    document.formModal.selectGrupoModal.value     = modalProducto[0].group;
+
     document.getElementById("botonAgregar").className = "d-none btn btn-success";
     document.getElementById("botonEditar").className = "btn btn-danger";
     document.getElementById("botonImprimir").className = "btn btn-primary";
@@ -321,9 +325,9 @@ function agregarModal() {
     document.formModal.nombreModal.value    = "";
     document.formModal.cantidadModal.value  = "";
     document.formModal.precioModal.value    = "";
-    document.formModal.grupoModal.value     = "";
+/*     document.formModal.grupoModal.value     = "";
     document.formModal.ubicacionModal.value = "";
-    document.formModal.categoriaModal.value = "";
+    document.formModal.categoriaModal.value = ""; */
     document.formModal.obsModal.value       = "";
 
     document.formModal.selectCategoriaModal.value = "";
@@ -335,10 +339,6 @@ function agregarModal() {
     document.getElementById("botonImprimir").className  = "d-none btn-primary";
     document.getElementById("botonImprimir").className  = "d-none btn-primary";
     document.getElementById("botonImprimir").className  = "d-none btn-primary";
-
-    selectNamesArray(listaUbicacion, "selectUbicacionModal");
-    selectNamesArray(listaGrupos, "selectGrupoModal");
-    selectNamesArray(listaCategoria, "selectCategoriaModal");
 
 }
 
