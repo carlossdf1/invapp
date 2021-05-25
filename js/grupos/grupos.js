@@ -1,4 +1,5 @@
 const grupos = api + 'product/menu';
+let listaGrupos;
 
 /**
  * Función que imprime la lista de consulta de grupos
@@ -8,7 +9,7 @@ const grupos = api + 'product/menu';
  */
 async function consultaGrupos() {
     const respuesta   = await consulta( grupos );
-    const listaGrupos = respuesta.data;
+    listaGrupos = respuesta.data;
     return listaGrupos;
 };
 
@@ -19,7 +20,9 @@ async function consultaGrupos() {
  * @version 2021-05-06
  */
 
-async function imprimirLista() { 
+consultaGrupos();
+
+async function imprimirGrupos() { 
     
     const datos = await consultaGrupos()
     const td    = "</td><td>";
