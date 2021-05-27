@@ -108,6 +108,7 @@ function vistaModal(id) {
     document.formModal.selectGrupoModal.value          = modalProducto[0].group;
 
     document.getElementById("botonAgregar").className  = "d-none btn btn-success";
+    document.getElementById("botonGuardar").className  = "d-none btn btn-danger";
     document.getElementById("botonEditar").className   = "btn btn-danger";
     document.getElementById("botonImprimir").className = "btn btn-primary";
 

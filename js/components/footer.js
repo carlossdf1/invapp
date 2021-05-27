@@ -7,18 +7,20 @@ class Footer extends HTMLElement {
         this.innerHTML = `
         <style>
         footer {
-          height: 50px;
-          padding: 0 10px;
+          height: 70px;
+          padding-block-start: 15px;
           list-style: none;
           display: flex;
           flex: 0 0 auto;
           justify-content: space-between;
           align-items: center;
           width: 100%;
-          position: fixed;
-          bottom: 0;
+          position: relative;
+          bottom: -136%;
+          line-height: 120%;
+        }
           
-      }
+      
         
         ul li {
           list-style: none;
@@ -46,12 +48,14 @@ class Footer extends HTMLElement {
 
         .copyright{
           color               : #C7C7C7;
-      }
+        }
       
       .copyright a{
           text-decoration     : none;
           color               : white;
           /* font-weight      : bold; */
+          /* padding-inline-end: 0.5rem; */
+          padding-inline-end: 30px;
       }
       
         </style>
