@@ -56,7 +56,7 @@ class Footer extends HTMLElement {
         </style>
         <footer class="bg-dark">
           <ul>
-            <li><a href="/WebStore/version/app.html">About</a></li>
+            <li><a href="/WebStore/view/version/app.html">About</a></li>
             <li><a href="https://documenter.getpostman.com/view/9034494/TzJpjL63">Documentacion</a></li>
             <li><a href="/WebStore/view/nosotros/nosotros.html">Nosotros</a></li>
           </ul>
