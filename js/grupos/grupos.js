@@ -8,8 +8,8 @@ let listaGrupos;
  * @version 2021-05-06
  */
 async function consultaGrupos() {
-    const respuesta   = await consulta( grupos );
-    listaGrupos = respuesta.data;
+    const respuesta = await consulta(grupos);
+    listaGrupos     = respuesta.data;
     return listaGrupos;
 };
 
@@ -22,17 +22,14 @@ async function consultaGrupos() {
 
 consultaGrupos();
 
-async function imprimirGrupos() { 
-    
+async function imprimirGrupos() {
+
     const datos = await consultaGrupos()
     const td    = "</td><td>";
 
     for ( let i in datos ) {
-        document.getElementById( "lista" ).innerHTML +=
-        '<tr scope="row"><td>' +
-        i + td +
-        datos[i].name +
-        '</td></tr>';
+        document.getElementById("lista").innerHTML +=
+        '<tr scope="row"><td>' + i + td + datos[i].name + '</td></tr>';
     }
-    
+
 }
