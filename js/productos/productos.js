@@ -51,8 +51,10 @@ async function consultaCategoria()
 };
 
 /**
- * Función que imprime los datos seleccionados, en este caso toda la lista de productos
- *
+ * Función que imprime los datos seleccionados, en este caso toda la lista de productos,
+ * ademas de relleñar los select con datos de ubicacion, categoria y grupos
+ * 
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
  * @version 2021-05-06
  */
