@@ -16,7 +16,7 @@ class Footer extends HTMLElement {
           align-items: center;
           width: 100%;
           position: relative;
-          bottom: -136%;
+          bottom: -149%;
           line-height: 120%;
         }
           
