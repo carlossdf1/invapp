@@ -29,7 +29,7 @@ async function imprimirGrupos() {
 
     for ( let i in datos ) {
         document.getElementById("lista").innerHTML +=
-        '<tr scope="row"><td>' + i + td + datos[i].name + '</td></tr>';
+        '<tr scope="row"><td>' + datos[i].name + '</td></tr>';
     }
 
 }
