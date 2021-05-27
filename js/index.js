@@ -4,6 +4,7 @@
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
  * @version 2021-05-06
  */
+
 async function imprimirNumeroProductos() {
     const numeroProductos = await consultaProductos();
     const numeroGrupos    = await consultaGrupos();
