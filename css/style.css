@@ -5,6 +5,7 @@ body{
 #imprimir {
     position: fixed;
     bottom: 10%;
+    right: 1%;
 }
 
 /*Edicion del Navbar*/
