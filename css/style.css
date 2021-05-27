@@ -10,11 +10,11 @@ body{
 /*Edicion del Navbar*/
 .fondo-entrada{
    
-    background          : url("../img/header2.jpg");
-    background-size     : cover;
-    background-position : center;
-    height              : 400px;
-    background-color: rgba(0,0,0, 0.5);
-    background-blend-mode: darken;
+    background            : url("../img/header2.jpg");
+    background-size       : cover;
+    background-position   : center;
+    height                : 400px;
+    background-color      : rgba(0,0,0, 0.5);
+    background-blend-mode : darken;
 
 }
