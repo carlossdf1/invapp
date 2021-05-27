@@ -128,11 +128,22 @@ function addOptions( domElement, array ) {
   }
 }
 
-/*   let select = document.getElementById('categoriaModal');
-  select.addEventListener('change',
-  function(){
+async function createProduct() {
 
-    let selectedOption = this.options[ select.selectedIndex ];
-    console.log( selectedOption.value + ': ' + selectedOption.text );
+  let data = JSON.stringify({
 
-  }); */
+    "name"        : document.formModal.nombreModal.value,
+    "img"         : "",
+    "category"    : document.formModal.selectCategoriaModal.value,
+    "quantity"    : document.formModal.cantidadModal.value,
+    "price"       : document.formModal.precioModal.value,
+    "ubication"   : document.formModal.selectUbicacionModal.value,
+    "group"       : document.formModal.selectGrupoModal.value,
+    "observations": document.formModal.obsModal.value,
+  
+  });
+
+  await agregarData( data );
+
+}
+

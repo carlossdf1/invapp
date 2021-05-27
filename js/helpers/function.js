@@ -12,15 +12,15 @@ function cortaPalabras(texto) {
 
     let palabras = [];
     let palabra = '';
-    for (let letra = 0; letra < texto.length; letra++) {
-        if (texto[letra] !== ' ') {
+    for ( let letra = 0; letra < texto.length; letra++ ) {
+        if ( texto[letra] !== ' ' ) {
             palabra += texto[letra];
-        } else if (palabra !== '') {
-            palabras.push(palabra);
+        } else if ( palabra !== '' ) {
+            palabras.push( palabra );
             palabra = '';
         }
 
-        if (letra == texto.length - 1 && palabra !== '') palabras.push(palabra);
+        if ( letra == texto.length - 1 && palabra !== '') palabras.push( palabra );
     }
 
     console.log(palabras);
@@ -36,13 +36,13 @@ function cortaPalabras(texto) {
  */
 
 function consulta(url) {
-    return new Promise((resolve, reject) => {
+    return new Promise(( resolve, reject ) => {
         const requestOptions = { method: 'GET', redirect: 'follow' };
 
         fetch(url, requestOptions)
-            .then(response => response.json())
-            .then(data => { resolve(JSON.parse(JSON.stringify(data))); })
-            .catch(err => console.log(err))
+            .then( response => response.json() )
+            .then( data     => { resolve( JSON.parse( JSON.stringify( data ) ) ); })
+            .catch( err     => console.log( err ))
     });
 }
 
@@ -54,10 +54,10 @@ function consulta(url) {
  * @version 2021-05-11
  */
 
-function imprimirLista(datos) { //imprime los datos entregados en lista html
+function imprimirLista( datos ) { //imprime los datos entregados en lista html
     console.log("DATOS RECIBIDOS");
-    const td = "</td><td>";
-    let boton = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal' ";
+    const td    = "</td><td>";
+    let boton   = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal' ";
     datos.sort((a, b) => a.name.localeCompare ( b.name ));
     
     for (let i in datos) {
@@ -89,33 +89,29 @@ function imprimirLista(datos) { //imprime los datos entregados en lista html
 
 function vistaModal(id) {
 
-    if (document.getElementById("nombreModal").className !== "form-control-plaintext") {
-        bloquearModal();
-    }
+    if ( document.getElementById("nombreModal").className !== "form-control-plaintext") bloquearModal();
 
     const modalProducto = listaProductos.filter(listaProductos => listaProductos.uid === id);
 
-    console.log(modalProducto);
+    console.log( { modalProducto } );
 
-    document.formModal.nombreModal.value    = modalProducto[0].name;
-    document.formModal.cantidadModal.value  = modalProducto[0].quantity;
-    document.formModal.precioModal.value    = modalProducto[0].price;
-    document.formModal.grupoModal.value     = modalProducto[0].group;
-    document.formModal.ubicacionModal.value = modalProducto[0].ubication;
-    document.formModal.categoriaModal.value = modalProducto[0].category;
-    document.formModal.obsModal.value       = elementoVacio(modalProducto[0].observations);
+    document.formModal.nombreModal.value               = modalProducto[0].name;
+    document.formModal.cantidadModal.value             = modalProducto[0].quantity;
+    document.formModal.precioModal.value               = modalProducto[0].price;
+    document.formModal.grupoModal.value                = modalProducto[0].group;
+    document.formModal.ubicacionModal.value            = modalProducto[0].ubication;
+    document.formModal.categoriaModal.value            = modalProducto[0].category;
+    document.formModal.obsModal.value                  = elementoVacio( modalProducto[0].observations );
 
-    document.formModal.selectCategoriaModal.value = modalProducto[0].category;
-    document.formModal.selectUbicacionModal.value = modalProducto[0].ubication;
-    document.formModal.selectGrupoModal.value     = modalProducto[0].group;
+    document.formModal.selectCategoriaModal.value      = modalProducto[0].category;
+    document.formModal.selectUbicacionModal.value      = modalProducto[0].ubication;
+    document.formModal.selectGrupoModal.value          = modalProducto[0].group;
 
+    document.getElementById("botonAgregar").className  = "d-none btn btn-success";
     document.getElementById("botonEditar").className   = "btn btn-danger";
     document.getElementById("botonImprimir").className = "btn btn-primary";
 
-    document.getElementById("botonGuardar").className  = "d-none btn-danger";
-    document.getElementById("botonAgregar").className  = "d-none btn btn-success";
-
-    console.log(modalProducto);
+    console.log({ modalProducto });
 
 }
 
@@ -143,40 +139,40 @@ function elementoVacio(dato) {
 function buscar() {
 
     console.log("BUSCANDO")
-    const palabras = normalizar(document.getElementById("search").value);
-    let busqueda = cortaPalabras(palabras);
+    const palabras        = normalizar( document.getElementById("search").value );
+    let busqueda          = cortaPalabras( palabras );
     let resultadoBusqueda = [];
 
-    console.log(busqueda);
+    console.log( busqueda );
 
-    if (busqueda.length >= 1) {
+    if ( busqueda.length >= 1 ) {
 
         document.getElementById("lista").innerHTML = "";
 
-        for (let i in listaProductos) {
+        for ( let i in listaProductos ) {
 
-            let data = listaProductos[i];
+            let data     = listaProductos[i];
             let contador = 0;
 
-            for (let b in busqueda) {
+            for ( let b in busqueda ) {
 
                 let coincidecia = false;
 
-                for (let x in data) {
+                for ( let x in data ) {
                     let e = data[x];
-                    if (e != data.uid && normalizar(e).includes(busqueda[b]) == true) coincidecia = true; //busca solo la concidencia por fila
+                    if ( e != data.uid && normalizar(e).includes( busqueda[b] ) == true ) coincidecia = true; //busca solo la concidencia por fila
                 }
 
                 if (coincidecia == true) contador++;
             }
 
-            if (contador == busqueda.length) resultadoBusqueda.push(data);
+            if ( contador == busqueda.length ) resultadoBusqueda.push( data );
         }
 
     } else { console.log( "NO HAY DATOS" ) }
 
-    imprimirLista(resultadoBusqueda);
-    console.log(resultadoBusqueda);
+    imprimirLista( resultadoBusqueda );
+    console.log( resultadoBusqueda );
 
     return resultadoBusqueda
 
@@ -205,7 +201,7 @@ function imprimirElemento( id ) {
 
     ventana.document.close();
     ventana.focus();
-    setTimeout(() => ventana.print(), 1000);
+    setTimeout( () => ventana.print(), 1000 );
     return true;
 }
 
@@ -258,29 +254,28 @@ function normalizar(str) {
 
 function editarModal() {
 
-    document.formModal.nombreModal.readOnly     = false;
-    document.formModal.cantidadModal.readOnly   = false;
-    document.formModal.precioModal.readOnly     = false;
-    document.formModal.obsModal.readOnly        = false;
+    document.formModal.nombreModal.readOnly                   = false;
+    document.formModal.cantidadModal.readOnly                 = false;
+    document.formModal.precioModal.readOnly                   = false;
+    document.formModal.obsModal.readOnly                      = false;
+        
+    document.formModal.cantidadModal.type                     = "number";
+    document.formModal.precioModal.type                       = "number";
 
-    document.formModal.cantidadModal.type   = "number";
-    document.formModal.precioModal.type     = "number";
+    document.getElementById("nombreModal").className          = "form-control";
+    document.getElementById("cantidadModal").className        = "form-control";
+    document.getElementById("precioModal").className          = "form-control";
+    document.getElementById("grupoModal").className           = "d-none form-control";
+    document.getElementById("ubicacionModal").className       = "d-none form-control";
+    document.getElementById("categoriaModal").className       = "d-none form-control";
+    document.getElementById("obsModal").className             = "form-control";
+    document.getElementById("selectCategoriaModal").className = "form-select";
+    document.getElementById("selectUbicacionModal").className = "form-select";
+    document.getElementById("selectGrupoModal").className     = "form-select";
 
-    document.getElementById("nombreModal").className    = "form-control";
-    document.getElementById("cantidadModal").className  = "form-control";
-    document.getElementById("precioModal").className    = "form-control";
-    document.getElementById("grupoModal").className     = "d-none form-control";
-    document.getElementById("ubicacionModal").className = "d-none form-control";
-    document.getElementById("categoriaModal").className = "d-none form-control";
-    document.getElementById("obsModal").className       = "form-control";
-    document.getElementById("selectCategoriaModal").className  = "form-select";
-    document.getElementById("selectUbicacionModal").className  = "form-select";
-    document.getElementById("selectGrupoModal").className      = "form-select";
-
-    document.getElementById("botonGuardar").className  = "btn btn-danger";
-    document.getElementById("botonImprimir").className  = "d-none btn-primary";
-    document.getElementById("botonEditar").className  = "d-none btn-danger";
-
+    document.getElementById("botonGuardar").className         = "btn btn-danger";
+    document.getElementById("botonImprimir").className        = "d-none btn-primary";
+    document.getElementById("botonEditar").className          = "d-none btn-danger";
 }
 
 /**
@@ -294,27 +289,27 @@ function editarModal() {
 
 function bloquearModal() {
 
-    document.formModal.nombreModal.readOnly     = true;
-    document.formModal.cantidadModal.readOnly   = true;
-    document.formModal.precioModal.readOnly     = true;
-    document.formModal.grupoModal.readOnly      = true;
-    document.formModal.ubicacionModal.readOnly  = true;
-    document.formModal.categoriaModal.readOnly  = true;
-    document.formModal.obsModal.readOnly        = true;
+    document.formModal.nombreModal.readOnly                   = true;
+    document.formModal.cantidadModal.readOnly                 = true;
+    document.formModal.precioModal.readOnly                   = true;
+    document.formModal.grupoModal.readOnly                    = true;
+    document.formModal.ubicacionModal.readOnly                = true;
+    document.formModal.categoriaModal.readOnly                = true;
+    document.formModal.obsModal.readOnly                      = true;
+        
+    document.formModal.cantidadModal.type                     = "text";
+    document.formModal.precioModal.type                       = "text";
 
-    document.formModal.cantidadModal.type   = "text";
-    document.formModal.precioModal.type     = "text";
-
-    document.getElementById("nombreModal").className    = "form-control-plaintext";
-    document.getElementById("cantidadModal").className  = "form-control-plaintext";
-    document.getElementById("precioModal").className    = "form-control-plaintext";
-    document.getElementById("grupoModal").className     = "form-control-plaintext";
-    document.getElementById("ubicacionModal").className = "form-control-plaintext";
-    document.getElementById("categoriaModal").className = "form-control-plaintext";
-    document.getElementById("obsModal").className       = "form-control-plaintext";
-    document.getElementById("selectCategoriaModal").className  = "d-none form-select";
-    document.getElementById("selectUbicacionModal").className  = "d-none form-select";
-    document.getElementById("selectGrupoModal").className      = "d-none form-select";
+    document.getElementById("nombreModal").className          = "form-control-plaintext";
+    document.getElementById("cantidadModal").className        = "form-control-plaintext";
+    document.getElementById("precioModal").className          = "form-control-plaintext";
+    document.getElementById("grupoModal").className           = "form-control-plaintext";
+    document.getElementById("ubicacionModal").className       = "form-control-plaintext";
+    document.getElementById("categoriaModal").className       = "form-control-plaintext";
+    document.getElementById("obsModal").className             = "form-control-plaintext";
+    document.getElementById("selectCategoriaModal").className = "d-none form-select";
+    document.getElementById("selectUbicacionModal").className = "d-none form-select";
+    document.getElementById("selectGrupoModal").className     = "d-none form-select";
 }
 
 /**
@@ -343,6 +338,39 @@ function agregarModal() {
     document.getElementById("botonEditar").className    = "d-none btn btn-danger";
     document.getElementById("botonImprimir").className  = "d-none btn-primary";
     document.getElementById("botonGuardar").className   = "d-none btn-danger";
+
+}
+
+/**
+ * Función que permite agregar atravez de un objeto un nuevo producto a la bd
+ *
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
+ * @author Emmanuel Correa <ebcorreac[at]gmail.com>
+ * 
+ * @version 2021-05-24
+ */
+
+ function addData( data, route  ) {
+
+    const myHeaders = new Headers();
+    myHeaders.append( "Content-Type", "application/json" );
+
+    const requestOptions = {
+    
+        method  : 'POST',
+        headers : myHeaders,
+        body    : data,
+        redirect: 'follow'
+    
+    };
+
+    console.log( data );
+    console.log( requestOptions );
+
+    fetch( api + route, requestOptions )
+    .then( response => response.text() )
+    .then(  result  => console.log( result ) )
+    .catch( error   => console.log('error', error ) );
 
 }
 
@@ -387,8 +415,8 @@ function agregarProducto() {
 
     fetch( api + "product/new", requestOptions )
         .then( response => response.text() )
-        .then( result => console.log( result ) )
-        .catch( error => console.log('error', error) );
+        .then(  result  => console.log( result ) )
+        .catch( error   => console.log('error', error ) );
 
 }
 
