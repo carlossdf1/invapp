@@ -11,6 +11,7 @@ class Footer extends HTMLElement {
           padding: 0 10px;
           list-style: none;
           display: flex;
+          flex: 0 0 auto;
           justify-content: space-between;
           align-items: center;
           width: 100%;
