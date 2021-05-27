@@ -1,5 +1,0 @@
-Estas son las instrucciones para isntalar esta app
-
-1 - descargar desde el enlace de la pagina 
-2 - dar permisos de origenes desconocidos
-3 - disfrutar de la app
