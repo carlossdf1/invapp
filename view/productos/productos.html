@@ -18,6 +18,7 @@
     <p></p>
     <h1 class="text-center" > Lista de items disponibles: </h1>
     <hr>
+
     <div class="container-xxl my-md-4 bd-layout ">
 
         <!-- BOTONES FLOTANTES -->
@@ -48,7 +49,7 @@
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-fullscreen-lg-down">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -125,11 +126,31 @@
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                         <button id="botonAgregar" type="button" class="d-none btn btn-success" data-bs-dismiss="modal" type="submit" onclick="agregarRecargar()">Agregar</button>
                         <button id="botonGuardar" type="button" class="d-none btn btn-danger" data-bs-dismiss="modal" type="submit" onclick="">Guardar</button>
-                        <button id="botonEditar" type="button" class="btn btn-danger" type="submit" onclick="editarModal()">Editar</button>
+                        <button id="botonEliminar" type="button" class="d-none btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar" onclick="eliminarModal()">Eliminar</button>
+                        <button id="botonEditar" type="button" class="btn btn-success" type="submit" onclick="editarModal()">Editar</button>
                         <button id="botonImprimir" type="button" class="btn btn-primary" type="submit" onclick="imprimirElemento('vistaModal')">Imprimir</button>
-
                     </div>
                 </div>
+            </div>
+        </div>
+        
+        <!-- Modal eliminar -->
+
+        <div class="modal fade" id="modalEliminar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Eliminar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Esta seguro que desea eliminar el item?</p>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="eliminarModalCancelar()">Cancelar</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="eliminarModalSalir()">Eliminar</button>
+                </div>
+            </div>
             </div>
         </div>
 

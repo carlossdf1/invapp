@@ -147,3 +147,4 @@ async function createProduct() {
 
 }
 
+let myModal = new bootstrap.Modal(document.getElementById("modalEditar"));

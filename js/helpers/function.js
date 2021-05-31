@@ -57,7 +57,7 @@ function consulta(url) {
 function imprimirLista( datos ) { //imprime los datos entregados en lista html
     console.log("DATOS RECIBIDOS");
     const td    = "</td><td>";
-    let boton   = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal' ";
+    let boton   = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalEditar' ";
     datos.sort((a, b) => a.name.localeCompare ( b.name ));
     
     for (let i in datos) {
@@ -109,8 +109,10 @@ function vistaModal(id) {
 
     document.getElementById("botonAgregar").className  = "d-none btn btn-success";
     document.getElementById("botonGuardar").className  = "d-none btn btn-danger";
-    document.getElementById("botonEditar").className   = "btn btn-danger";
+    document.getElementById("botonEditar").className   = "btn btn-success";
     document.getElementById("botonImprimir").className = "btn btn-primary";
+    document.getElementById("botonEliminar").className = "btn btn-danger";
+
 
     console.log({ modalProducto });
 
@@ -277,6 +279,9 @@ function editarModal() {
     document.getElementById("botonGuardar").className         = "btn btn-danger";
     document.getElementById("botonImprimir").className        = "d-none btn-primary";
     document.getElementById("botonEditar").className          = "d-none btn-danger";
+    document.getElementById("botonEliminar").className        = "d-none btn-danger";
+
+    
 }
 
 /**
@@ -433,4 +438,17 @@ function agregarProducto() {
 function agregarRecargar(){
     agregarProducto();
     setTimeout(() => imprimir(), 1000);
+}
+
+function eliminarModal(){
+    document.getElementById("modalEditar").style   = "z-index: 1040; display: block;";
+}
+
+function eliminarModalCancelar(){
+    document.getElementById("modalEditar").style   = "z-index: 1060; display: block;";
+}
+
+function eliminarModalSalir(){
+    document.getElementById("modalEditar").style   = "z-index: 1060; display: block;";
+    myModal.toggle()
 }
