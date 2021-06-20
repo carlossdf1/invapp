@@ -38,7 +38,7 @@
             <div class="row">
                 <div class="col">
                     <!-- BOTON AGREGAR -->
-                    <button class="btn btn-success" tabindex="2" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button" onclick="agregarModal()">
+                    <button class="btn btn-success" tabindex="2" data-bs-toggle="modal" data-bs-target="#modalEditar" type="button" onclick="agregarModal()">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <!-- Modal -->
+        <!-- Modal editar y ver-->
         <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-fullscreen-lg-down">
                 <div class="modal-content">
@@ -64,26 +64,26 @@
                                     <div class="mb-3 row">
                                         <label for="nombre" class="col-sm-3 col-form-label">NOMBRE:</label>
                                         <div class="col-sm-6">
-                                            <input type="text" readonly class="form-control-plaintext" id="nombreModal" value="" placeholder="Ingrese el nombre">
+                                            <input type="text" class="form-control-plaintext" id="nombreModal" value="" placeholder="Ingrese el nombre">
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="cantidad" class="col-sm-3 col-form-label">CANTIDAD:</label>
                                         <div class="col-sm-6">
-                                            <input type="text" readonly class="form-control-plaintext" min="1" id="cantidadModal" value="" placeholder="1">
+                                            <input type="text" class="form-control-plaintext" min="1" id="cantidadModal" value="" placeholder="1">
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="precio" class="col-sm-3 col-form-label">PRECIO:</label>
                                         <div class="col-sm-6">
-                                            <input type="text" readonly class="form-control-plaintext" min="0" id="precioModal" value="" placeholder="0">
+                                            <input type="text" class="form-control-plaintext" min="0" id="precioModal" value="" placeholder="0">
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="grupo" class="col-sm-3 col-form-label">GRUPO:</label>
                                         <div class="col-sm-6">
-                                            <input type="text" readonly class="form-control-plaintext" id="grupoModal" value="" placeholder="">
-                                            <select id="selectGrupoModal" name="selectGrupoModal" class="d-none form-select" aria-label=".form-select-lg">
+                                            <!-- <input type="text" class="form-control-plaintext" id="grupoModal" value="" placeholder=""> -->
+                                            <select id="selectGrupoModal" name="selectGrupoModal" class="form-control-plaintext" aria-label=".form-select-lg">
                                                 <option value="" disabled selected>Seleccione una categoria...</option>
                                             </select>
                                         </div>
@@ -91,8 +91,8 @@
                                     <div class="mb-3 row">
                                         <label for="ubicacion" class="col-sm-3 col-form-label">UBICACION:</label>
                                         <div class="col-sm-6">
-                                            <input type="text" readonly class="form-control-plaintext" id="ubicacionModal" value="">
-                                            <select id="selectUbicacionModal" name="selectUbicacionModal" class="d-none form-select" aria-label=".form-select-lg">
+                                            <!-- <input type="text" class="form-control-plaintext" id="ubicacionModal" value=""> -->
+                                            <select id="selectUbicacionModal" name="selectUbicacionModal" class="form-control-plaintext" aria-label=".form-select-lg">
                                                 <option value="" disabled selected>Seleccione una ubicación...</option>
                                             </select>
                                         </div>
@@ -100,8 +100,8 @@
                                     <div class="mb-3 row">
                                         <label for="categoria" class="col-sm-3 col-form-label">CATEGORIA:</label>
                                         <div class="col-sm-6 align-items-end">
-                                            <input type="text" readonly class="form-control-plaintext" id="categoriaModal" value="">
-                                            <select id="selectCategoriaModal" name="selectCategoriaModal" class="d-none form-select" aria-label=".form-select-lg">
+                                            <!-- <input type="text" class="form-control-plaintext" id="categoriaModal" value=""> -->
+                                            <select id="selectCategoriaModal" name="selectCategoriaModal" class="form-control-plaintext" aria-label=".form-select-lg">
                                                 <option value="" disabled selected>Seleccione una categoria...</option>
                                             </select>
                                         </div>
@@ -109,7 +109,7 @@
                                     <div class="mb-3 row">
                                         <label for="obs" class="col-sm-3 col-form-label">OBSERVACIÓN:</label>
                                         <div class="col-sm-6 align-items-end">
-                                            <input type="text" readonly class="form-control-plaintext" id="obsModal" value="" placeholder="(Opcional)">
+                                            <input type="text" class="form-control-plaintext" id="obsModal" value="" placeholder="(Opcional)">
                                         </div>
                                     </div>
                                 </form>
@@ -124,9 +124,9 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button id="botonAgregar" type="button" class="d-none btn btn-success" data-bs-dismiss="modal" type="submit" onclick="agregarRecargar()">Agregar</button>
-                        <button id="botonGuardar" type="button" class="d-none btn btn-danger" data-bs-dismiss="modal" type="submit" onclick="">Guardar</button>
-                        <button id="botonEliminar" type="button" class="d-none btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar" onclick="eliminarModal()">Eliminar</button>
+                        <button id="botonAgregar" type="button" class="btn btn-success" data-bs-dismiss="modal" type="submit" onclick="agregarRecargar()">Agregar</button>
+                        <button id="botonGuardar" type="button" class="btn btn-danger" data-bs-dismiss="modal" type="submit" onclick="">Guardar</button>
+                        <button id="botonEliminar" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar" onclick="eliminarModal()">Eliminar</button>
                         <button id="botonEditar" type="button" class="btn btn-success" type="submit" onclick="editarModal()">Editar</button>
                         <button id="botonImprimir" type="button" class="btn btn-primary" type="submit" onclick="imprimirElemento('vistaModal')">Imprimir</button>
                     </div>
@@ -134,14 +134,14 @@
             </div>
         </div>
         
-        <!-- Modal eliminar -->
+        <!-- Modal confirmacion eliminar -->
 
         <div class="modal fade" id="modalEliminar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel">Eliminar</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="eliminarModalCancelar()"></button>
                 </div>
                 <div class="modal-body">
                     <p>Esta seguro que desea eliminar el item?</p>

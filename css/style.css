@@ -28,6 +28,11 @@ html{
 
 }
 
+.form-control:disabled, .form-control[readonly] {
+    background-color: #fff;
+    opacity: 1;
+}
+
 #botonUrl{
     margin: 0% !important;
 
