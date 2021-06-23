@@ -24,6 +24,9 @@ class Header extends HTMLElement {
                         <a class="nav-link" href="/WebStore/view/productos/productos.html">Inventario</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/WebStore/view/users/users.html">Usuarios</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/WebStore/view/categorias/categorias.html">Categorias</a>
                     </li>
                     <li class="nav-item">

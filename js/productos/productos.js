@@ -86,8 +86,33 @@ async function createProduct() {
     "user"        : "web"
   });
 
-  await addData( data, "product/new" );
+  await addData( data, "product/new", "POST" );
 
+  recargar();
+}
+
+async function editProduct(id) {
+
+
+  console.log(id);
+  let data = JSON.stringify({
+
+    "name"        : document.formModal.nombreModal.value,
+    "img"         : "",
+    "category"    : document.formModal.selectCategoriaModal.value,
+    "quantity"    : document.formModal.cantidadModal.value,
+    "price"       : document.formModal.precioModal.value,
+    "ubication"   : document.formModal.selectUbicacionModal.value,
+    "group"       : document.formModal.selectGrupoModal.value,
+    "observations": document.formModal.obsModal.value,
+    "user"        : "web"
+  });
+
+  console.log(data);
+
+  await addData( data, "product/"+id, "PUT" );
+
+  recargar();
 }
 
 /**
@@ -198,6 +223,10 @@ async function createProduct() {
 
   dNone("botonEliminar",true);
 
+  document.getElementById("botonGuardar").setAttribute( 'onClick', 'editProduct("'+id+'");' );
+  /* onClick="editProduct("+id+")"; */
+  /* setAttribute( "onClick", "javascript: Boo();" ) */
+
 }
 
 /**
@@ -291,9 +320,8 @@ function agregarModal() {
  * @version 2021-05-12
  */
 
- function agregarRecargar(){
-  createProduct();
-  setTimeout(() => imprimir(), 1000);
+ function recargar(){
+    setTimeout(() => imprimir(), 1000);
 }
 
 function eliminarModal(){

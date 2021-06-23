@@ -153,7 +153,6 @@ function normalizar(str) {
 
 }
 
-
 /**
  * Función que permite agregar atravez de un objeto un nuevo producto a la bd
  *
@@ -163,14 +162,14 @@ function normalizar(str) {
  * @version 2021-05-24
  */
 
- function addData( data, route  ) {
+ function addData( data, route , method ) {
 
     const myHeaders = new Headers();
     myHeaders.append( "Content-Type", "application/json" );
 
     const requestOptions = {
     
-        method  : 'POST',
+        method  : method,
         headers : myHeaders,
         body    : data,
         redirect: 'follow'
