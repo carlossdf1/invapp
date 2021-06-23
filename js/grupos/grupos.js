@@ -1,4 +1,4 @@
-const grupos = api + 'product/menu';
+const grupos = api + 'group/menu';
 let listaGrupos;
 
 /**

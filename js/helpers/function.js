@@ -1,4 +1,4 @@
-const api = "https://ivnapp-socket-server.herokuapp.com/api/";
+const api = "https://inv-api.herokuapp.com/api/";
 
 /**
  * corta el string busqueda en un array de palabras para comparar
@@ -44,76 +44,6 @@ function consulta(url) {
             .then( data     => { resolve( JSON.parse( JSON.stringify( data ) ) ); })
             .catch( err     => console.log( err ))
     });
-}
-
-/**
- * Función que imprime la tabla productos en la vista
- * 
- * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
- * @author Emmanuel Correa <ebcorrea[at]gmail.com>
- * @version 2021-05-11
- */
-
-function imprimirLista( datos ) { //imprime los datos entregados en lista html
-    console.log("DATOS RECIBIDOS");
-    const td    = "</td><td>";
-    let boton   = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal' ";
-    datos.sort((a, b) => a.name.localeCompare ( b.name ));
-    
-    for (let i in datos) {
-        const data = datos[i];
-        const com = '"';
-
-        document.getElementById("lista").innerHTML +=
-            '<tr scope="row"><td>' +
-            i + td +
-            data.name + td +
-            //data.price + td +
-            data.quantity + td +
-            //data.category + td +
-            data.ubication + td +
-            //elementoVacio(data.observations) + td +
-            boton + "onclick='vistaModal(" + com + data.uid + com + ");'>Ver</button>" +
-            '</td></tr>';
-    }
-
-}
-
-/**
- * Función que muestra la vista modal del producto especifico
- * 
- * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
- * @author Emmanuel Correa <ebcorrea[at]gmail.com>
- * @version 2021-05-24
- */
-
-function vistaModal(id) {
-
-    if ( document.getElementById("nombreModal").className !== "form-control-plaintext") bloquearModal();
-
-    const modalProducto = listaProductos.filter(listaProductos => listaProductos.uid === id);
-
-    console.log( { modalProducto } );
-
-    document.formModal.nombreModal.value               = modalProducto[0].name;
-    document.formModal.cantidadModal.value             = modalProducto[0].quantity;
-    document.formModal.precioModal.value               = modalProducto[0].price;
-    document.formModal.grupoModal.value                = modalProducto[0].group;
-    document.formModal.ubicacionModal.value            = modalProducto[0].ubication;
-    document.formModal.categoriaModal.value            = modalProducto[0].category;
-    document.formModal.obsModal.value                  = elementoVacio( modalProducto[0].observations );
-
-    document.formModal.selectCategoriaModal.value      = modalProducto[0].category;
-    document.formModal.selectUbicacionModal.value      = modalProducto[0].ubication;
-    document.formModal.selectGrupoModal.value          = modalProducto[0].group;
-
-    document.getElementById("botonAgregar").className  = "d-none btn btn-success";
-    document.getElementById("botonGuardar").className  = "d-none btn btn-danger";
-    document.getElementById("botonEditar").className   = "btn btn-danger";
-    document.getElementById("botonImprimir").className = "btn btn-primary";
-
-    console.log({ modalProducto });
-
 }
 
 /**
@@ -207,27 +137,6 @@ function imprimirElemento( id ) {
 }
 
 /**
- * Función que muestra cada linea de informacion en un modal
- *
- * @author Emmanuel Correa <ebcorrea[at]gmail.com>
- * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
- * @version 2021-05-06
- */
-
-function obtenerModal(ventana) {
-
-    ventana.document.formModal.nombreModal.value    = document.formModal.nombreModal.value;
-    ventana.document.formModal.cantidadModal.value  = document.formModal.cantidadModal.value;
-    ventana.document.formModal.precioModal.value    = document.formModal.precioModal.value;
-    ventana.document.formModal.grupoModal.value     = document.formModal.grupoModal.value;
-    ventana.document.formModal.ubicacionModal.value = document.formModal.ubicacionModal.value;
-    ventana.document.formModal.categoriaModal.value = document.formModal.categoriaModal.value;
-    ventana.document.formModal.obsModal.value       = document.formModal.obsModal.value;
-
-    return ventana;
-}
-
-/**
  * Función que formatea string
  *
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
@@ -245,104 +154,6 @@ function normalizar(str) {
 }
 
 /**
- * Función que desbloqea los input del modal para ingresar datos.
- *
- * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
- * @author Emmanuel Correa <ebcorreac[at]gmail.com>
- * 
- * @version 2021-05-24
- */
-
-function editarModal() {
-
-    document.formModal.nombreModal.readOnly                   = false;
-    document.formModal.cantidadModal.readOnly                 = false;
-    document.formModal.precioModal.readOnly                   = false;
-    document.formModal.obsModal.readOnly                      = false;
-        
-    document.formModal.cantidadModal.type                     = "number";
-    document.formModal.precioModal.type                       = "number";
-
-    document.getElementById("nombreModal").className          = "form-control";
-    document.getElementById("cantidadModal").className        = "form-control";
-    document.getElementById("precioModal").className          = "form-control";
-    document.getElementById("grupoModal").className           = "d-none form-control";
-    document.getElementById("ubicacionModal").className       = "d-none form-control";
-    document.getElementById("categoriaModal").className       = "d-none form-control";
-    document.getElementById("obsModal").className             = "form-control";
-    document.getElementById("selectCategoriaModal").className = "form-select";
-    document.getElementById("selectUbicacionModal").className = "form-select";
-    document.getElementById("selectGrupoModal").className     = "form-select";
-
-    document.getElementById("botonGuardar").className         = "btn btn-danger";
-    document.getElementById("botonImprimir").className        = "d-none btn-primary";
-    document.getElementById("botonEditar").className          = "d-none btn-danger";
-}
-
-/**
- * Función que bloquea los elemetos del modal
- *
- * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
- * @author Emmanuel Correa <ebcorreac[at]gmail.com>
- * 
- * @version 2021-05-24
- */
-
-function bloquearModal() {
-
-    document.formModal.nombreModal.readOnly                   = true;
-    document.formModal.cantidadModal.readOnly                 = true;
-    document.formModal.precioModal.readOnly                   = true;
-    document.formModal.grupoModal.readOnly                    = true;
-    document.formModal.ubicacionModal.readOnly                = true;
-    document.formModal.categoriaModal.readOnly                = true;
-    document.formModal.obsModal.readOnly                      = true;
-        
-    document.formModal.cantidadModal.type                     = "text";
-    document.formModal.precioModal.type                       = "text";
-
-    document.getElementById("nombreModal").className          = "form-control-plaintext";
-    document.getElementById("cantidadModal").className        = "form-control-plaintext";
-    document.getElementById("precioModal").className          = "form-control-plaintext";
-    document.getElementById("grupoModal").className           = "form-control-plaintext";
-    document.getElementById("ubicacionModal").className       = "form-control-plaintext";
-    document.getElementById("categoriaModal").className       = "form-control-plaintext";
-    document.getElementById("obsModal").className             = "form-control-plaintext";
-    document.getElementById("selectCategoriaModal").className = "d-none form-select";
-    document.getElementById("selectUbicacionModal").className = "d-none form-select";
-    document.getElementById("selectGrupoModal").className     = "d-none form-select";
-}
-
-/**
- * Función que resetea los input y botones del model
- *
- * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
- * @author Emmanuel Correa <ebcorreac[at]gmail.com>
- * 
- * @version 2021-05-24
- */
-
-function agregarModal() {
-
-    editarModal();
-
-    document.formModal.nombreModal.value    = "";
-    document.formModal.cantidadModal.value  = "";
-    document.formModal.precioModal.value    = "";
-    document.formModal.obsModal.value       = "";
-
-    document.formModal.selectCategoriaModal.value = "";
-    document.formModal.selectUbicacionModal.value = "";
-    document.formModal.selectGrupoModal.value     = "";
-
-    document.getElementById("botonAgregar").className   = "btn btn-success";
-    document.getElementById("botonEditar").className    = "d-none btn btn-danger";
-    document.getElementById("botonImprimir").className  = "d-none btn-primary";
-    document.getElementById("botonGuardar").className   = "d-none btn-danger";
-
-}
-
-/**
  * Función que permite agregar atravez de un objeto un nuevo producto a la bd
  *
  * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
@@ -351,14 +162,14 @@ function agregarModal() {
  * @version 2021-05-24
  */
 
- function addData( data, route  ) {
+ function addData( data, route , method ) {
 
     const myHeaders = new Headers();
     myHeaders.append( "Content-Type", "application/json" );
 
     const requestOptions = {
     
-        method  : 'POST',
+        method  : method,
         headers : myHeaders,
         body    : data,
         redirect: 'follow'
@@ -376,34 +187,53 @@ function agregarModal() {
 }
 
 /**
- * Función que permite agregar atravez de un objeto un nuevo producto a la bd
+* Función que separa el name de los datos, crea un array y lo envia addOptions
+*
+* @author Carlos Correa   <carlos.sdf1[at]gmail.com>
+* 
+* @version 2021-05-24
+*/
+
+function selectNamesArray(lista, selectId) {
+ 
+    let select=[];
+  
+    for (let i in lista) {
+      const fila=lista[i];
+      select.push(fila.name);
+    }
+  
+    console.log(select);
+    addOptions( selectId, select );
+    return select;
+}
+
+// Rutina para agregar opciones a un <select>
+function addOptions( domElement, array ) {
+
+const select   = document.getElementsByName( domElement )[0];
+
+for ( value in array ) {
+
+    const option  = document.createElement( "option" );
+    option.text   = array[ value ];
+    select.add( option );
+
+}
+}
+
+/**
+ * Permite agregar elemento a la BD indicandole la url, el header y los datos
  *
  * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
- * @author Emmanuel Correa <ebcorreac[at]gmail.com>
  * 
  * @version 2021-05-24
  */
 
-function agregarProducto() {
-
-    const myHeaders = new Headers();
-    myHeaders.append( "Content-Type", "application/json" );
-
-    let data = JSON.stringify({
-
-        "name"        : document.formModal.nombreModal.value,
-        "img"         : "",
-        "category"    : document.formModal.selectCategoriaModal.value,
-        "quantity"    : document.formModal.cantidadModal.value,
-        "price"       : document.formModal.precioModal.value,
-        "ubication"   : document.formModal.selectUbicacionModal.value,
-        "group"       : document.formModal.selectGrupoModal.value,
-        "observations": document.formModal.obsModal.value,
-    
-    });
+function agregar(url,myHeaders,data){
 
     const requestOptions = {
-    
+  
         method  : 'POST',
         headers : myHeaders,
         body    : data,
@@ -411,26 +241,56 @@ function agregarProducto() {
     
     };
 
-    console.log( data );
-    console.log( requestOptions );
+    console.log(requestOptions);
 
-    fetch( api + "product/new", requestOptions )
+    fetch( api + url, requestOptions )
         .then( response => response.text() )
         .then(  result  => console.log( result ) )
         .catch( error   => console.log('error', error ) );
+}
+
+function plainText(elemid){
+
+    elemid.forEach(element => {
+        document.getElementById(element).className = "form-control-plaintext";    
+    });
 
 }
 
-/**
- * Permite agregar un producto y recargar la lista para que sea visualizado
- *
- * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
- * @author Emmanuel Correa <ebcorreac[at]gmail.com>
- * 
- * @version 2021-05-12
- */
+function readOnly(elemid,est){
 
-function agregarRecargar(){
-    agregarProducto();
-    setTimeout(() => imprimir(), 1000);
+    elemid.forEach(element => {
+        document.getElementById(element).readOnly= est;    
+    });
+
 }
+
+function dNone(elemid,est){
+
+    /* resetDnone(idButton); */
+    document.getElementById(elemid).className = document.getElementById(elemid).className.replace(" d-none","");
+    if(est==false){
+        document.getElementById(elemid).className += " d-none";
+    }
+    if(est==true){
+        document.getElementById(elemid).className = document.getElementById(elemid).className.replace(" d-none","");
+    }
+}
+
+function resetDnone(buttons){
+    buttons.forEach(element => {
+        document.getElementById(element).className = document.getElementById(element).className.replace(" d-none","");
+    });
+}
+
+function toggleInput(elemid, est){
+
+    let cn=est ? "form-control-plaintext":"form-control";
+
+    elemid.forEach(element => {
+        document.getElementById(element).disabled=est;
+        document.getElementById(element).className=cn;
+    });
+
+}
+
