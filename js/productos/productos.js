@@ -123,6 +123,26 @@ async function editProduct(id) {
  * @version 2021-05-11
  */
 
+async function deleteProduct(id) {
+
+  console.log( id );
+  let data = JSON.stringify({ "user" : "web" });
+
+  console.log( data );
+
+  await addData( data, "product/"+id, "POST" );
+
+  recargar();
+}
+
+/**
+ * Función que imprime la tabla productos en la vista
+ * 
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
+ * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @version 2021-05-11
+ */
+
  function imprimirLista( datos ) { //imprime los datos entregados en lista html
   console.log("DATOS RECIBIDOS");
   const td    = "</td><td>";
@@ -224,6 +244,7 @@ async function editProduct(id) {
   dNone("botonEliminar",true);
 
   document.getElementById("botonGuardar").setAttribute( 'onClick', 'editProduct("'+id+'");' );
+  document.getElementById("botonEliminar").setAttribute( 'onClick', 'deleteProduct("'+id+'");' );
   /* onClick="editProduct("+id+")"; */
   /* setAttribute( "onClick", "javascript: Boo();" ) */
 
