@@ -20,8 +20,16 @@ class Header extends HTMLElement {
                     <li class="nav-item">
                         <a class="nav-link" href="/WebStore/view/grupos/grupos.html">Grupos</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/WebStore/view/productos/productos.html">Inventario</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/WebStore/view/productos/productos.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Inventario
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/WebStore/view/productos/productos.html" >Disponibles</a></li>
+                            <li><a class="dropdown-item" onclick="buscar('prestamo')">En prestamo</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" onclick="buscar('eliminados')">Eliminados</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/WebStore/view/users/users.html">Usuarios</a>

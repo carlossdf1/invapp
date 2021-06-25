@@ -93,7 +93,6 @@ async function createProduct() {
 
 async function editProduct(id) {
 
-
   console.log(id);
   let data = JSON.stringify({
 
@@ -143,65 +142,32 @@ async function deleteProduct(id) {
  * @version 2021-05-11
  */
 
- function imprimirLista( datos ) { //imprime los datos entregados en lista html
+ function imprimirLista( datos , eliminados) { //imprime los datos entregados en lista html
   console.log("DATOS RECIBIDOS");
   const td    = "</td><td>";
   let boton   = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalEditar' ";
-  datos.sort((a, b) => a.name.localeCompare ( b.name ));
+  /* datos.sort((a, b) => a.name.localeCompare ( b.name )); */
   
   for (let i in datos) {
       const data = datos[i];
       const com = '"';
 
-      document.getElementById("lista").innerHTML +=
-          '<tr scope="row"><td>' +
-          i + td +
-          data.name + td +
-          //data.price + td +
-          data.quantity + td +
-          //data.category + td +
-          data.ubication + td +
-          //elementoVacio(data.observations) + td +
-          boton + "onclick='vistaModal(" + com + data.uid + com + ");'>Ver</button>" +
-          '</td></tr>';
+      if(data.active==true | eliminados==true){
+        document.getElementById("lista").innerHTML +=
+            '<tr scope="row"><td>' +
+            i + td +
+            data.name + td +
+            //data.price + td +
+            data.quantity + td +
+            //data.category + td +
+            data.ubication + td +
+            //elementoVacio(data.observations) + td +
+            boton + "onclick='vistaModal(" + com + data.uid + com + ");'>Ver</button>" +
+            '</td></tr>';
+      }
   }
 
 }
-
-/**
- * Función que permite capturar los datos para agregar un producto atravez de un objeto a la bd
- *
- * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
- * @author Emmanuel Correa <ebcorreac[at]gmail.com>
- * 
- * @version 2021-05-24
- */
-
-/*  function agregarProducto() {
-
-  const myHeaders = new Headers();
-  myHeaders.append( "Content-Type", "application/json" );
-
-  let data = JSON.stringify({
-
-      "name"        : document.formModal.nombreModal.value,
-      "img"         : "",
-      "category"    : document.formModal.selectCategoriaModal.value,
-      "quantity"    : document.formModal.cantidadModal.value,
-      "price"       : document.formModal.precioModal.value,
-      "ubication"   : document.formModal.selectUbicacionModal.value,
-      "group"       : document.formModal.selectGrupoModal.value,
-      "observations": document.formModal.obsModal.value,
-  
-  });
-
-  let url="product/new";
-
-  console.log( data );
-
-  agregar(url,myHeaders,data);
- 
-} */
 
 /* ##### MODAL FUNCIONES #################### */
 
@@ -217,6 +183,8 @@ async function deleteProduct(id) {
 
   if ( document.getElementById("nombreModal").className !== "form-control-plaintext") bloquearModal();
   const modalProducto = listaProductos.filter(listaProductos => listaProductos.uid === id);
+
+  console.log(modalProducto);
 
   let arrayProducto=[
   modalProducto[0].name,
@@ -244,9 +212,7 @@ async function deleteProduct(id) {
   dNone("botonEliminar",true);
 
   document.getElementById("botonGuardar").setAttribute( 'onClick', 'editProduct("'+id+'");' );
-  document.getElementById("botonEliminar").setAttribute( 'onClick', 'deleteProduct("'+id+'");' );
-  /* onClick="editProduct("+id+")"; */
-  /* setAttribute( "onClick", "javascript: Boo();" ) */
+  document.getElementById("botonEliminarConfirmar").setAttribute( 'onClick', 'eliminarModalSalir("'+id+'");' );
 
 }
 
@@ -353,7 +319,8 @@ function eliminarModalCancelar(){
   document.getElementById("modalEditar").style   = "z-index: 1060; display: block;";
 }
 
-function eliminarModalSalir(){
+function eliminarModalSalir(id){
+  deleteProduct(id);
   document.getElementById("modalEditar").style   = "z-index: 1060; display: block;";
   myModal.toggle()
 }

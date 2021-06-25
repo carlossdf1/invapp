@@ -20,26 +20,27 @@ async function consultaRoles() {
 
 function listaUsuarios( datos,roles ) { //imprime los datos entregados en lista html
     console.log("DATOS RECIBIDOS");
-    /* console.log(datos); */
+    console.log(datos);
     console.log(roles);
  
     for (let i in datos) {
         const data = datos[i];
         let roluser="";
-        roles.forEach(element => {
-            if (element.uid==data.role) {
+
+        roles.every(function(element, index) {
+            if (element.uid==data.role){
                 roluser=element;
+                return false;
             }
+            else return true;
         });
-/*         console.log(roluser.uid);
-        console.log(data.role); */
+
         document.getElementById("userNombre").innerHTML=data.name;
         document.getElementById("userDatos").innerHTML=data.email + "<br>" + roluser.name;
-        document.getElementById("userEstado").innerHTML=data.online;
+        document.getElementById("userEstado").innerHTML=data.active;
 
         let card = document.getElementById("CardUser");
-/*         console.log(i);
-        console.log(datos.length-1); */
+
         if (i==datos.length-1) {
             document.getElementById("listaUsuarios").innerHTML += card.outerHTML;
             document.getElementById("CardUser").className += " d-none";

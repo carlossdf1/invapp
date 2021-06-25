@@ -24,18 +24,18 @@ class Footer extends HTMLElement {
         
         ul li {
           list-style: none;
-          display: inline;
+          /* display: inline; */
         }
         
         a {
-          margin: 0 15px;
+          /* margin: 0 15px; */
           color: white;
           text-decoration: none;
         }
         
         a:hover {
-          padding-bottom: 5px;
-          box-shadow: inset 0 -2px 0 0 #333;
+/*           padding-bottom: 5px;
+          box-shadow: inset 0 -2px 0 0 #333; */
         }
         
         .social-row {
