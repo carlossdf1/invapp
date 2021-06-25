@@ -56,6 +56,7 @@ function consulta(url) {
 
 function elementoVacio(dato) {
     (dato === undefined) ? dato = "": dato;
+    (dato === null) ? dato = "": dato;
     return dato;
 }
 
@@ -67,10 +68,16 @@ function elementoVacio(dato) {
  * @version 2021-05-06
  */
 
-function buscar() {
+function buscar(autobuscar) {
 
     console.log("BUSCANDO")
-    const palabras        = normalizar( document.getElementById("search").value );
+    let palabras        = "";
+    if (autobuscar!==undefined) {
+        palabras=normalizar(autobuscar);
+    } else {
+        palabras=normalizar( document.getElementById("search").value );
+    }
+    
     let busqueda          = cortaPalabras( palabras );
     let resultadoBusqueda = [];
 
@@ -102,7 +109,13 @@ function buscar() {
 
     } else { console.log( "NO HAY DATOS" ) }
 
-    imprimirLista( resultadoBusqueda );
+    if (autobuscar=="eliminados") {
+        imprimirLista( resultadoBusqueda ,true);
+    } else {
+        imprimirLista( resultadoBusqueda );
+    }
+
+    
     console.log( resultadoBusqueda );
 
     return resultadoBusqueda
@@ -145,12 +158,17 @@ function imprimirElemento( id ) {
  */
 
 function normalizar(str) {
+    /* console.log(str); */
+    if (str==null) {
+        str=elementoVacio(str);
+    } else {
+        str = str.toString();
+        str = str.toLowerCase();
+        str = str.normalize("NFD").replace(/[\u0300-\u0301]/g, "");
+        
+    }
 
-    str = str.toString();
-    str = str.toLowerCase();
-    str = str.normalize("NFD").replace(/[\u0300-\u0301]/g, "");
     return str;
-
 }
 
 /**
