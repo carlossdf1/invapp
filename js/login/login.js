@@ -13,6 +13,7 @@ async function sendInformation() {
     });
     const route = 'login';
     const result = await addData(data, route, 'POST')
+    localStorage.setItem("login",await addData(data, route, 'POST'));
     console.log(result);
 }
 

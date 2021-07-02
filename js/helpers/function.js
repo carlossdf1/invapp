@@ -1,5 +1,5 @@
 const api = "https://inv-api.herokuapp.com/api/";
-
+let res;
 /**
  * corta el string busqueda en un array de palabras para comparar
  *
@@ -180,7 +180,7 @@ function normalizar(str) {
  * @version 2021-05-24
  */
 
- function addData( data, route , method ) {
+ async function addData( data, route , method ) {
 
     const myHeaders = new Headers();
     myHeaders.append( "Content-Type", "application/json" );
@@ -199,9 +199,11 @@ function normalizar(str) {
 
     fetch( api + route, requestOptions )
     .then( response => response.text() )
-    .then(  result  => console.log( result ) )
+    .then(  result  => res =JSON.parse(result) )
     .catch( error   => console.log('error', error ) );
-
+    
+    console.log( res );
+    return res;
 }
 
 /**
