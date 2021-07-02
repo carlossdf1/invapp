@@ -204,15 +204,28 @@ async function deleteProduct(id) {
 
   toggleInput(idIn,true);
 
-  dNone("botonAgregar",false);
-  dNone("botonGuardar",false);
-  dNone("botonEditar",true);
-  dNone("botonImprimir",true);
-
-  dNone("botonEliminar",true);
-
-  document.getElementById("botonGuardar").setAttribute( 'onClick', 'editProduct("'+id+'");' );
-  document.getElementById("botonEliminarConfirmar").setAttribute( 'onClick', 'eliminarModalSalir("'+id+'");' );
+  if (modalProducto[0].active===true) {
+    dNone("botonAgregar",false);
+    dNone("botonGuardar",false);
+    dNone("botonEditar",true);
+    dNone("botonImprimir",true);
+    dNone("botonEliminar",true);
+    dNone("botonRestaurar",false);
+  
+    document.getElementById("botonGuardar").setAttribute( 'onClick', 'editProduct("'+id+'");' );
+    document.getElementById("botonEliminarConfirmar").setAttribute( 'onClick', 'eliminarModalSalir("'+id+'");' );
+  }
+  else{
+    dNone("botonAgregar",false);
+    dNone("botonGuardar",false);
+    dNone("botonEditar",true);
+    dNone("botonImprimir",true);
+    dNone("botonEliminar",false);
+    /* dNone("botonRestaurar",true); */
+  }
+  if (modalProducto[0].ubication=="Prestamo") {
+    dNone("botonRestaurar",true);
+  }
 
 }
 

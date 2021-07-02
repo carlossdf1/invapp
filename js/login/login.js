@@ -8,12 +8,12 @@
 async function sendInformation() {
 
     const data = JSON.stringify({
-        "email": "emmanuel@admin.cl",
-        "pass": "123456789"
+        "email": document.getElementById("floatingInput").value,
+        "pass": document.getElementById("floatingPassword").value
     });
     const route = 'login';
     const result = await addData(data, route, 'POST')
     console.log(result);
 }
 
-sendInformation();
+/* sendInformation(); */
