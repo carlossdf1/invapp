@@ -12,9 +12,7 @@ async function sendInformation() {
         "pass": document.getElementById("floatingPassword").value
     });
     
-    const result = await REST(data, 'login', 'POST')
-    localStorage.setItem("login", JSON.stringify(result));
-    // console.log(result);
+    REST(data, 'login', 'POST')
 }
 
 /**
