@@ -45,15 +45,22 @@ async function sendInformation() {
         if ( resp.ok) {
             localStorage.setItem("login", JSON.stringify( resp.data ));
             localStorage.setItem("token", resp.token );
+            // showAlert(resp.msg);
             location.href = 'https://carlossdf1.github.io/WebStore';
 
         }else{
-
-            alert(resp.msg);
+            showAlert('Error al iniciar sesion');
+            // alert('Error al iniciar sesion');
         
         }
     })
     .catch( error   => console.log('error', error ) );
 }
 
-/* sendInformation(); */
+function showAlert( message ) {
+    
+    let element = document.getElementById("alerts");
+    element.classList.remove("d-none");
+    element.innerHTML= message;
+
+}

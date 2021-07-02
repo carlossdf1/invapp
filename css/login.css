@@ -171,3 +171,11 @@ user agent stylesheet label {
 .text-center {
     text-align: center!important;
 }
+
+.alert {
+    /* background-color:#212529; */
+    /* width: 50%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto; */
+}
