@@ -194,16 +194,13 @@ function normalizar(str) {
     
     };
 
-    console.log( data );
-    console.log( requestOptions );
+    // console.log( data );
+    // console.log( requestOptions );
 
     fetch( api + route, requestOptions )
-    .then( response => response.text() )
-    .then(  result  => res =JSON.parse(result) )
+    .then(( resp ) => resp.json())
+    .then( function( result ) { console.log(result) } )
     .catch( error   => console.log('error', error ) );
-    
-    console.log( res );
-    return res;
 }
 
 /**
