@@ -1,10 +1,11 @@
+if ( localStorage.getItem("token") === null ) {
+
+    location.href = 'view/login/login.html';
+} 
+localStorage.clear();
 const categorias = api + 'category';
 let listaCategorias;
 
-if ( !localStorage.getItem("token") ) {
-
-    return location.href = 'view/login/login.html';
-} 
 /**
  * Función que imprime la lista de consulta de categorias
  *

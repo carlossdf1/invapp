@@ -194,9 +194,6 @@ function normalizar(str) {
     
     };
 
-    // console.log( data );
-    // console.log( requestOptions );
-
     fetch( api + route, requestOptions )
     .then(( resp ) => resp.json())
     .then( function( result ) { console.log(result) } )

@@ -1,3 +1,9 @@
+if ( localStorage.getItem("token") === null ) {
+
+    location.href = 'view/login/login.html';
+} 
+
+
 const grupos = api + 'group/menu';
 let listaGrupos;
 

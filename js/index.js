@@ -14,14 +14,14 @@ async function imprimirNumeroProductos() {
     document.getElementById( "numeroUsuarios" ).innerHTML  = numeroUsuarios.length;
 }
 
-if ( localStorage.getItem("token") ) {
+if ( localStorage.getItem("username") ) {
     
     const username = localStorage.getItem("username");
     document.querySelector('#title-index').innerHTML = `${ username } : Aqui podras ver los datos en tiempo real`;
+    // localStorage.clear();
     imprimirNumeroProductos();
     
 } else {
     
-    localStorage.clear();
     location.href = 'view/login/login.html';
 }

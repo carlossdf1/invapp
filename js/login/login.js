@@ -44,10 +44,17 @@ async function sendInformation() {
 
         if ( resp.ok) {
 
-            localStorage.setItem("login", JSON.stringify( resp.data ));
-            localStorage.setItem("username", resp.data.name);
-            localStorage.setItem("email", resp.data.email);
+            const isChecked = document.getElementById('remember-me').checked;
+            
+            if(isChecked){
+              
+                localStorage.setItem("login", JSON.stringify( resp.data ));
+            }
+            
             localStorage.setItem("token", resp.token );
+            localStorage.setItem("email", resp.data.email);
+            localStorage.setItem("username", resp.data.name);
+
             // showAlert(resp.msg);
             // location.href = '/WebStore/index.html';
             location.href = '/index.html';
