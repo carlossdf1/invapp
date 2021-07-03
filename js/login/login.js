@@ -43,10 +43,14 @@ async function sendInformation() {
     .then( resp =>  { 
 
         if ( resp.ok) {
+
             localStorage.setItem("login", JSON.stringify( resp.data ));
+            localStorage.setItem("username", resp.data.name);
+            localStorage.setItem("email", resp.data.email);
             localStorage.setItem("token", resp.token );
             // showAlert(resp.msg);
-            location.href = 'https://carlossdf1.github.io/WebStore';
+            // location.href = '/WebStore/index.html';
+            location.href = '/index.html';
 
         }else{
             showAlert('Error al iniciar sesion');

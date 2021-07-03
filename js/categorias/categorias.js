@@ -1,6 +1,10 @@
 const categorias = api + 'category';
 let listaCategorias;
 
+if ( !localStorage.getItem("token") ) {
+
+    return location.href = 'view/login/login.html';
+} 
 /**
  * Función que imprime la lista de consulta de categorias
  *

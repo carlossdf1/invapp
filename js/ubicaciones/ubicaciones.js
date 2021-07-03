@@ -1,6 +1,12 @@
 const ubicaciones = api + 'ubication';
 let listaUbicaciones;
 
+if ( !localStorage.getItem("token") ) {
+
+   return location.href = 'view/login/login.html';
+ 
+} 
+
 /**
  * Función que imprime la lista de consulta de ubicaciones
  *
