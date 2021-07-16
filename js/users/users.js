@@ -12,7 +12,7 @@ async function consultaUsuarios() {
 };
 
 async function consultaRoles() {
-    let respuesta       = await consulta( rols );
+    let respuesta    = await consulta( rols );
     let listaRoles   = respuesta.data;
     console.log(listaRoles);
     return  listaRoles;

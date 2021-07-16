@@ -1,15 +1,22 @@
+// if ( localStorage.getItem("token") === null ) {
+
+//   location.href = 'view/login/login.html';
+// } 
+
 const productos = api + "product/products";
 const ubicacion = api + "ubication";
 const categoria = api + "category";
 
-let myModal = new bootstrap.Modal(document.getElementById("modalEditar"));
+const email = localStorage.getItem('email');
+
+let myModal = new bootstrap.Modal( document.getElementById("modalEditar") );
 
 let listaProductos;
-let listaUbicacion=consultaUbicacion();
-let listaCategoria=consultaCategoria();
+let listaUbicacion = consultaUbicacion();
+let listaCategoria = consultaCategoria();
 
-let idIn=["nombreModal","cantidadModal","precioModal","selectGrupoModal","selectUbicacionModal","selectCategoriaModal","obsModal"];
-let idButton=["botonAgregar","botonGuardar","botonEditar","botonImprimir","botonEliminar"]
+let idIn     = ["nombreModal","cantidadModal","precioModal","selectGrupoModal","selectUbicacionModal","selectCategoriaModal","obsModal"];
+let idButton = ["botonAgregar","botonGuardar","botonEditar","botonImprimir","botonEliminar"]
 /**
  * Función que muestra cada linea de informacion
  *
@@ -19,8 +26,8 @@ let idButton=["botonAgregar","botonGuardar","botonEditar","botonImprimir","boton
 
 async function consultaProductos() 
 {
-  const respuesta 	= await consulta( productos );
-  listaProductos 	  = respuesta.data;
+  const respuesta = await consulta( productos );
+  listaProductos 	= respuesta.data;
   return listaProductos;
 };
 
@@ -34,8 +41,8 @@ async function consultaProductos()
 
 async function consultaUbicacion() 
 {
-  const respuesta 	= await consulta( ubicacion );
-  listaUbicacion 	  = respuesta.data;
+  const respuesta = await consulta( ubicacion );
+  listaUbicacion 	= respuesta.data;
   return listaUbicacion;
 };
 
@@ -49,8 +56,8 @@ async function consultaUbicacion()
 
 async function consultaCategoria() 
 {
-  const respuesta 	= await consulta( categoria );
-  listaCategoria 	  = respuesta.data;
+  const respuesta = await consulta( categoria );
+  listaCategoria 	= respuesta.data;
   return listaCategoria;
 };
 
@@ -64,10 +71,10 @@ async function consultaCategoria()
  */
 
 async function imprimir() { 
-  imprimirLista( await consultaProductos( ) );
-  selectNamesArray( await consultaUbicacion( ), "selectUbicacionModal");
-  selectNamesArray( await consultaGrupos( ), "selectGrupoModal");
-  selectNamesArray( await consultaCategoria( ), "selectCategoriaModal");
+  imprimirLista( await consultaProductos() );
+  selectNamesArray( await consultaUbicacion(), "selectUbicacionModal");
+  selectNamesArray( await consultaGrupos(), "selectGrupoModal");
+  selectNamesArray( await consultaCategoria(), "selectCategoriaModal");
 
 }
 
@@ -83,7 +90,7 @@ async function createProduct() {
     "ubication"   : document.formModal.selectUbicacionModal.value,
     "group"       : document.formModal.selectGrupoModal.value,
     "observations": document.formModal.obsModal.value,
-    "user"        : "web"
+    "user"        : email
   });
 
   await addData( data, "product/new", "POST" );
@@ -91,9 +98,9 @@ async function createProduct() {
   recargar();
 }
 
-async function editProduct(id) {
+async function editProduct( id ) {
 
-  console.log(id);
+  console.log( id );
   let data = JSON.stringify({
 
     "name"        : document.formModal.nombreModal.value,
@@ -104,12 +111,12 @@ async function editProduct(id) {
     "ubication"   : document.formModal.selectUbicacionModal.value,
     "group"       : document.formModal.selectGrupoModal.value,
     "observations": document.formModal.obsModal.value,
-    "user"        : "web"
+    "user"        : email
   });
 
   console.log(data);
 
-  await addData( data, "product/"+id, "PUT" );
+  await addData( data, "product/" + id, "PUT" );
 
   recargar();
 }
@@ -125,11 +132,11 @@ async function editProduct(id) {
 async function deleteProduct(id) {
 
   console.log( id );
-  let data = JSON.stringify({ "user" : "web" });
+  let data = JSON.stringify({ "user" : email });
 
   console.log( data );
 
-  await addData( data, "product/"+id, "POST" );
+  await addData( data, "product/" + id, "POST" );
 
   recargar();
 }
@@ -142,30 +149,38 @@ async function deleteProduct(id) {
  * @version 2021-05-11
  */
 
- function imprimirLista( datos , eliminados) { //imprime los datos entregados en lista html
+ function imprimirLista( datos , eliminados ) {
+  //imprime los datos entregados en lista html
   console.log("DATOS RECIBIDOS");
-  const td    = "</td><td>";
-  let boton   = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalEditar' ";
-  /* datos.sort((a, b) => a.name.localeCompare ( b.name )); */
-  
-  for (let i in datos) {
-      const data = datos[i];
-      const com = '"';
+  const td  = "</td><td>";
+  let boton = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalEditar' ";
+  const inversion = [];
 
-      if(data.active==true | eliminados==true){
-        document.getElementById("lista").innerHTML +=
-            '<tr scope="row"><td>' +
-            i + td +
-            data.name + td +
-            //data.price + td +
-            data.quantity + td +
-            //data.category + td +
-            data.ubication + td +
-            //elementoVacio(data.observations) + td +
-            boton + "onclick='vistaModal(" + com + data.uid + com + ");'>Ver</button>" +
-            '</td></tr>';
-      }
+  for ( let i in datos ) {
+    
+    const data = datos[i];
+    const com  = '"';
+    
+    if( data.active == true | eliminados == true ) {
+      inversion.push( datos[i].price );
+      document.getElementById("lista").innerHTML +=
+      '<tr scope="row"><td>' +
+      i + td +
+      data.name + td +
+      //data.price + td +
+      data.quantity + td +
+      //data.category + td +
+      data.ubication + td +
+      //elementoVacio(data.observations) + td +
+      boton + "onclick='vistaModal(" + com + data.uid + com + ");'>Ver</button>" +
+      '</td></tr>';
+      
+    }
   }
+
+  const gasto = inversion.reduce((a, b) => a + b, 0 )
+  document.querySelector("#item-total").innerHTML = `Total : ${ datos.length }`;
+  document.querySelector("#inversion-total").innerHTML = `Inversion : $ ${ gasto }`;
 
 }
 
@@ -179,40 +194,53 @@ async function deleteProduct(id) {
  * @version 2021-05-24
  */
 
- function vistaModal(id) {
+ function vistaModal( id ) {
 
   if ( document.getElementById("nombreModal").className !== "form-control-plaintext") bloquearModal();
-  const modalProducto = listaProductos.filter(listaProductos => listaProductos.uid === id);
+  const modalProducto = listaProductos.filter( listaProductos => listaProductos.uid === id );
 
-  console.log(modalProducto);
+  console.log( modalProducto );
 
-  let arrayProducto=[
-  modalProducto[0].name,
-  modalProducto[0].quantity,
-  modalProducto[0].price,
-  modalProducto[0].group,
-  modalProducto[0].ubication,
-  modalProducto[0].category,
-  modalProducto[0].observations
-];
+  let arrayProducto = [
+    modalProducto[0].name,
+    modalProducto[0].quantity,
+    modalProducto[0].price,
+    modalProducto[0].group,
+    modalProducto[0].ubication,
+    modalProducto[0].category,
+    modalProducto[0].observations
+  ];
 
   let con=0;
-  idIn.forEach(element => {
-    document.getElementById(element).value = elementoVacio( arrayProducto[con]);
+  idIn.forEach( element => {
+    document.getElementById( element ).value = elementoVacio( arrayProducto[ con ] );
     con++;
   });
 
-  toggleInput(idIn,true);
+  toggleInput( idIn, true );
 
-  dNone("botonAgregar",false);
-  dNone("botonGuardar",false);
-  dNone("botonEditar",true);
-  dNone("botonImprimir",true);
-
-  dNone("botonEliminar",true);
-
-  document.getElementById("botonGuardar").setAttribute( 'onClick', 'editProduct("'+id+'");' );
-  document.getElementById("botonEliminarConfirmar").setAttribute( 'onClick', 'eliminarModalSalir("'+id+'");' );
+  if ( modalProducto[0].active === true) {
+    dNone("botonAgregar", false );
+    dNone("botonGuardar", false );
+    dNone("botonEditar", true );
+    dNone("botonImprimir", true );
+    dNone("botonEliminar", true );
+    dNone("botonRestaurar", false );
+  
+    document.getElementById("botonGuardar").setAttribute( 'onClick', 'editProduct("'+id+'");' );
+    document.getElementById("botonEliminarConfirmar").setAttribute( 'onClick', 'eliminarModalSalir("'+id+'");' );
+  } else {
+    dNone("botonAgregar",  false );
+    dNone("botonGuardar",  false );
+    dNone("botonEditar",   true );
+    dNone("botonImprimir", true );
+    dNone("botonEliminar", false );
+    /* dNone("botonRestaurar",true); */
+  }
+  
+  if ( modalProducto[0].ubication == "Prestamo" ) {
+    dNone( "botonRestaurar", true );
+  }
 
 }
 
@@ -229,13 +257,13 @@ async function deleteProduct(id) {
 
   toggleInput(idIn,false);
       
-  document.formModal.cantidadModal.type                     = "number";
-  document.formModal.precioModal.type                       = "number";
+  document.formModal.cantidadModal.type = "number";
+  document.formModal.precioModal.type   = "number";
   
-  dNone("botonGuardar",true);
-  dNone("botonEditar",false);
-  dNone("botonImprimir",false);
-  dNone("botonEliminar",false);
+  dNone("botonGuardar", true );
+  dNone("botonEditar", false );
+  dNone("botonImprimir", false );
+  dNone("botonEliminar", false );
   
 }
 
@@ -250,10 +278,10 @@ async function deleteProduct(id) {
 
 function bloquearModal() {
 
-  toggleInput(idIn,true);
+  toggleInput( idIn, true );
 
-  document.formModal.cantidadModal.type                     = "text";
-  document.formModal.precioModal.type                       = "text";
+  document.formModal.cantidadModal.type = "text";
+  document.formModal.precioModal.type   = "text";
 
 }
 
@@ -270,14 +298,14 @@ function agregarModal() {
 
   editarModal();
 
-  idIn.forEach(element => {
-    document.getElementById(element).value= "";
+  idIn.forEach( element => {
+    document.getElementById( element ).value= "";
   });
 
-  dNone("botonGuardar",false);
-  dNone("botonEditar",false);
-  dNone("botonImprimir",false);
-  dNone("botonAgregar",true);
+  dNone("botonGuardar", false );
+  dNone("botonEditar", false );
+  dNone("botonImprimir", false );
+  dNone("botonAgregar", true );
 
 }
 
@@ -289,10 +317,10 @@ function agregarModal() {
  * @version 2021-05-06
  */
 
- function obtenerModal(ventana) {
+ function obtenerModal( ventana ) {
 
-  idIn.forEach(element => {
-    ventana.document.getElementById(element).value= document.getElementById(element).value;
+  idIn.forEach( element => {
+    ventana.document.getElementById( element ).value = document.getElementById( element ).value;
   });
 
   return ventana;
@@ -308,19 +336,19 @@ function agregarModal() {
  */
 
  function recargar(){
-    setTimeout(() => imprimir(), 1000);
+  setTimeout(() => imprimir(), 1000);
 }
 
 function eliminarModal(){
-  document.getElementById("modalEditar").style   = "z-index: 1040; display: block;";
+  document.getElementById("modalEditar").style = "z-index: 1040; display: block;";
 }
 
 function eliminarModalCancelar(){
-  document.getElementById("modalEditar").style   = "z-index: 1060; display: block;";
+  document.getElementById("modalEditar").style = "z-index: 1060; display: block;";
 }
 
-function eliminarModalSalir(id){
-  deleteProduct(id);
-  document.getElementById("modalEditar").style   = "z-index: 1060; display: block;";
+function eliminarModalSalir( id ){
+  deleteProduct( id );
+  document.getElementById("modalEditar").style = "z-index: 1060; display: block;";
   myModal.toggle()
 }
