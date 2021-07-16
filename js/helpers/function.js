@@ -310,6 +310,6 @@ function toggleInput(elemid, est){
 
 function noLogin(){
     if ( localStorage.getItem("token") === null ) {
-        location.replace('../../WebStore/view/login/login.html');
+        location.replace(origin +'/WebStore/view/login/login.html');
     }
 }
