@@ -308,3 +308,8 @@ function toggleInput(elemid, est){
 
 }
 
+function noLogin(){
+    if ( localStorage.getItem("token") === null ) {
+        location.replace('../../view/login/login.html');
+    }
+}
