@@ -57,7 +57,8 @@ async function sendInformation() {
 
             // showAlert(resp.msg);
             // location.href = '/WebStore/index.html';
-            location.href = '/index.html';
+            // location.href = '/index.html';
+            location.replace(origin +'/WebStore/view/login/login.html');
 
         }else{
             showAlert('Error al iniciar sesion');

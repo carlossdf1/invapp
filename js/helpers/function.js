@@ -309,6 +309,8 @@ function toggleInput(elemid, est){
 }
 
 function noLogin(){
+    console.log(origin +'/WebStore/view/login/login.html');
+
     if ( localStorage.getItem("token") === null ) {
         location.replace(origin +'/WebStore/view/login/login.html');
     }
