@@ -1,3 +1,8 @@
+if ( localStorage.getItem("token") === null ) {
+
+    location.href = 'view/login/login.html';
+} 
+localStorage.clear();
 const categorias = api + 'category';
 let listaCategorias;
 

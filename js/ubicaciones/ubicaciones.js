@@ -1,3 +1,8 @@
+if ( localStorage.getItem("token") === null ) {
+
+    location.href = 'view/login/login.html';
+} 
+
 const ubicaciones = api + 'ubication';
 let listaUbicaciones;
 
@@ -33,22 +38,23 @@ async function imprimirUbicaciones() {
  * @version 2021-05-11
  */
 
- function imprimirLista( datos ) { //imprime los datos entregados en lista html
+ function imprimirLista( datos ) {
+    //imprime los datos entregados en lista html
     console.log("DATOS RECIBIDOS");
-    const td    = "</td><td>";
-    let boton   = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal' ";
-    datos.sort(( a, b ) => a.name.localeCompare ( b.name ));
+    const td   = "</td><td>";
+    let boton  = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal' ";
+    // datos.sort(( a, b ) => a.name.localeCompare ( b.name ));
     
     for ( let i in datos ) {
 
-        const data  = datos[i];
-        const com   = '"';
+        const data = datos[i];
+        const com  = '"';
 
         document.getElementById("lista").innerHTML +=
-            '<tr><td>' +
-            data.name + td +
-            boton + "onclick='vistaModal(" + com + data.uid + com + ");'>Ver</button>" +
-            '</td></tr>';
+        '<tr><td>' +
+        data.name + td +
+        boton + "onclick='vistaModal(" + com + data.uid + com + ");'>Ver</button>" +
+        '</td></tr>';
     }
 
 }
@@ -62,7 +68,10 @@ async function imprimirUbicaciones() {
 
 async function sendInformation(){
 
-    const data   = JSON.stringify( { 'name': 'prueba manolete' });
+    const data   = JSON.stringify( { 
+      'name': 'prueba manolete',
+      'user':  localStorage.getItem('email')
+    });
     const route  = 'ubication/new';
     const result = await addData( data, route )
     console.log( result );
