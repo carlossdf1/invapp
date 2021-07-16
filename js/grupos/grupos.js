@@ -1,7 +1,6 @@
-if ( localStorage.getItem("token") === null ) {
-
-    location.href = 'view/login/login.html';
-} 
+if (localStorage.getItem("token") === null) {
+    location.replace(origin + '/WebStore/view/login/login.html');
+}
 
 
 const grupos = api + 'group/menu';
@@ -15,7 +14,7 @@ let listaGrupos;
  */
 async function consultaGrupos() {
     const respuesta = await consulta(grupos);
-    listaGrupos     = respuesta.data;
+    listaGrupos = respuesta.data;
     return listaGrupos;
 };
 
@@ -31,11 +30,11 @@ consultaGrupos();
 async function imprimirGrupos() {
 
     const datos = await consultaGrupos()
-    const td    = "</td><td>";
+    const td = "</td><td>";
 
-    for ( let i in datos ) {
+    for (let i in datos) {
         document.getElementById("lista").innerHTML +=
-        '<tr scope="row"><td>' + datos[i].name + '</td></tr>';
+            '<tr scope="row"><td>' + datos[i].name + '</td></tr>';
     }
 
 }
