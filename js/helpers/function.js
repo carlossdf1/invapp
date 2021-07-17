@@ -364,7 +364,7 @@ function closeSesion(){
 //urlAdaptive();
 //noLogin();
 window.onload = setTimeout( () => urlAdaptive(), 500 );
-window.onload = setTimeout( () => noLogin (), 1000 );
+window.onload = setTimeout( () => noLogin (), 0 );
 
 
 
