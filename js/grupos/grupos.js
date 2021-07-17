@@ -1,8 +1,3 @@
-if (localStorage.getItem("token") === null) {
-    location.replace(origin + '/WebStore/view/login/login.html');
-}
-
-
 const grupos = api + 'group/menu';
 let listaGrupos;
 

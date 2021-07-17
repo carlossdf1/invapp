@@ -21,8 +21,4 @@ if (localStorage.getItem("username")) {
     // localStorage.clear();
     imprimirNumeroProductos();
 
-} else {
-
-    location.replace(origin + '/WebStore/view/login/login.html');
-
 }

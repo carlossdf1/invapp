@@ -1,7 +1,3 @@
-if (localStorage.getItem("token") === null) {
-    location.replace(origin + '/WebStore/view/login/login.html');
-}
-
 const productos = api + "product/products";
 const ubicacion = api + "ubication";
 const categoria = api + "category";

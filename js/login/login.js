@@ -58,7 +58,8 @@ async function sendInformation() {
             // showAlert(resp.msg);
             // location.href = '/WebStore/index.html';
             // location.href = '/index.html';
-            location.replace(origin +'/WebStore/index.html');
+            let url=redireccionamiento();
+            location.replace(origin + url + '/index.html');
 
         }else{
             showAlert('Error al iniciar sesion');

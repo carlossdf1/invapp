@@ -1,7 +1,3 @@
-if (localStorage.getItem("token") === null) {
-    location.replace(origin + '/WebStore/view/login/login.html');
-}
-
 const users = api + 'login/users';
 const rols = api + 'rol';
 /**

@@ -309,9 +309,62 @@ function toggleInput(elemid, est){
 }
 
 function noLogin(){
-    console.log(origin +'/WebStore/view/login/login.html');
 
-    if ( localStorage.getItem("token") === null ) {
-        location.replace(origin +'/WebStore/view/login/login.html');
+    let url=redireccionamiento();
+
+    let urlBase=location.href.replace(origin,"");
+
+    if ( localStorage.getItem("token") === null && urlBase!== url +'/view/login/login.html') {
+        location.replace(origin + url +'/view/login/login.html');
+    }
+
+    else{
+        console.log("LOGEADO");
     }
 }
+
+function redireccionamiento(){
+
+    let url="";
+
+    if(origin==="http://127.0.0.1:5500"){
+        url="";
+    }
+    else{
+        url="/WebStore";
+    }
+
+    return url
+}
+
+function urlAdaptive(){
+
+    console.log("REDIRECION INICIO");
+
+    let url="";
+    url=redireccionamiento();
+
+    let urls = document.querySelectorAll('#url');
+    
+    urls.forEach(element => {
+        let link=element.href.replace(origin,"");
+        element.href=url + link;
+        console.log(element.href);
+    });
+
+    console.log("REDIRECION FIN");
+
+}
+
+function closeSesion(){
+    localStorage.clear();
+    noLogin();
+}
+
+//urlAdaptive();
+//noLogin();
+window.onload = setTimeout( () => urlAdaptive(), 500 );
+window.onload = setTimeout( () => noLogin (), 1000 );
+
+
+
