@@ -11,7 +11,7 @@ async function sendInformation() {
         "email": document.getElementById("floatingInput").value,
         "pass": document.getElementById("floatingPassword").value
     });
-    
+
     REST(data, 'login', 'POST')
 }
 
@@ -24,56 +24,54 @@ async function sendInformation() {
  * @version 2021-05-24
  */
 
- async function REST( data, route , method ) {
+async function REST(data, route, method) {
 
     const myHeaders = new Headers();
-    myHeaders.append( "Content-Type", "application/json" );
+    myHeaders.append("Content-Type", "application/json");
 
     const requestOptions = {
-    
-        method  : method,
-        headers : myHeaders,
-        body    : data,
+
+        method: method,
+        headers: myHeaders,
+        body: data,
         redirect: 'follow'
-    
+
     };
 
-    fetch( api + route, requestOptions )
-    .then( res => res.json())
-    .then( resp =>  { 
+    fetch(api + route, requestOptions)
+        .then(res => res.json())
+        .then(resp => {
 
-        if ( resp.ok) {
+            if (resp.ok) {
 
-            const isChecked = document.getElementById('remember-me').checked;
-            
-            if(isChecked){
-              
-                localStorage.setItem("login", JSON.stringify( resp.data ));
+                // const isChecked = document.getElementById('remember-me').checked;
+
+                // if (isChecked) {
+
+                // }
+
+                localStorage.setItem("login", JSON.stringify(resp.data));
+                localStorage.setItem("token", resp.token);
+                localStorage.setItem("email", resp.data.email);
+                localStorage.setItem("username", resp.data.name);
+
+                showAlert(resp.msg);
+
+                let url = redireccionamiento();
+                location.replace(origin + url + '/index.html');
+
+            } else {
+                showAlert('Error al iniciar sesion');
+
             }
-            
-            localStorage.setItem("token", resp.token );
-            localStorage.setItem("email", resp.data.email);
-            localStorage.setItem("username", resp.data.name);
-
-            // showAlert(resp.msg);
-            // location.href = '/WebStore/index.html';
-            // location.href = '/index.html';
-            let url=redireccionamiento();
-            location.replace(origin + url + '/index.html');
-
-        }else{
-            showAlert('Error al iniciar sesion');
-            // alert('Error al iniciar sesion');
-        
-        }
-    })
-    .catch( error   => console.log('error', error ) );
+        })
+        .catch(error => console.log('error', error));
 }
 
-function showAlert( message ) {
-    
+function showAlert(message) {
+
     let element = document.getElementById("alerts");
     element.classList.remove("d-none");
-    element.innerHTML= message;
+    element.innerHTML = message;
 
 }
