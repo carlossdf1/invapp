@@ -49,11 +49,14 @@ async function REST(data, route, method) {
                 // if (isChecked) {
 
                 // }
-
-                localStorage.setItem("login", JSON.stringify(resp.data));
+                console.log(resp.data);
+                // localStorage.setItem("login", JSON.stringify(resp.data));
                 localStorage.setItem("token", resp.token);
                 localStorage.setItem("email", resp.data.email);
                 localStorage.setItem("username", resp.data.name);
+                localStorage.setItem("role", resp.data.role._id);
+                localStorage.setItem("menu", JSON.stringify(resp.data.role.menuOptions));
+                localStorage.setItem("group", JSON.stringify(resp.data.role.groupOptions));
 
                 showAlert(resp.msg);
 
