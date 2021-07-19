@@ -73,9 +73,9 @@ function buscar(autobuscar) {
     console.log("BUSCANDO")
     let palabras        = "";
     if (autobuscar!==undefined) {
-        palabras=normalizar(autobuscar);
+        palabras = normalizar( autobuscar );
     } else {
-        palabras=normalizar( document.getElementById("search").value );
+        palabras = normalizar( document.getElementById("search").value );
     }
     
     let busqueda          = cortaPalabras( palabras );

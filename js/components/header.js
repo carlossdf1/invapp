@@ -55,7 +55,7 @@ class Header extends HTMLElement {
                                 </svg>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-lg-end" id="useropt" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" id="url" href="" >Perfil</a></li>
+                                <li><a class="dropdown-item" id="url" href="/view/users/perfil.html" >Perfil</a></li>
                                 <li><a class="dropdown-item" >Grupo</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" onclick="closeSesion()">Cerrar sesion</a></li>
