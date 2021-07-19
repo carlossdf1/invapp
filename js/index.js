@@ -6,19 +6,21 @@
  */
 
 async function imprimirNumeroProductos() {
-    const numeroProductos = await consultaProductos();
-    const numeroGrupos = await consultaGrupos();
-    const numeroUsuarios = await consultaUsuarios();
-    document.getElementById("numeroProductos").innerHTML = numeroProductos.length;
-    document.getElementById("numeroGrupos").innerHTML = numeroGrupos.length;
-    document.getElementById("numeroUsuarios").innerHTML = numeroUsuarios.length;
+
+    const productos        = JSON.parse( localStorage.getItem('productos') );
+    const filtroProductos  = productos.filter( data => data.group != 'Eliminados' );
+    const filtroPretados   = productos.filter( data => data.group == 'Prestamos' );
+    const filtroEliminados = productos.filter( data => data.group == 'Eliminados' );
+    
+    document.getElementById("numeroProductos").innerHTML  = filtroProductos.length;
+    document.getElementById("numeroPrestados").innerHTML  = filtroPretados.length;
+    document.getElementById("numeroEliminados").innerHTML = filtroEliminados.length;
 }
 
 if (localStorage.getItem("username")) {
 
     const username = localStorage.getItem("username");
     document.querySelector('#title-index').innerHTML = `${ username } : Aqui podras ver los datos en tiempo real`;
-    // localStorage.clear();
     imprimirNumeroProductos();
 
 }

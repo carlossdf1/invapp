@@ -9,6 +9,8 @@ let myModal = new bootstrap.Modal(document.getElementById("modalEditar"));
 let listaProductos;
 let listaUbicacion = consultaUbicacion();
 let listaCategoria = consultaCategoria();
+let listProdDelete;
+let listProPrestad;
 
 let idIn = ["nombreModal", "cantidadModal", "precioModal", "selectGrupoModal", "selectUbicacionModal", "selectCategoriaModal", "obsModal"];
 let idButton = ["botonAgregar", "botonGuardar", "botonEditar", "botonImprimir", "botonEliminar"]
@@ -22,6 +24,7 @@ let idButton = ["botonAgregar", "botonGuardar", "botonEditar", "botonImprimir", 
 async function consultaProductos() {
     const respuesta = await consulta(productos);
     listaProductos = respuesta.data;
+    localStorage.setItem("productos", JSON.stringify(listaProductos));
     return listaProductos;
 };
 
