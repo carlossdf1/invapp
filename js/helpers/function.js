@@ -108,13 +108,12 @@ function buscar(autobuscar) {
         }
 
     } else { console.log( "NO HAY DATOS" ) }
-
-    if (autobuscar=="eliminados") {
-        imprimirLista( resultadoBusqueda ,true);
-    } else {
-        imprimirLista( resultadoBusqueda );
-    }
-
+    
+    ( autobuscar == "eliminados" ) 
+    ? imprimirLista( resultadoBusqueda, true , false)
+    : ( autobuscar == "prestamo" ) 
+    ? imprimirLista( resultadoBusqueda, false, true )
+    : imprimirLista( resultadoBusqueda , false, false);
     
     console.log( resultadoBusqueda );
 

@@ -25,7 +25,8 @@ async function consultaProductos() {
     const respuesta = await consulta(productos);
     listaProductos = respuesta.data;
     localStorage.setItem("productos", JSON.stringify(listaProductos));
-    return listaProductos;
+    const data = JSON.parse( localStorage.getItem("productos") );
+    return data;
 };
 
 /**
@@ -144,37 +145,38 @@ async function deleteProduct(id) {
  * @version 2021-05-11
  */
 
-function imprimirLista(datos, eliminados) {
+function imprimirLista( datos, eliminados = false, prestados = false ) {
     //imprime los datos entregados en lista html
     console.log("DATOS RECIBIDOS");
     const td = "</td><td>";
     let boton = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalEditar' ";
     const inversion = [];
+    let filtro;
+    if ( eliminados ) filtro = datos.filter( ( item ) =>  item.group === "Eliminados" );
+    if ( prestados )  filtro = datos.filter( ( item ) =>  item.group !== "Prestamos" );
+    if ( !eliminados && !prestados ) filtro = datos.filter( ( item ) =>  item.group !== "Eliminados" && item.group !== "Prestamos" && item.active === true );
 
-    for (let i in datos) {
+    for (let i in filtro ) {
 
-        const data = datos[i];
+        const data = filtro[i];
         const com = '"';
 
-        if (data.active == true | eliminados == true) {
-            inversion.push(datos[i].price);
-            document.getElementById("lista").innerHTML +=
-                '<tr scope="row"><td>' +
-                i + td +
-                data.name + td +
-                //data.price + td +
-                data.quantity + td +
-                //data.category + td +
-                data.ubication + td +
-                //elementoVacio(data.observations) + td +
-                boton + "onclick='vistaModal(" + com + data.uid + com + ");'>Ver</button>" +
-                '</td></tr>';
-
-        }
+        inversion.push( datos[i].price );
+        document.getElementById("lista").innerHTML +=
+            '<tr scope="row"><td>' 
+            + i
+            + td + data.name 
+            // + td + data.price
+            + td + data.quantity
+            // + td +data.category
+            + td + data.ubication
+            //  + td + elementoVacio(data.observations)
+            + td + boton + "onclick='vistaModal(" + com + data.uid + com + ");'>Ver</button>" +
+            '</td></tr>';
     }
 
-    const gasto = inversion.reduce((a, b) => a + b, 0)
-    document.querySelector("#item-total").innerHTML = `Total : ${ datos.length }`;
+    const gasto = inversion.reduce(( a, b ) => a + b, 0 )
+    document.querySelector("#item-total").innerHTML = `Total : ${ filtro.length }`;
     document.querySelector("#inversion-total").innerHTML = `Inversion : $ ${ gasto }`;
 
 }
