@@ -1,15 +1,18 @@
-const productos = api + "product/products";
-const ubicacion = api + "ubication";
-const categoria = api + "category";
+const email          = localStorage.getItem('email');
+const roleId         = localStorage.getItem('roleId');
+const roleName       = localStorage.getItem('roleName');
+const group          = JSON.parse( localStorage.getItem('group'));
 
-const email = localStorage.getItem('email');
+const productos      = api + ( roleName == 'admin' || group.length > 1 ) ? "product/products" : `product/products/?group=${ group.name }`;
+const prodPrestados  = (roleName == 'admin') ? api + "product/products/?group=Prestamos"  : null;
+const prodEliminados = (roleName == 'admin') ? api + "product/products/?group=Eliminados" : null;
+const ubicacion      = api + "ubication";
+const categoria      = api + "category";
 
 let myModal = new bootstrap.Modal(document.getElementById("modalEditar"));
 
 let listaUbicacion = consultaUbicacion();
 let listaCategoria = consultaCategoria();
-let listProdDelete;
-let listProPrestad;
 
 let idIn = ["nombreModal", "cantidadModal", "precioModal", "selectGrupoModal", "selectUbicacionModal", "selectCategoriaModal", "obsModal"];
 let idButton = ["botonAgregar", "botonGuardar", "botonEditar", "botonImprimir", "botonEliminar"]
@@ -23,17 +26,16 @@ let idButton = ["botonAgregar", "botonGuardar", "botonEditar", "botonImprimir", 
 async function consultaProductos() {
 
     const data = JSON.parse( localStorage.getItem("productos") );
+
     if (data) {
     
-        const filtro = data.filter( ( item ) =>  item.group !== "Eliminados" && item.group !== "Prestamos" && item.active === true );
-        return filtro;
-
+        return data.filter( ( item ) =>  item.group !== "Eliminados" && item.group !== "Prestamos" && item.active === true );
+       
     } else {
 
         const respuesta = await consulta( productos );
         localStorage.setItem("productos", JSON.stringify( respuesta.data ));
-        const filtro = data.filter( ( item ) =>  item.group !== "Eliminados" && item.group !== "Prestamos" && item.active === true );
-        return filtro;
+        return data.filter( ( item ) =>  item.group !== "Eliminados" && item.group !== "Prestamos" && item.active === true );
     }
         
 
@@ -181,9 +183,8 @@ async function productosPrestados() {
         const filtro = data.filter( ( item ) =>  item.group === "Prestamos" && item.active === true );
         imprimirLista(filtro);
     } else {
-       await consultaProductos();
-       const filtro = data.filter( ( item ) =>  item.group === "Prestamos" && item.active === true );
-       imprimirLista(filtro)
+       const query = await consulta(prodPrestados);
+       imprimirLista(query)
     }
 }
 
@@ -193,9 +194,8 @@ async function productosEliminados() {
         const filtro = data.filter( ( item ) =>  item.group === "Eliminados");
         imprimirLista(filtro);
     } else {
-       await consultaProductos();
-       const filtro = data.filter( ( item ) =>  item.group === "Eliminados");
-       imprimirLista(filtro)
+       const query = await consulta(prodEliminados);
+       imprimirLista(query)
     }
 }
 
