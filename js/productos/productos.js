@@ -419,8 +419,8 @@ async function readGetUrl(){
     const valores = window.location.search;
     const urlParams = new URLSearchParams(valores);
     const estado = urlParams.get('estado');
-    console.log(urlParams.has('estado'));
-    console.log(estado);
+    //console.log(urlParams.has('estado'));
+    //console.log(estado);
 
     if (estado === "prestamo") {
         productosPrestados();

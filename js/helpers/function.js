@@ -348,10 +348,10 @@ function urlAdaptive(){
     urls.forEach(element => {
         let link=element.href.replace(origin,"");
         element.href=url + link;
-        console.log(element.href);
+        //console.log(element.href);
     });
 
-    console.log("REDIRECION FIN");
+    //console.log("REDIRECION FIN");
 
 }
 
