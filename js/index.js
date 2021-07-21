@@ -8,9 +8,9 @@
 async function imprimirNumeroProductos() {
 
     const productos        = JSON.parse( localStorage.getItem('productos') );
-    const filtroProductos  = productos.filter( data => data.group != 'Eliminados' );
-    const filtroPretados   = productos.filter( data => data.group == 'Prestamos' );
-    const filtroEliminados = productos.filter( data => data.group == 'Eliminados' );
+    const filtroProductos  = productos.filter( data => data.group !== 'Eliminados' );
+    const filtroPretados   = productos.filter( data => data.group === 'Prestamos' );
+    const filtroEliminados = productos.filter( data => data.group === 'Eliminados' );
     
     document.getElementById("numeroProductos").innerHTML  = filtroProductos.length;
     document.getElementById("numeroPrestados").innerHTML  = filtroPretados.length;
