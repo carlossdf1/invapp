@@ -4,8 +4,8 @@ const roleName       = localStorage.getItem('roleName');
 const group          = JSON.parse( localStorage.getItem('group'));
 
 const productos      = ( roleName == 'admin' || group.length > 1 ) ? api +  "product/products" : api +  `product/products/?group=${ group[0].name }`;
-const prodPrestados  = (roleName == 'admin') ? api + "product/products/?group=Prestamos"  : null;
-const prodEliminados = (roleName == 'admin') ? api + "product/products/?group=Eliminados" : null;
+const prodPrestados  = ( roleName == 'admin') ? api + "product/products/?group=Prestamos"  : null;
+const prodEliminados = ( roleName == 'admin') ? api + "product/products/?group=Eliminados" : null;
 const ubicacion      = api + "ubication";
 const categoria      = api + "category";
 

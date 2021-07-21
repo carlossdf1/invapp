@@ -24,29 +24,25 @@ async function initState() {
     if ( username ) {
 
         document.querySelector('#title-index').innerHTML = `${ username } : Aqui podras ver los datos en tiempo real`;
-        console.log(prod);
+        (roleName == 'admin') ? console.log('Feature Flags de botones en INDEX') : hiddenElements();
 
-        if (prod == null) {
+        if (prod) return  imprimirNumeroProductos();
 
-            if(roleName == 'admin') {
-                const query = await consultaProductos();
-                query ??  imprimirNumeroProductos();
-            } else {
+        if( roleName == 'admin' ) {
 
-                console.log('Estoy dentro de este IF')
-                const respuesta = await consulta( productos );
-                const filtro    = respuesta.data.filter( ( item ) =>  item.group == group[0].name && item.active === true );
-                console.log('=========================')
-                console.log(filtro);
-                localStorage.setItem("productos", JSON.stringify( filtro ));
-               
-                ( filtro ) ? imprimirNumeroProductos() : null;
-                
-                
-            }
-    
+            const query = await consultaProductos();
+            (query) ?  imprimirNumeroProductos() : null;
+        
         } else {
-            imprimirNumeroProductos();
+
+            const respuesta = await consulta( productos );
+            const filtro    = respuesta.data.filter( ( item ) =>  item.group == group[0].name && item.active === true );
+            localStorage.setItem("productos", JSON.stringify( filtro ));
+            
+            document.getElementById("numeroProductos").innerHTML  = filtro.length;
+            document.getElementById("numeroPrestados").innerHTML  =  0;
+            document.getElementById("numeroEliminados").innerHTML =  0; 
+            
         }
     
     }
@@ -54,3 +50,9 @@ async function initState() {
 }
 
 initState();
+
+function hiddenElements() {
+
+    dNone('btn-prestado',  false );
+    dNone('btn-eliminado', false );
+}

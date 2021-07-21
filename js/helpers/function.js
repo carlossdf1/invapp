@@ -1,5 +1,5 @@
 const api = "https://inv-api.herokuapp.com/api/";
-let res;
+// let res;
 /**
  * corta el string busqueda en un array de palabras para comparar
  *
