@@ -196,13 +196,14 @@ function imprimirLista( datos, eliminados = false, prestados = false ) {
  * 
  * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
- * @version 2021-05-24
+ * @version 2021-07-21
  */
 
 function vistaModal(id) {
 
+    const listaProductos = JSON.parse(localStorage.getItem("productos"));
     if (document.getElementById("nombreModal").className !== "form-control-plaintext") bloquearModal();
-    const modalProducto = listaProductos.filter(listaProductos => listaProductos.uid === id);
+    const modalProducto = listaProductos.filter( data => data.uid === id);
 
     console.log(modalProducto);
 
