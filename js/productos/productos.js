@@ -87,6 +87,7 @@ async function consultaCategoria() {
 
 async function imprimir() {
     imprimirLista(await consultaProductos());
+    readGetUrl();
     selectNamesArray(await consultaUbicacion(), "selectUbicacionModal");
     selectNamesArray(await consultaGrupos(), "selectGrupoModal");
     selectNamesArray(await consultaCategoria(), "selectCategoriaModal");
@@ -181,6 +182,7 @@ async function productosPrestados() {
     const data = JSON.parse( localStorage.getItem("productos") );
     if (data) {
         const filtro = data.filter( ( item ) =>  item.group === "Prestamos" && item.active === true );
+        console.log(filtro);
         imprimirLista(filtro);
     } else {
        const query = await consulta(prodPrestados);
@@ -192,6 +194,7 @@ async function productosEliminados() {
     const data = JSON.parse( localStorage.getItem("productos") );
     if (data) {
         const filtro = data.filter( ( item ) =>  item.group === "Eliminados");
+        console.log(filtro);
         imprimirLista(filtro);
     } else {
        const query = await consulta(prodEliminados);
@@ -213,6 +216,8 @@ function imprimirLista( datos ) {
     const td = "</td><td>";
     let boton = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalEditar' ";
     const inversion = [];
+
+    document.getElementById("lista").innerHTML ="";
 
     for (const i in datos ) {
 
@@ -408,4 +413,21 @@ function eliminarModalSalir(id) {
     deleteProduct(id);
     document.getElementById("modalEditar").style = "z-index: 1060; display: block;";
     myModal.toggle()
+}
+
+function readGetUrl(){
+    const valores = window.location.search;
+    const urlParams = new URLSearchParams(valores);
+    const estado = urlParams.get('estado');
+    console.log(urlParams.has('estado'));
+    console.log(estado);
+
+    if (estado === "prestamo") {
+        productosPrestados();
+    }
+
+    if (estado === "eliminado") {
+        productosEliminados();
+    }
+
 }
