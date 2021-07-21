@@ -414,7 +414,7 @@ function eliminarModalSalir(id) {
     myModal.toggle()
 }
 
-function readGetUrl(){
+async function readGetUrl(){
     const valores = window.location.search;
     const urlParams = new URLSearchParams(valores);
     const estado = urlParams.get('estado');
