@@ -6,7 +6,6 @@ const email = localStorage.getItem('email');
 
 let myModal = new bootstrap.Modal(document.getElementById("modalEditar"));
 
-let listaProductos;
 let listaUbicacion = consultaUbicacion();
 let listaCategoria = consultaCategoria();
 let listProdDelete;
@@ -22,25 +21,31 @@ let idButton = ["botonAgregar", "botonGuardar", "botonEditar", "botonImprimir", 
      */
 
 async function consultaProductos() {
-    const respuesta = await consulta(productos);
-    listaProductos = respuesta.data;
-    localStorage.setItem("productos", JSON.stringify(listaProductos));
+
     const data = JSON.parse( localStorage.getItem("productos") );
+    if (data) return data;
+    const respuesta = await consulta( productos );
+    localStorage.setItem("productos", JSON.stringify( respuesta.data ));
     return data;
+
 };
 
 /**
  * Función consulta los datos de ubicacion en la api
  *
  * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
+ * @author Emmanuel Correa <ebcorreac[at]gmail.com>
  * 
  * @version 2021-05-24
  */
 
 async function consultaUbicacion() {
+
+    const data = JSON.parse( localStorage.getItem("ubicaciones") );
+    if ( data ) return data;
     const respuesta = await consulta(ubicacion);
-    listaUbicacion = respuesta.data;
-    return listaUbicacion;
+    localStorage.setItem("ubicaciones", JSON.stringify( respuesta.data ));
+    return data;
 };
 
 /**
@@ -52,9 +57,12 @@ async function consultaUbicacion() {
  */
 
 async function consultaCategoria() {
+
+    const data = JSON.parse( localStorage.getItem("categorias") );
+    if ( data ) return data;
     const respuesta = await consulta(categoria);
-    listaCategoria = respuesta.data;
-    return listaCategoria;
+    localStorage.setItem("categorias", JSON.stringify( respuesta.data ));
+    return data;
 };
 
 /**
@@ -153,7 +161,7 @@ function imprimirLista( datos, eliminados = false, prestados = false ) {
     const inversion = [];
     let filtro;
     if ( eliminados ) filtro = datos.filter( ( item ) =>  item.group === "Eliminados" );
-    if ( prestados )  filtro = datos.filter( ( item ) =>  item.group !== "Prestamos" );
+    if ( prestados )  filtro = datos.filter( ( item ) =>  item.group === "Prestamos" );
     if ( !eliminados && !prestados ) filtro = datos.filter( ( item ) =>  item.group !== "Eliminados" && item.group !== "Prestamos" && item.active === true );
 
     for (let i in filtro ) {
@@ -333,6 +341,7 @@ function obtenerModal(ventana) {
  */
 
 function recargar() {
+    localStorage.removeItem("productos");
     setTimeout(() => imprimir(), 1000);
 }
 
