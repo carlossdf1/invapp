@@ -23,9 +23,9 @@ class Header extends HTMLElement {
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" id="url" href="/view/productos/productos.html" >Disponibles</a></li>
-                            <li><a class="dropdown-item" onclick="buscar('prestamo')">En prestamo</a></li>
+                            <li><a class="dropdown-item" onclick="productosPrestados()">En prestamo</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" onclick="buscar('eliminados')">Eliminados</a></li>
+                            <li><a class="dropdown-item" onclick="productosEliminados()">Eliminados</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">

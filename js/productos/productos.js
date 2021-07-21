@@ -23,10 +23,19 @@ let idButton = ["botonAgregar", "botonGuardar", "botonEditar", "botonImprimir", 
 async function consultaProductos() {
 
     const data = JSON.parse( localStorage.getItem("productos") );
-    if (data) return data;
-    const respuesta = await consulta( productos );
-    localStorage.setItem("productos", JSON.stringify( respuesta.data ));
-    return data;
+    if (data) {
+    
+        const filtro = data.filter( ( item ) =>  item.group !== "Eliminados" && item.group !== "Prestamos" && item.active === true );
+        return filtro;
+
+    } else {
+
+        const respuesta = await consulta( productos );
+        localStorage.setItem("productos", JSON.stringify( respuesta.data ));
+        const filtro = data.filter( ( item ) =>  item.group !== "Eliminados" && item.group !== "Prestamos" && item.active === true );
+        return filtro;
+    }
+        
 
 };
 
@@ -145,6 +154,7 @@ async function deleteProduct(id) {
     recargar();
 }
 
+
 /**
  * Función que imprime la tabla productos en la vista
  * 
@@ -153,38 +163,78 @@ async function deleteProduct(id) {
  * @version 2021-05-11
  */
 
-function imprimirLista( datos, eliminados = false, prestados = false ) {
+ async function deleteProduct(id) {
+
+    console.log(id);
+    let data = JSON.stringify({ "user": email });
+
+    console.log(data);
+
+    await addData(data, "product/" + id, "POST");
+
+    recargar();
+}
+
+async function productosPrestados() {
+    const data = JSON.parse( localStorage.getItem("productos") );
+    if (data) {
+        const filtro = data.filter( ( item ) =>  item.group === "Prestamo" && item.active === true );
+        imprimirLista(filtro);
+    } else {
+       await consultaProductos();
+       const filtro = data.filter( ( item ) =>  item.group === "Prestamo" && item.active === true );
+       imprimirLista(filtro)
+    }
+}
+
+async function productosEliminados() {
+    const data = JSON.parse( localStorage.getItem("productos") );
+    if (data) {
+        const filtro = data.filter( ( item ) =>  item.group === "Eliminados");
+        imprimirLista(filtro);
+    } else {
+       await consultaProductos();
+       const filtro = data.filter( ( item ) =>  item.group === "Eliminados");
+       imprimirLista(filtro)
+    }
+}
+
+/**
+ * Función que imprime la tabla productos en la vista
+ * 
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
+ * @author Emmanuel Correa <ebcorrea[at]gmail.com>
+ * @version 2021-05-11
+ */
+
+function imprimirLista( datos ) {
     //imprime los datos entregados en lista html
     console.log("DATOS RECIBIDOS");
     const td = "</td><td>";
     let boton = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalEditar' ";
     const inversion = [];
-    let filtro;
-    if ( eliminados ) filtro = datos.filter( ( item ) =>  item.group === "Eliminados" );
-    if ( prestados )  filtro = datos.filter( ( item ) =>  item.group === "Prestamos" );
-    if ( !eliminados && !prestados ) filtro = datos.filter( ( item ) =>  item.group !== "Eliminados" && item.group !== "Prestamos" && item.active === true );
 
-    for (let i in filtro ) {
+    for (const i in datos ) {
 
-        const data = filtro[i];
+        const data = datos[i];
         const com = '"';
 
         inversion.push( datos[i].price );
         document.getElementById("lista").innerHTML +=
-            '<tr scope="row"><td>' 
-            + i
-            + td + data.name 
-            // + td + data.price
-            + td + data.quantity
-            // + td +data.category
-            + td + data.ubication
-            //  + td + elementoVacio(data.observations)
-            + td + boton + "onclick='vistaModal(" + com + data.uid + com + ");'>Ver</button>" +
-            '</td></tr>';
+        '<tr scope="row"><td>' 
+        + i
+        + td + data.name 
+        // + td + data.price
+        + td + data.quantity
+        // + td +data.category
+        + td + data.ubication
+        //  + td + elementoVacio(data.observations)
+        + td + boton + "onclick='vistaModal(" + com + data.uid + com + ");'>Ver</button>" +
+        '</td></tr>';
     }
 
     const gasto = inversion.reduce(( a, b ) => a + b, 0 )
-    document.querySelector("#item-total").innerHTML = `Total : ${ filtro.length }`;
+    document.querySelector("#item-total").innerHTML = `Total : ${ datos.length }`;
     document.querySelector("#inversion-total").innerHTML = `Inversion : $ ${ gasto }`;
 
 }
@@ -203,7 +253,7 @@ function vistaModal(id) {
 
     const listaProductos = JSON.parse(localStorage.getItem("productos"));
     if (document.getElementById("nombreModal").className !== "form-control-plaintext") bloquearModal();
-    const modalProducto = listaProductos.filter( data => data.uid === id);
+    const modalProducto = listaProductos.filter( data => data.uid === id );
 
     console.log(modalProducto);
 
