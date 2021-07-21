@@ -30,8 +30,14 @@ async function initState() {
 
         if( roleName == 'admin' ) {
 
-            const query = await consultaProductos();
-            (query) ?  imprimirNumeroProductos() : null;
+            const filtro = await consultaProductos();
+            // const respuesta = await consulta( productos );
+            // const filtro    = respuesta.data.filter( ( item ) =>  item.group == group[0].name && item.active === true );
+            // localStorage.setItem("productos", JSON.stringify( filtro ));
+
+            document.getElementById("numeroProductos").innerHTML  = filtro.length;
+            document.getElementById("numeroPrestados").innerHTML  =  0;
+            document.getElementById("numeroEliminados").innerHTML =  0; 
         
         } else {
 

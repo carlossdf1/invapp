@@ -34,8 +34,9 @@ async function consultaProductos() {
     } else {
 
         const respuesta = await consulta( productos );
-        localStorage.setItem("productos", JSON.stringify( respuesta.data ));
-        const filtro = data.filter( ( item ) =>  item.group !== "Eliminados" && item.group !== "Prestamos" && item.active === true );
+        const filtro = respuesta.data.filter( ( item ) =>  item.group !== "Eliminados" && item.group !== "Prestamos" && item.active === true );
+        localStorage.setItem("productos", JSON.stringify( filtro ));
+     
         return filtro;
     }
         
