@@ -86,7 +86,6 @@ async function consultaCategoria() {
  */
 
 async function imprimir() {
-    imprimirLista(await consultaProductos());
     readGetUrl();
     selectNamesArray(await consultaUbicacion(), "selectUbicacionModal");
     selectNamesArray(await consultaGrupos(), "selectGrupoModal");
@@ -428,6 +427,10 @@ function readGetUrl(){
 
     if (estado === "eliminado") {
         productosEliminados();
+    }
+
+    else{
+        imprimirLista(await consultaProductos());
     }
 
 }
