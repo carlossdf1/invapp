@@ -178,11 +178,11 @@ async function deleteProduct(id) {
 async function productosPrestados() {
     const data = JSON.parse( localStorage.getItem("productos") );
     if (data) {
-        const filtro = data.filter( ( item ) =>  item.group === "Prestamo" && item.active === true );
+        const filtro = data.filter( ( item ) =>  item.group === "Prestamos" && item.active === true );
         imprimirLista(filtro);
     } else {
        await consultaProductos();
-       const filtro = data.filter( ( item ) =>  item.group === "Prestamo" && item.active === true );
+       const filtro = data.filter( ( item ) =>  item.group === "Prestamos" && item.active === true );
        imprimirLista(filtro)
     }
 }
