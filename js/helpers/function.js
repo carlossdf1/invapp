@@ -338,7 +338,7 @@ function redireccionamiento(){
 
 function urlAdaptive(){
 
-    console.log("REDIRECION INICIO");
+    //console.log("REDIRECION INICIO");
 
     let url="";
     url=redireccionamiento();
