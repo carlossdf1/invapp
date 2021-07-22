@@ -1,5 +1,11 @@
 const api = "https://inv-api.herokuapp.com/api/";
 // let res;
+
+const email          = localStorage.getItem('email');
+const roleId         = localStorage.getItem('roleId');
+const roleName       = localStorage.getItem('roleName');
+const group          = JSON.parse( localStorage.getItem('group'));
+
 /**
  * corta el string busqueda en un array de palabras para comparar
  *
@@ -368,17 +374,24 @@ window.onload = setTimeout( () => noLogin (), 0 );
 
 function urlRols(){
     let url = document.getElementById ("enlaces");
-    //Mostramos el número de hijos
-    console.log (url.children.length); //2
-    //Asignamos a variable item el elemento con id ='item2'de la lista
-    let item = url.querySelector ('#urlNosotros');
-    url.removeChild (item);
-    //Mostramos número de hijos
-    console.log (url.children.length); //1
+        
+    if(roleName == 'user') {
+        //url.removeChild(url.children.urlNosotros);
+        url.removeChild(url.children.urlGrupos);
+        url.removeChild(url.children.urlUsuarios);
+        url.removeChild(url.children.urlCat);
+        url.removeChild(url.children.urlUbi);
+    }
 
-    url.removeChild(url.children.urlGrupos);
+    /* 
+    urlGrupos
+    urlProductos
+    urlUsuarios
+    urlCat  
+    urlUbi  
+    urlNosotros 
+    */
 
-    (roleName == 'admin') ? url.removeChild(url.children.urlGrupos):true
 
 }
 
