@@ -216,7 +216,7 @@ function selectNamesArray(lista, selectId) {
       select.push(fila.name);
     }
   
-    console.log(select);
+    //console.log(select);
     addOptions( selectId, select );
     return select;
 }
@@ -366,4 +366,21 @@ window.onload = setTimeout( () => urlAdaptive(), 500 );
 window.onload = setTimeout( () => noLogin (), 0 );
 
 
+function urlRols(){
+    let url = document.getElementById ("enlaces");
+    //Mostramos el número de hijos
+    console.log (url.children.length); //2
+    //Asignamos a variable item el elemento con id ='item2'de la lista
+    let item = url.querySelector ('#urlNosotros');
+    url.removeChild (item);
+    //Mostramos número de hijos
+    console.log (url.children.length); //1
 
+    url.removeChild(url.children.urlGrupos);
+
+    (roleName == 'admin') ? url.removeChild(url.children.urlGrupos):true
+
+}
+
+
+setTimeout( () => urlRols(), 1 );

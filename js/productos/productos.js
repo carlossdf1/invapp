@@ -180,27 +180,36 @@ async function deleteProduct(id) {
 }
 
 async function productosPrestados() {
-    const data = JSON.parse( localStorage.getItem("productos") );
-    if (data) {
-        const filtro = data.filter( ( item ) =>  item.group === "Prestamos" && item.active === true );
-        console.log(filtro);
-        imprimirLista(filtro);
+     const pro = JSON.parse( localStorage.getItem("productosPrestados") );
+    if (pro) {
+        console.log(pro);
+        //const filtro = pro.filter( ( item ) =>  item.group === "Prestamos" && item.active === true );
+        //console.log(filtro);
+        //imprimirLista(filtro);
+        imprimirLista(pro);
     } else {
        const query = await consulta(prodPrestados);
-       imprimirLista(query)
+       console.log(query.data);
+       localStorage.setItem("productosPrestados", JSON.stringify(query.data));
+       imprimirLista(query.data);
     }
+
 }
 
 async function productosEliminados() {
-    const data = JSON.parse( localStorage.getItem("productos") );
-    if (data) {
-        const filtro = data.filter( ( item ) =>  item.group === "Eliminados");
-        console.log(filtro);
-        imprimirLista(filtro);
+    const pro = JSON.parse( localStorage.getItem("productosEliminados") );
+    if (pro) {
+        //console.log(pro);
+        //const filtro = pro.filter( ( item ) =>  item.group === "Eliminados");
+        //console.log(filtro);
+        imprimirLista(pro);
     } else {
        const query = await consulta(prodEliminados);
-       imprimirLista(query)
+       console.log(query.data);
+       localStorage.setItem("productosEliminados",JSON.stringify(query.data));
+       imprimirLista(query.data);
     }
+
 }
 
 /**
@@ -211,8 +220,9 @@ async function productosEliminados() {
  * @version 2021-05-11
  */
 
-function imprimirLista( datos ) {
+async function imprimirLista( datos ) {
     //imprime los datos entregados en lista html
+    console.log(datos);
     console.log("DATOS RECIBIDOS");
     const td = "</td><td>";
     let boton = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalEditar' ";
@@ -224,7 +234,7 @@ function imprimirLista( datos ) {
 
         const data = datos[i];
         const com = '"';
-
+        console.log(data);
         inversion.push( datos[i].price );
         document.getElementById("lista").innerHTML +=
         '<tr scope="row"><td>' 
@@ -421,13 +431,13 @@ async function readGetUrl(){
     const urlParams = new URLSearchParams(valores);
     const estado = urlParams.get('estado');
     //console.log(urlParams.has('estado'));
-    //console.log(estado);
+    console.log(estado);
 
     if (estado === "prestamo") {
         productosPrestados();
     }
 
-    if (estado === "eliminado") {
+    else if (estado === "eliminado") {
         productosEliminados();
     }
 
