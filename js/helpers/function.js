@@ -1,5 +1,11 @@
 const api = "https://inv-api.herokuapp.com/api/";
-let res;
+// let res;
+
+const email          = localStorage.getItem('email');
+const roleId         = localStorage.getItem('roleId');
+const roleName       = localStorage.getItem('roleName');
+const group          = JSON.parse( localStorage.getItem('group'));
+
 /**
  * corta el string busqueda en un array de palabras para comparar
  *
@@ -73,9 +79,9 @@ function buscar(autobuscar) {
     console.log("BUSCANDO")
     let palabras        = "";
     if (autobuscar!==undefined) {
-        palabras=normalizar(autobuscar);
+        palabras = normalizar( autobuscar );
     } else {
-        palabras=normalizar( document.getElementById("search").value );
+        palabras = normalizar( document.getElementById("search").value );
     }
     
     let busqueda          = cortaPalabras( palabras );
@@ -108,13 +114,12 @@ function buscar(autobuscar) {
         }
 
     } else { console.log( "NO HAY DATOS" ) }
-
-    if (autobuscar=="eliminados") {
-        imprimirLista( resultadoBusqueda ,true);
-    } else {
-        imprimirLista( resultadoBusqueda );
-    }
-
+    
+    ( autobuscar == "eliminados" ) 
+    ? imprimirLista( resultadoBusqueda, true , false)
+    : ( autobuscar == "prestamo" ) 
+    ? imprimirLista( resultadoBusqueda, false, true )
+    : imprimirLista( resultadoBusqueda , false, false);
     
     console.log( resultadoBusqueda );
 
@@ -217,7 +222,7 @@ function selectNamesArray(lista, selectId) {
       select.push(fila.name);
     }
   
-    console.log(select);
+    //console.log(select);
     addOptions( selectId, select );
     return select;
 }
@@ -339,7 +344,7 @@ function redireccionamiento(){
 
 function urlAdaptive(){
 
-    console.log("REDIRECION INICIO");
+    //console.log("REDIRECION INICIO");
 
     let url="";
     url=redireccionamiento();
@@ -349,10 +354,10 @@ function urlAdaptive(){
     urls.forEach(element => {
         let link=element.href.replace(origin,"");
         element.href=url + link;
-        console.log(element.href);
+        //console.log(element.href);
     });
 
-    console.log("REDIRECION FIN");
+    //console.log("REDIRECION FIN");
 
 }
 
@@ -367,4 +372,28 @@ window.onload = setTimeout( () => urlAdaptive(), 500 );
 window.onload = setTimeout( () => noLogin (), 0 );
 
 
+function urlRols(){
+    let url = document.getElementById ("enlaces");
+        
+    if(roleName == 'user') {
+        //url.removeChild(url.children.urlNosotros);
+        url.removeChild(url.children.urlGrupos);
+        url.removeChild(url.children.urlUsuarios);
+        url.removeChild(url.children.urlCat);
+        url.removeChild(url.children.urlUbi);
+    }
 
+    /* 
+    urlGrupos
+    urlProductos
+    urlUsuarios
+    urlCat  
+    urlUbi  
+    urlNosotros 
+    */
+
+
+}
+
+
+setTimeout( () => urlRols(), 1 );

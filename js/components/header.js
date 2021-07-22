@@ -12,32 +12,32 @@ class Header extends HTMLElement {
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
-            <div class="collapse navbar-collapse" id="navbarColor01">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="enlaces">
+                    <li class="nav-item" id="urlGrupos" >
                         <a class="nav-link" id="url" href="/view/grupos/grupos.html">Grupos</a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown" id="urlProductos" >
                         <a class="nav-link dropdown-toggle" id="url" href="/view/productos/productos.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Inventario
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" id="url" href="/view/productos/productos.html" >Disponibles</a></li>
-                            <li><a class="dropdown-item" onclick="buscar('prestamo')">En prestamo</a></li>
+                            <li><a class="dropdown-item" id="url" href="/view/productos/productos.html?estado=prestamo" >En prestamo</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" onclick="buscar('eliminados')">Eliminados</a></li>
+                            <li><a class="dropdown-item" id="url" href="/view/productos/productos.html?estado=eliminado" >Eliminados</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="urlUsuarios" >
                         <a class="nav-link" id="url" href="/view/users/users.html">Usuarios</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="urlCat" >
                         <a class="nav-link" id="url" href="/view/categorias/categorias.html">Categorias</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="urlUbi" >
                         <a class="nav-link" id="url" href="/view/ubicaciones/ubicaciones.html">Ubicaciones</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="urlNosotros" >
                         <a class="nav-link" id="url" href="/view/nosotros/nosotros.html">Nosotros</a>
                     </li>
                 </ul>
@@ -55,7 +55,7 @@ class Header extends HTMLElement {
                                 </svg>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-lg-end" id="useropt" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" id="url" href="" >Perfil</a></li>
+                                <li><a class="dropdown-item" id="url" href="/view/users/perfil.html" >Perfil</a></li>
                                 <li><a class="dropdown-item" >Grupo</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" onclick="closeSesion()">Cerrar sesion</a></li>
