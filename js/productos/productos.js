@@ -1,3 +1,9 @@
+const email          = localStorage.getItem('email');
+const roleId         = localStorage.getItem('roleId');
+const roleName       = localStorage.getItem('roleName');
+const group          = JSON.parse( localStorage.getItem('group'));
+
+
 const productos      = ( roleName == 'admin' || group.length > 1 ) ? api +  "product/products" : api +  `product/products/?group=${ group[0].name }`;
 const prodPrestados  = ( roleName == 'admin') ? api + "product/products/?group=Prestamos"  : null;
 const prodEliminados = ( roleName == 'admin') ? api + "product/products/?group=Eliminados" : null;
@@ -8,6 +14,7 @@ let myModal = new bootstrap.Modal(document.getElementById("modalEditar"));
 
 let listaUbicacion = consultaUbicacion();
 let listaCategoria = consultaCategoria();
+//let listaProductos = consultaProductos();
 
 let idIn = ["nombreModal", "cantidadModal", "precioModal", "selectGrupoModal", "selectUbicacionModal", "selectCategoriaModal", "obsModal"];
 let idButton = ["botonAgregar", "botonGuardar", "botonEditar", "botonImprimir", "botonEliminar"]
@@ -229,7 +236,7 @@ async function imprimirLista( datos ) {
 
         const data = datos[i];
         const com = '"';
-        console.log(data);
+        //console.log(data);
         inversion.push( datos[i].price );
         document.getElementById("lista").innerHTML +=
         '<tr scope="row"><td>' 

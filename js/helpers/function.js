@@ -1,11 +1,6 @@
 const api = "https://inv-api.herokuapp.com/api/";
 // let res;
 
-const email          = localStorage.getItem('email');
-const roleId         = localStorage.getItem('roleId');
-const roleName       = localStorage.getItem('roleName');
-const group          = JSON.parse( localStorage.getItem('group'));
-
 /**
  * corta el string busqueda en un array de palabras para comparar
  *
@@ -76,6 +71,9 @@ function elementoVacio(dato) {
 
 function buscar(autobuscar) {
 
+    console.log("###################################");
+    //console.log(listaProductos);
+
     console.log("BUSCANDO")
     let palabras        = "";
     if (autobuscar!==undefined) {
@@ -92,7 +90,7 @@ function buscar(autobuscar) {
     if ( busqueda.length >= 1 ) {
 
         document.getElementById("lista").innerHTML = "";
-
+        const listaProductos = JSON.parse(localStorage.getItem("productos"));
         for ( let i in listaProductos ) {
 
             let data     = listaProductos[i];
@@ -115,14 +113,14 @@ function buscar(autobuscar) {
 
     } else { console.log( "NO HAY DATOS" ) }
     
-    ( autobuscar == "eliminados" ) 
+/*     ( autobuscar == "eliminados" ) 
     ? imprimirLista( resultadoBusqueda, true , false)
     : ( autobuscar == "prestamo" ) 
     ? imprimirLista( resultadoBusqueda, false, true )
-    : imprimirLista( resultadoBusqueda , false, false);
+    : imprimirLista( resultadoBusqueda , false, false); */
     
     console.log( resultadoBusqueda );
-
+    imprimirLista( resultadoBusqueda);
     return resultadoBusqueda
 
 }
