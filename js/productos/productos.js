@@ -1,9 +1,3 @@
-const email          = localStorage.getItem('email');
-const roleId         = localStorage.getItem('roleId');
-const roleName       = localStorage.getItem('roleName');
-const group          = JSON.parse( localStorage.getItem('group'));
-
-
 const productos      = ( roleName == 'admin' || group.length > 1 ) ? api +  "product/products" : api +  `product/products/?group=${ group[0].name }`;
 const prodPrestados  = ( roleName == 'admin') ? api + "product/products/?group=Prestamos"  : null;
 const prodEliminados = ( roleName == 'admin') ? api + "product/products/?group=Eliminados" : null;
@@ -17,6 +11,7 @@ let listaCategoria = consultaCategoria();
 //let listaProductos = consultaProductos();
 
 let idIn = ["nombreModal", "cantidadModal", "precioModal", "selectGrupoModal", "selectUbicacionModal", "selectCategoriaModal", "obsModal"];
+let idData=[ "name","category","quantity","price","ubication","group","observations","user"];
 let idButton = ["botonAgregar", "botonGuardar", "botonEditar", "botonImprimir", "botonEliminar"]
     /**
      * Función que muestra cada linea de informacion
@@ -99,22 +94,39 @@ async function imprimir() {
 
 async function createProduct() {
 
-    let data = JSON.stringify({
-
-        "name": document.formModal.nombreModal.value,
-        "img": "",
-        "category": document.formModal.selectCategoriaModal.value,
-        "quantity": document.formModal.cantidadModal.value,
-        "price": document.formModal.precioModal.value,
-        "ubication": document.formModal.selectUbicacionModal.value,
-        "group": document.formModal.selectGrupoModal.value,
-        "observations": document.formModal.obsModal.value,
-        "user": email
+    let inputs=idIn.slice();
+    inputs.pop();
+    let valid=inputs.some(element => {
+        return (document.getElementById(element).value ==="")? true : false;
     });
 
-    await addData(data, "product/new", "POST");
+    if(valid===false){
 
-    recargar();
+        let data = JSON.stringify({
+
+            "name": document.formModal.nombreModal.value,
+            "img": "",
+            "category": document.formModal.selectCategoriaModal.value,
+            "quantity": document.formModal.cantidadModal.value,
+            "price": document.formModal.precioModal.value,
+            "ubication": document.formModal.selectUbicacionModal.value,
+            "group": document.formModal.selectGrupoModal.value,
+            "observations": document.formModal.obsModal.value,
+            "user": email
+        });
+
+        console.log(data);
+
+        let resp = await addData(data, "product/new", "POST");
+
+        recargar(resp);
+
+    }
+
+    else{
+        alert("COMPLETE EL FORMULARIO");
+    }
+
 }
 
 async function editProduct(id) {
@@ -134,10 +146,11 @@ async function editProduct(id) {
     });
 
     console.log(data);
+    
+    let res = await addData(data, "product/" + id, "PUT");
+    console.log(res);
 
-    await addData(data, "product/" + id, "PUT");
-
-    recargar();
+    recargar(res);
 }
 
 /**
@@ -269,7 +282,27 @@ async function imprimirLista( datos ) {
 
 function vistaModal(id) {
 
-    const listaProductos = JSON.parse(localStorage.getItem("productos"));
+    const valores = window.location.search;
+    const urlParams = new URLSearchParams(valores);
+    const estado = urlParams.get('estado');
+    //console.log(urlParams.has('estado'));
+    console.log(estado);
+
+    let listaProductos={};
+
+    if (estado === "prestamo") {
+        listaProductos = JSON.parse(localStorage.getItem("productosPrestados"));
+    }
+
+    else if (estado === "eliminado") {
+        listaProductos = JSON.parse(localStorage.getItem("productosEliminados"));
+    }
+
+    else{
+        listaProductos = JSON.parse(localStorage.getItem("productos"));
+    }
+
+    
     if (document.getElementById("nombreModal").className !== "form-control-plaintext") bloquearModal();
     const modalProducto = listaProductos.filter( data => data.uid === id );
 
@@ -409,9 +442,22 @@ function obtenerModal(ventana) {
  * @version 2021-05-12
  */
 
-function recargar() {
-    localStorage.removeItem("productos");
-    setTimeout(() => imprimir(), 1000);
+async function recargar(res) {
+
+    console.log("DATOS EN REGARGA",res);
+
+    console.log("RESULTADO: ",res.ok);
+
+    if(res.ok===true){
+        myModal.toggle();
+        localStorage.removeItem("productos");
+        setTimeout(() => imprimir(), 1000);
+    }
+
+    else{
+        alert("ERROR AL INGRESAR LOS DATOS, MAS DETALLE: ",res);
+    }
+
 }
 
 function eliminarModal() {

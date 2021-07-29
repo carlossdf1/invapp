@@ -1,3 +1,9 @@
+const email          = localStorage.getItem('email');
+const roleId         = localStorage.getItem('roleId');
+const roleName       = localStorage.getItem('roleName');
+const group          = JSON.parse( localStorage.getItem('group'));
+
+
 const api = "https://inv-api.herokuapp.com/api/";
 // let res;
 
@@ -191,10 +197,12 @@ async function addData(data, route, method) {
 
     };
 
-    fetch(api + route, requestOptions)
-        .then((resp) => resp.json())
-        .then(function(result) { console.log(result) })
-        .catch(error => console.log('error', error));
+    return new Promise((resolve, reject) => {
+        fetch(api + route, requestOptions)
+            .then( resp => { resolve(resp) })
+            .then( result => { resolve(result) })
+            .catch( error => { resolve(error) });
+    });
 }
 
 /**
@@ -307,14 +315,13 @@ function toggleInput(elemid, est) {
 
 function noLogin() {
 
-    let url = redireccionamiento();
-
     let urlBase = location.href.replace(origin, "");
 
-    if (localStorage.getItem("token") === null && urlBase !== url + '/view/login/login.html') {
-        location.replace(origin + url + '/view/login/login.html');
+    if (localStorage.getItem("token") === null && urlBase !== redireccionamiento() + '/view/login/login.html') {
+        location.replace(origin + redireccionamiento() + '/view/login/login.html');
     } else {
         console.log("LOGEADO");
+        //gotoIndex();
     }
 }
 
@@ -361,28 +368,37 @@ window.onload = setTimeout(() => urlAdaptive(), 500);
 window.onload = setTimeout(() => noLogin(), 0);
 
 
-function urlRols() {
+async function urlRols() {
     let url = document.getElementById("enlaces");
 
-    if (roleName == 'user') {
-        //url.removeChild(url.children.urlNosotros);
+    if ( roleId !== '5f5b708a0c56761a0246fda7') {
+
+        switch ( window.location.href) {
+            case url.children.urlGrupos.children.url.href:
+                gotoIndex();
+                break;
+            case url.children.urlUsuarios.children.url.href: // foo es 0, por lo tanto se cumple la condición y se ejecutara el siguiente bloque
+                gotoIndex();
+                // NOTA: el "break" olvidado debería estar aquí
+            case url.children.urlCat.children.url.href: // No hay sentencia "break" en el 'case 0:', por lo tanto este caso también será ejecutado
+                gotoIndex();
+                break; // Al encontrar un "break", no será ejecutado el 'case 2:'
+            case url.children.urlUbi.children.url.href:
+                gotoIndex();
+                break;
+        }
+
         url.removeChild(url.children.urlGrupos);
         url.removeChild(url.children.urlUsuarios);
         url.removeChild(url.children.urlCat);
         url.removeChild(url.children.urlUbi);
     }
 
-    /* 
-    urlGrupos
-    urlProductos
-    urlUsuarios
-    urlCat  
-    urlUbi  
-    urlNosotros 
-    */
-
-
+    /* let links=["urlGrupos","urlProductos","urlUsuarios","urlCat","urlUbi","urlNosotros"]; */
 }
 
+function gotoIndex(){
+    location.replace(origin + redireccionamiento() + '/index.html');
+}
 
-setTimeout(() => urlRols(), 1);
+setTimeout(() => urlRols(), 50);
