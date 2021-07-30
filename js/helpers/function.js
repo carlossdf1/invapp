@@ -79,9 +79,6 @@ function elementoVacio(dato) {
 
 function buscar(autobuscar) {
 
-    console.log("###################################");
-    //console.log(listaProductos);
-
     console.log("BUSCANDO")
     let palabras = "";
     if (autobuscar !== undefined) {
