@@ -1,6 +1,8 @@
 const email          = localStorage.getItem('email');
+const nombre         = localStorage.getItem('username');
 const roleId         = localStorage.getItem('roleId');
 const roleName       = localStorage.getItem('roleName');
+const menu           = JSON.parse( localStorage.getItem('menu') );
 const group          = JSON.parse( localStorage.getItem('group'));
 
 
