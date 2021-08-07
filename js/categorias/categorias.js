@@ -35,6 +35,7 @@ async function imprimirCategorias() {
 
  function imprimirLista( datos ) { //imprime los datos entregados en lista html
     console.log("DATOS RECIBIDOS");
+    console.log(datos);
     const td    = "</td><td>";
     let boton   = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal' ";
     datos.sort(( a, b ) => a.name.localeCompare ( b.name ));
