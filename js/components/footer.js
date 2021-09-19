@@ -6,6 +6,7 @@ class Footer extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
         <style>
+        
         footer {
          background-color: #222;
          padding: 1rem;
@@ -19,13 +20,13 @@ class Footer extends HTMLElement {
           float: left;
         }
         
-        a {
+        footer a {
           margin: 0 2px;
           color: white;
           text-decoration: none;
         }
         
-        a:hover {
+        footer a:hover {
           padding-bottom: 5px;
           box-shadow: inset 0 -2px 0 0 #333;
         }
