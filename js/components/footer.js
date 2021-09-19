@@ -7,66 +7,52 @@ class Footer extends HTMLElement {
         this.innerHTML = `
         <style>
         footer {
-          height: 70px;
-          padding-block-start: 15px;
-          list-style: none;
-          display: flex;
-          flex: 0 0 auto;
-          justify-content: space-between;
-          align-items: center;
-          width: 100%;
-          position:absolute;
-          bottom: 0;
-          line-height: 120%;
+         background-color: #222;
+         padding: 1rem;
+         color: #fff;
+         bottom: 0;
+         position: absolute;
+         width: 100%;
         }
-          
-      
-        
-        ul li {
-          list-style: none;
-          /* display: inline; */
+
+        footer section {
+          float: left;
         }
         
         a {
-          /* margin: 0 15px; */
+          margin: 0 2px;
           color: white;
           text-decoration: none;
         }
         
         a:hover {
-/*           padding-bottom: 5px;
-          box-shadow: inset 0 -2px 0 0 #333; */
-        }
-        
-        .social-row {
-          font-size: 20px;
-        }
-        
-        .social-row li a {
-          margin: 0 15px;
+          padding-bottom: 5px;
+          box-shadow: inset 0 -2px 0 0 #333;
         }
 
-        .copyright{
-          color               : #C7C7C7;
+        .copyright {
+          color : #C7C7C7;
+          float : right;
+          margin : 0;
         }
       
       .copyright a{
           text-decoration     : none;
           color               : white;
-          /* font-weight      : bold; */
-          /* padding-inline-end: 0.5rem; */
-          padding-inline-end: 30px;
+          font-weight         : bold;
+          padding-inline-end  : 0.5rem;
+          padding-inline-end  : 30px;
       }
       
         </style>
         <footer class="bg-dark">
-          <ul>
-            <li><a href="/WebStore/view/version/app.html">About</a></li>
-            <li><a href="https://documenter.getpostman.com/view/9034494/TzJpjL63">Documentacion</a></li>
-            <li><a href="/WebStore/view/nosotros/nosotros.html">Nosotros</a></li>
-          </ul>
+          <section>
+            <a href="/WebStore/view/version/app.html">About</a>
+            <a href="https://documenter.getpostman.com/view/9034494/TzJpjL63">Documentacion</a>
+            <a href="/WebStore/view/nosotros/nosotros.html">Nosotros</a>
+          </section>
           <div class="copyright">
-            © Derechos Reservados | <a href="https://impulsandonegocios.cl">ImpulsandoNegocios</a>
+            © Derechos Reservados 2021 | <a href="https://impulsandonegocios.cl">ImpulsandoNegocios</a>
           </div>
         </footer>
 
