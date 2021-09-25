@@ -19,7 +19,7 @@ html {
 
 /*Edicion del Navbar*/
 
-.fondo-entrada {
+.fondo-header {
     background: url("../img/header2.jpg");
     background-size: cover;
     background-position: center;
