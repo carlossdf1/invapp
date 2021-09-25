@@ -4,8 +4,7 @@ html {
 }
 
 
-/* body{
-    
+/* body {
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -20,7 +19,7 @@ html {
 
 /*Edicion del Navbar*/
 
-.fondo-entrada {
+.fondo-header {
     background: url("../img/header2.jpg");
     background-size: cover;
     background-position: center;
@@ -34,6 +33,7 @@ html {
     background-color: #fff;
     opacity: 1;
 }
+
 
 /* #botonUrl {
     margin: 0% !important;
