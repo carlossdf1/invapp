@@ -385,12 +385,16 @@ async function urlRols() {
             case url.children.urlUbi.children.url.href:
                 gotoIndex();
                 break;
+            case url.children.urlHis.children.url.href:
+                gotoIndex();
+                break;
         }
 
         url.removeChild(url.children.urlGrupos);
         url.removeChild(url.children.urlUsuarios);
         url.removeChild(url.children.urlCat);
         url.removeChild(url.children.urlUbi);
+        url.removeChild(url.children.urlHis);
     }
 
     /* let links=["urlGrupos","urlProductos","urlUsuarios","urlCat","urlUbi","urlNosotros"]; */

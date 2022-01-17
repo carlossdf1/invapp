@@ -37,6 +37,9 @@ class Header extends HTMLElement {
                     <li class="nav-item" id="urlUbi" >
                         <a class="nav-link" id="url" href="/view/ubicaciones/ubicaciones.html">Ubicaciones</a>
                     </li>
+                    <li class="nav-item" id="urlHis" >
+                        <a class="nav-link" id="url" href="/view/history/history.html">Historial</a>
+                    </li>
                     <li class="nav-item" id="urlNosotros" >
                         <a class="nav-link" id="url" href="/view/nosotros/nosotros.html">Nosotros</a>
                     </li>

@@ -61,7 +61,7 @@ class Footer extends HTMLElement {
 
           copyright = new Date();
           update    = copyright.getFullYear();
-          document.write("© 2021 - " + update + " " + "https://impulsandonegocios.cl");
+          document.write("© 2022 - " + update + " " + "https://impulsandonegocios.cl");
         </script>
       `;
     }

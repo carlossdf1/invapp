@@ -192,7 +192,7 @@ async function deleteProduct(id) {
  * @version 2021-05-11
  */
 
- async function deleteProduct(id) {
+async function deleteProduct(id) {
 
     console.log(id);
     let data = JSON.stringify({ "user": email });
