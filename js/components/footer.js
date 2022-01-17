@@ -53,7 +53,7 @@ class Footer extends HTMLElement {
             <a href="/WebStore/view/nosotros/nosotros.html">Nosotros</a>
           </section>
           <div class="copyright">
-            © Derechos Reservados 2021 | <a href="https://impulsandonegocios.cl">ImpulsandoNegocios</a>
+            © Derechos Reservados 2022 | <a href="https://impulsandonegocios.cl">ImpulsandoNegocios</a>
           </div>
         </footer>
 
