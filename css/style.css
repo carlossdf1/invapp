@@ -34,7 +34,15 @@ html {
     opacity: 1;
 }
 
+.table {
+    margin-bottom: 0 !important;
+}
 
+
+body.darkmode {
+    background-color: #212529;
+    color: white !important;
+}
 /* #botonUrl {
     margin: 0% !important;
 } */

@@ -5,7 +5,6 @@ const roleName       = localStorage.getItem('roleName');
 const menu           = JSON.parse( localStorage.getItem('menu') );
 const group          = JSON.parse( localStorage.getItem('group'));
 
-
 const api = "https://inv-api.herokuapp.com/api/";
 // let res;
 
@@ -310,6 +309,8 @@ function toggleInput(elemid, est) {
         document.getElementById(element).className = cn;
     });
 
+    darkMode();
+
 }
 
 function noLogin() {
@@ -405,3 +406,42 @@ function gotoIndex(){
 }
 
 setTimeout(() => urlRols(), 50);
+
+
+function darkMode(){
+    
+    if (document.getElementById("darkMode").checked) {
+        localStorage.setItem('darkmode', true)
+    }
+    else { 
+        localStorage.setItem('darkmode', false)
+    }
+
+    darkModeChange();
+}
+
+function darkModeChange() {
+    
+    if (localStorage.getItem('darkmode')==='true') {
+        document.body.classList.add("darkmode");
+        document.querySelectorAll("table").forEach(element => { element.classList.add("table-dark") });
+        document.querySelectorAll(".modal-content").forEach(element => { element.classList.add("bg-dark","text-white") });
+        document.querySelectorAll(".btn-close").forEach(element => { element.classList.add("btn-close-white") });
+        document.querySelectorAll(".form-control-plaintext").forEach(element => { element.classList.add("text-white") });
+        document.querySelectorAll(".card").forEach(element => { element.classList.add("bg-dark","text-white") });
+        setTimeout(() => {
+        document.getElementById("darkMode").checked = true;
+        }, 100);
+        localStorage.setItem('darkmode', true);
+    } else {
+        document.body.classList.remove("darkmode");
+        document.querySelectorAll("table").forEach(element => { element.classList.remove("table-dark") });
+        document.querySelectorAll(".modal-content").forEach(element => { element.classList.remove("bg-dark","text-white") });
+        document.querySelectorAll(".btn-close").forEach(element => { element.classList.remove("btn-close-white") });
+        document.querySelectorAll(".form-control-plaintext").forEach(element => { element.classList.remove("text-white") });
+        document.querySelectorAll(".card").forEach(element => { element.classList.remove("bg-dark","text-white") });
+        localStorage.setItem('darkmode', false);
+
+    }
+}
+
