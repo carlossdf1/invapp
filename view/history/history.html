@@ -14,12 +14,13 @@
 <body>
     <header-component></header-component>
 
+    <p></p>
     <h1 class="text-center">Historial: </h1>
     <hr>
 
     <div class="container-xxl my-md-4 bd-layout ">
         <!-- TABLA -->
-        <div class="table-responsive">
+        <div class="table-responsive rounded-3">
             <table id="tabla" class="table table-striped table-bordered">
                 <thead class="table-dark">
                     <tr>
@@ -32,6 +33,7 @@
                 </tbody>
             </table>
         </div>
+        <div class="p-5"></div>
     </div>
     
     <footer-component></footer-component>
@@ -40,6 +42,7 @@
     <script src='../../js/history/history.js'></script>
     <script>
         imprimirHistorial();
+        darkModeChange();
     </script>
 </body>
 </html>
