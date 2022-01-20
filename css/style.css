@@ -40,9 +40,12 @@ html {
 
 
 body.darkmode {
-    background-color: #212529;
+    background-color: #1a1a1a;
     color: white !important;
 }
+
+/* background-color: #212529; */
+
 /* #botonUrl {
     margin: 0% !important;
 } */

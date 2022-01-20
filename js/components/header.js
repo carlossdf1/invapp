@@ -6,10 +6,10 @@ class Header extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
         <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" id="url" href="/index.html">Inventario App</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
             <div class="collapse navbar-collapse" id="navbar">
@@ -21,7 +21,7 @@ class Header extends HTMLElement {
                         <a class="nav-link dropdown-toggle" id="url" href="/view/productos/productos.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Inventario
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" id="url" href="/view/productos/productos.html" >Disponibles</a></li>
                             <li><a class="dropdown-item" id="url" href="/view/productos/productos.html?estado=prestamo" >En prestamo</a></li>
                             <li><hr class="dropdown-divider"></li>
@@ -45,7 +45,7 @@ class Header extends HTMLElement {
                     </li>
                 </ul>
                 <div class="d-flex">
-                    <input id="search" class="form-control me-2" onchange="buscar()" type="search" placeholder="Buscar" aria-label="Search">
+                    <input id="search" class="form-control me-2 bg-dark text-white" onchange="buscar()" type="search" placeholder="Buscar" aria-label="Search">
                     <button id="buscar" class="btn btn-outline-light" onclick="buscar()" type="button">Buscar</button>
                 </div>
                 <div class="d-flex">
@@ -57,7 +57,7 @@ class Header extends HTMLElement {
                                     <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
                                 </svg>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-lg-end" id="useropt" aria-labelledby="navbarDropdown">
+                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" id="useropt" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" id="url" href="/view/users/perfil.html" >Perfil</a></li>
                                 <li><a class="dropdown-item" >Grupo</a></li>
                                 <li><hr class="dropdown-divider"></li>
@@ -68,7 +68,7 @@ class Header extends HTMLElement {
                                             <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
                                         </svg>
                                         <div class="form-check form-switch">
-                                            <input class="form-check-input dropdown-item" type="checkbox" role="switch" id="darkMode" onclick="darkMode()">
+                                            <input class="form-check-input dropdown-item" type="checkbox" role="switch" id="darkMode" onclick="selectMode()">
                                         </div>
                                     </a>
                                 </li>	
@@ -81,6 +81,7 @@ class Header extends HTMLElement {
 
         </div>
     </nav>
+    <div class="p-5"></div>
     </header>
         `;
     }
