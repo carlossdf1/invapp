@@ -46,6 +46,7 @@ class Footer extends HTMLElement {
       }
       
         </style>
+        <div class="p-5"></div>
         <footer class="bg-dark">
           <section>
             <a href="/WebStore/view/version/app.html">About</a>

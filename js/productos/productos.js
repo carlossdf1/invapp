@@ -310,6 +310,8 @@ function vistaModal(id) {
     if (document.getElementById("nombreModal").className !== "form-control-plaintext") bloquearModal();
     const modalProducto = listaProductos.filter( data => data.uid === id );
 
+    if (localStorage.getItem('darkmode')==='true') document.querySelectorAll(".form-control-plaintext").forEach(element => { element.classList.add("text-white") });
+
     let arrayProducto = [
         modalProducto[0].name,
         modalProducto[0].quantity,
@@ -372,6 +374,7 @@ function editarModal() {
 
     document.formModal.cantidadModal.type = "number";
     document.formModal.precioModal.type = "number";
+    if (localStorage.getItem('darkmode')==='true') document.querySelectorAll(".form-control").forEach(element => { element.classList.remove("text-white") });
 
     dNone("botonGuardar", true);
     dNone("botonEditar", false);
