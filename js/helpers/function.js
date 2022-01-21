@@ -385,7 +385,7 @@ function redireccionamiento() {
     if (origin === "http://127.0.0.1:5500") {
         url = "";
     } else {
-        url = "invapp";
+        url = "/invapp";
     }
 
     return url
