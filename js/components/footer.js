@@ -47,7 +47,7 @@ class Footer extends HTMLElement {
       
         </style>
         <div class="p-5"></div>
-        <footer class="bg-dark">
+        <footer class="primary-color">
           <section>
             <a href="/WebStore/view/version/app.html">About</a>
             <a href="https://documenter.getpostman.com/view/9034494/TzJpjL63">Documentacion</a>

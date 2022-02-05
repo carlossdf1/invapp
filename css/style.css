@@ -7,7 +7,8 @@ html {
 /* body {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    padding-top: 4%;
+    width: 100%;
 } */
 
 #imprimir {
@@ -38,6 +39,10 @@ html {
     margin-bottom: 0 !important;
 }
 
+.primary-color {
+    background-color: #2196f3;
+    color: #fff;
+}
 
 body.darkmode {
     background-color: #1a1a1a;
