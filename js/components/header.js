@@ -6,7 +6,7 @@ class Header extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
         <header>
-        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark primary-color">
         <div class="container-fluid">
             <a class="navbar-brand" id="url" href="/index.html">Inventario App</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,7 +21,7 @@ class Header extends HTMLElement {
                         <a class="nav-link dropdown-toggle" id="url" href="/view/productos/productos.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Inventario
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                        <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" id="url" href="/view/productos/productos.html" >Disponibles</a></li>
                             <li><a class="dropdown-item" id="url" href="/view/productos/productos.html?estado=prestamo" >En prestamo</a></li>
                             <li><hr class="dropdown-divider"></li>

@@ -474,9 +474,3 @@ function normalizar(str) {
 
     return str;
 }
-
-
-
-
-
-
