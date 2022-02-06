@@ -34,23 +34,19 @@ function listaUsuarios(datos, roles) { //imprime los datos entregados en lista h
             } else return true;
         });
 
-        document.getElementById("userNombre").innerHTML = data.name;
-        document.getElementById("userDatos").innerHTML = data.email + "<br>" + roluser.name;
-        document.getElementById("userEstado").innerHTML = data.active;
+        let temp = document.importNode(document.querySelector('template').content, true);
 
-        let card = document.getElementById("CardUser");
+        temp.getElementById("userNombre").innerHTML = data.name;
+        temp.getElementById("userDatos").innerHTML = data.email + "<br>" + roluser.name;
+        temp.getElementById("userEstado").innerHTML = data.active;
 
-        if (i == datos.length - 1) {
-            document.getElementById("listaUsuarios").innerHTML += card.outerHTML;
-            document.getElementById("CardUser").className += " d-none";
-        } else {
-            document.getElementById("listaUsuarios").innerHTML += card.outerHTML;
-
-        }
+        let card = temp.getElementById("CardUser");
+        document.getElementById("listaUsuarios").innerHTML += card.outerHTML;
     }
 
 }
 
 async function imprimir() {
     listaUsuarios(await consultaUsuarios(), await consultaRoles());
+    darkModeChange();
 }
