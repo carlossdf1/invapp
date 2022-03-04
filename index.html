@@ -15,22 +15,22 @@
 
 <body>
 
-    <header-component></header-component>
+    <header>
+        
+        <header-component></header-component>
+        <div class="d-flex justify-content-center align-items-center">
 
-    <div class="container-fluid fondo-header d-flex justify-content-center flex-colum  align-items-center">
-
-        <div class="text-center">
-            <h1 id="title-index" class="display-4 text-white">Aqui podras ver los datos en tiempo real</h1>
+            <div class="text-center">
+                <h1 id="title-index" class="display-4 text-white">Aqui podras ver los datos en tiempo real</h1>
+            </div>
+    
         </div>
+    </header>
 
-    </div>
+    <div class="container-info">
 
-    <div class="container">
-        <div class="row gy-5">
-
-        </div>
-        <div class="row gy-5">
-            <div class="col-4">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col-mb-4">
                 <div class="card text-center">
                     <div class="card-header">
                         Disponibles
@@ -38,11 +38,11 @@
                     <div class="card-body">
                         <h2 class="card-title" id="numeroProductos">N°</h2>
                         <p class="card-text">Listados</p>
-                        <a href="view/productos/productos.html" class="btn  btn-primary primary-color">Ver</a>
+                        <a href="view/productos/productos.html" class="btn btn-index ">Ver</a>
                     </div>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-mb-4">
                 <div class="card text-center">
                     <div class="card-header">
                         Prestados
@@ -50,11 +50,11 @@
                     <div class="card-body">
                         <h2 class="card-title" id="numeroPrestados">N°</h2>
                         <p class="card-text">Listados</p>
-                        <a id="btn-prestado" href="view/grupos/grupos.html" class="btn btn-primary primary-color">Ver</a>
+                        <a id="btn-prestado" href="view/grupos/grupos.html" class="btn btn-index">Ver</a>
                     </div>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-mb-4">
                 <div class="card text-center">
                     <div class="card-header">
                         Eliminados
@@ -62,13 +62,12 @@
                     <div class="card-body">
                         <h2 class="card-title" id="numeroEliminados">N°</h2>
                         <p class="card-text">Listados</p>
-                        <a id="btn-eliminado" href="view/users/users.html" class="btn btn-primary primary-color col align-self-center">Ver</a>
+                        <a id="btn-eliminado" href="view/users/users.html" class="btn btn-index">Ver</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="p-5"></div>
 
     <footer-component></footer-component>
 

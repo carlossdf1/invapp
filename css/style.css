@@ -4,29 +4,74 @@ html {
 }
 
 
-/* body {
+body {
     display: flex;
     flex-direction: column;
-    padding-top: 4%;
+    margin: 0;
+    padding: 0;
+    /* line-height: 20px; */
+    /* width: 100%; */
+}
+
+body.darkmode {
+    background-color: #1a1a1a;
+    color: white !important;
+}
+
+header {
+    background: url("../img/header2.jpg");
+    background-size: cover;
+    background-position: center;
     width: 100%;
-} */
+    height: 35rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    background-blend-mode: darken;
+    /* min-height: 100vh; */
+}
+
+#title-index{
+    align-items: center;
+    text-align: center;
+    padding: 200px 0px;
+
+}
+
+.container-title {
+    text-align: center;
+    padding: 80px 0px 1px 0px;
+}
+
+.container-info{
+    
+    margin-top: -40px;
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-bottom: 0%;
+   
+}
+
+
+
+
+.card-header{
+    background-color: #2196f3;
+    color: white;
+    border: none;
+}
+
+.btn-index {
+    background-color: #2196f3;
+    color: white;
+    padding: 2% 45%;
+    border-radius: 5px;
+
+    /* margin: 10px; */
+}
 
 #imprimir {
     position: fixed;
     bottom: 10%;
     right: 5%;
-}
-
-
-/*Edicion del Navbar*/
-
-.fondo-header {
-    background: url("../img/header2.jpg");
-    background-size: cover;
-    background-position: center;
-    height: 400px;
-    background-color: rgba(0, 0, 0, 0.5);
-    background-blend-mode: darken;
 }
 
 .form-control:disabled,
@@ -44,13 +89,59 @@ html {
     color: #fff;
 }
 
-body.darkmode {
-    background-color: #1a1a1a;
-    color: white !important;
-}
-
 /* background-color: #212529; */
 
 /* #botonUrl {
     margin: 0% !important;
 } */
+        
+footer {
+ background-color: #2196f3;
+ width: 100%;
+ /* padding-top: auto; */
+ padding: 0.5% 0.5% 0.5% 0.5%;
+ color: #fff;
+ bottom: 0;
+ position: absolute;
+}
+
+footer section {
+  float: left;
+}
+
+footer a {
+  margin: 0px 1px;
+  color: white;
+  text-decoration: none;
+}
+
+footer a:hover {
+  /* padding-top: 0px; */
+  box-shadow: inset 0 -2px 0 0 #333;
+  
+}
+
+.copyright {
+  color : #C7C7C7;
+  float : right;
+  /* margin : 0; */
+}
+
+.copyright a{
+  text-decoration     : none;
+  color               : white;
+  font-weight         : bold;
+  padding-inline-end  : 0.5rem;
+  padding-inline-end  : 0px;
+}
+
+@media screen and (max-width: 1366px) {
+    .container-info{
+    
+        margin-top: -40px;
+        padding-left: 3%;
+        padding-right: 3%;
+        padding-bottom: 10%;
+       
+    }
+}
