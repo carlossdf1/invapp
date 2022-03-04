@@ -5,7 +5,7 @@ class Header extends HTMLElement {
 
     connectedCallback() {
         this.innerHTML = `
-        <header>
+        
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark primary-color">
         <div class="container-fluid">
             <a class="navbar-brand" id="url" href="/index.html">Inventario App</a>
@@ -81,8 +81,6 @@ class Header extends HTMLElement {
 
         </div>
     </nav>
-    <div class="p-5"></div>
-    </header>
         `;
     }
 

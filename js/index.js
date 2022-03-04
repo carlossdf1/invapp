@@ -33,6 +33,7 @@ async function consultaData(){
         
         } else {
             
+            hiddenElements();
             document.getElementById("numeroProductos").innerHTML  =  dataProdFiltered.length;
             document.getElementById("numeroPrestados").innerHTML  =  productosPrestados.length;
             document.getElementById("numeroEliminados").innerHTML =  productosEliminados.length; 
