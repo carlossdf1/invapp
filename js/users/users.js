@@ -37,7 +37,8 @@ function listaUsuarios(datos, roles) { //imprime los datos entregados en lista h
         let temp = document.importNode(document.querySelector('template').content, true);
 
         temp.getElementById("userNombre").innerHTML = data.name;
-        temp.getElementById("userDatos").innerHTML = data.email + "<br>" + roluser.name;
+        temp.getElementById("userEmail").innerHTML = data.email;
+        temp.getElementById("userRol").innerHTML = roluser.name;
         temp.getElementById("userEstado").innerHTML = data.active;
 
         let card = temp.getElementById("CardUser");
