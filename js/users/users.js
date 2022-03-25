@@ -1,5 +1,6 @@
 const users = api + "login/users";
 const rols = api + "rol";
+const modalForm= new bootstrap.Modal(document.getElementById("modalForm"));
 /**
  *
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
@@ -166,46 +167,46 @@ function confirmDelete(id) {
     
 
 async function addUser() {
-    let userDatos = new Array();
-
-    userDatos.push(document.getElementById("nombreModal").value);
-    userDatos.push(document.getElementById("emailModal").value);
-    userDatos.push(document.getElementById("passwordModal").value);
 
     let data = JSON.stringify({
-        "name": userDatos[0],
-        "email": userDatos[1],
-        "pass": userDatos[2]
+        "name": document.getElementById("nombreModal").value,
+        "email": document.getElementById("emailModal").value,
+        "pass": document.getElementById("passwordModal").value
     });
 
     let resp = await addData(data, "login/new", "POST");
 
-    recargar(resp,"usuarios","modalForm");
+    if (resp.ok){
+        modalForm.toggle();
+        console.log("DENTRO DE IF");
+        setTimeout(() => imprimir(), 1000);
+    }
 
 }
 
 async function editUser(id) {
-    let userDatos = new Array();
-
-    userDatos.push(document.getElementById("nombreModal").value);
-    userDatos.push(document.getElementById("emailModal").value);
-    userDatos.push(document.getElementById("passwordModal").value);
 
     let data = JSON.stringify({
-        "name": userDatos[0],
-        "email": userDatos[1],
-        "pass": userDatos[2]
+        "name": document.getElementById("nombreModal").value,
+        "email": document.getElementById("emailModal").value,
+        "pass": document.getElementById("passwordModal").value
     });
 
     let resp = await addData(data, "login/"+ id, "PUT");
 
-    recargar(resp,"usuarios","modalForm");
+    if (resp.ok){
+        modalForm.toggle();
+        console.log("DENTRO DE IF");
+        setTimeout(() => imprimir(), 1000);
+    }
 
 }
 
 async function deleteUser(id) {
+    modalForm.hide();
 
     console.log(id);
+
     let data = JSON.stringify({ "user": email });
 
     console.log(data);
@@ -213,7 +214,10 @@ async function deleteUser(id) {
     let resp = await addData(data, "login/" + id, "POST");
     let myModal = new bootstrap.Modal(document.getElementById("modalEliminar"));
     myModal.hide();
-    recargar(resp,"usuarios","modalForm");
+    if (resp.ok) {
+        setTimeout(() => imprimir(), 1000);
+    }
+
 
 }
 
