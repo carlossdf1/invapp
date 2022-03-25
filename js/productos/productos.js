@@ -118,7 +118,7 @@ async function createProduct() {
 
         let resp = await addData(data, "product/new", "POST");
 
-        recargar(resp);
+        recargar(resp,"productos");
 
     }
 
@@ -440,32 +440,6 @@ function obtenerModal(ventana) {
     });
 
     return ventana;
-}
-
-/**
- * Permite agregar un producto y recargar la lista para que sea visualizado
- *
- * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
- * @author Emmanuel Correa <ebcorreac[at]gmail.com>
- * 
- * @version 2021-05-12
- */
-
-async function recargar(res) {
-
-    console.log("DATOS EN REGARGA",res);
-    console.log("RESULTADO: ",res.ok);
-
-    if(res.ok===true | res===null){
-        myModal.toggle();
-        localStorage.removeItem("productos");
-        setTimeout(() => imprimir(), 1000);
-    }
-
-    else{
-        alert("Error al realizar la operacion");
-    }
-
 }
 
 //Modal eliminar, animacion vista y captura de datos

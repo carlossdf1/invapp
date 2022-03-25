@@ -474,3 +474,37 @@ function normalizar(str) {
 
     return str;
 }
+
+/**
+ * Permite agregar un producto y recargar la lista para que sea visualizado
+ *
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
+ * @author Emmanuel Correa <ebcorreac[at]gmail.com>
+ * 
+ * @version 2021-05-12
+ */
+
+ async function recargar(res,remover,modal) {
+
+    console.log(remover);
+    console.log(modal);
+
+    console.log("DATOS EN REGARGA",res);
+    console.log("RESULTADO: ",res.ok);
+    let formularioModal = new bootstrap.Modal(document.getElementById(modal));
+    console.log(formularioModal.hide());
+    console.log(formularioModal);
+    
+    if(res.ok===true | res===null){
+        
+        console.log("DENTRO DE IF");
+        localStorage.removeItem(remover);
+        console.log(JSON.parse(localStorage.getItem("usuarios")));
+        setTimeout(() => imprimir(), 1000);
+    }
+
+    else{
+        alert("Error al realizar la operacion");
+    }
+
+}
