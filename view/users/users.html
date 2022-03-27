@@ -21,33 +21,153 @@
         <h1 class="text-center">Lista de Usuarios</h1>
     </div>
 
-    <div class="container">
-        <div class="row row-cols-1 row-cols-md-4 g-4" id="listaUsuarios">
-            <template>
-            <div class="col" id="CardUser">
-                <div class="card h-100">
-                    <div class="p-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                </svg>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title" id="userNombre"></h5>
-                        <p class="card-text" id="userDatos">
-                        </p>
-                        <div class="d-flex justify-content-end">
-                            <a href="#" class="btn btn-primary text-end">Ver</a>
+    <div class="container-xxl my-md-4 bd-layout ">
+
+        <div class="row">
+            <div class="col-11"></div>
+            <div class="col-1">
+                <button type="button" class="btn btn-success" id="userEditar" data-bs-toggle="modal" data-bs-target="#modalForm" onclick="vistaAgregar();">Agregar</button>
+            </div>
+            <div class="p-3"></div>
+        </div>
+        <div class="row">
+            <!-- LISTA DE USUARIO -->
+            <div class="table-responsive rounded-3">
+                <table id="tabla" class="table table-hover table-striped table-bordered">
+                    <thead>
+                        <tr class="primary-color text-left">
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Rol</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listaUsuarios">
+                    </tbody>
+                    <template>
+                        <tr id="CardUser">
+                            <td id="userNombre"></td>
+                            <td id="userEmail"></td>
+                            <td id="userRol"></td>
+                            <td id="userEstado"></td>
+                            <td class="action">
+                                <button type="button" class="btn btn-secondary btn-sm" id="userEditar" data-bs-toggle="modal" data-bs-target="#modalForm">Editar</button>
+                                <button type="button" class="btn btn-primary btn-sm" id="userVer" data-bs-toggle="modal" data-bs-target="#modalForm">Ver</button>
+                                <button type="button" class="btn btn-danger btn-sm" id="userEliminar" data-bs-toggle="modal" data-bs-target="#modalEliminar">Eliminar</button>
+                                <a href="#" class="btn btn-dark btn-sm">Cambiar Contraseña</a>
+                            </td>
+                        </tr>
+                    </template>  
+                </table>
+            </div>
+        </div>
+        <!-- MODAL EDITAR Y VER -->
+        <div class="modal fade" id="modalForm" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-fullscreen-lg-down">
+                <div class="modal-content">
+                    <form class="form" id="formModal" target="_self">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="ModalLabel">Detalles</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" fill="currentColor"></button>
                         </div>
+                        <div class="modal-body" id="vistaModal">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3 row">
+                                        <label for="nombre" class="col-sm-3 col-form-label">NOMBRE:</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control-plaintext" id="nombreModal" value="" placeholder="Ingrese el nombre" required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="email" class="col-sm-3 col-form-label">EMAIL:</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control-plaintext" min="1" id="emailModal" value="" placeholder="1" required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row" id="modalRol">
+                                        <label for="rol" class="col-sm-3 col-form-label">ROL:</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control-plaintext" min="0" id="rolModal" value="" placeholder="0" required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row d-none" id="modalPassword">
+                                        <label for="rol" class="col-sm-3 col-form-label">CONTRSEÑA:</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" min="0" id="passwordModal" value="" placeholder="0" required>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="mb-3 row">
+                                        <label for="grupo" class="col-sm-3 col-form-label">GRUPO:</label>
+                                        <div class="col-sm-6">
+                                            <select id="selectGrupoModal" name="selectGrupoModal" class="form-control-plaintext" aria-label=".form-select-lg" required>
+                                                <option value="" disabled selected>Seleccione un grupo...</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="ubicacion" class="col-sm-3 col-form-label">OPCIONES DE MENU:</label>
+                                        <div class="col-sm-6">
+                                            <select id="selectUbicacionModal" name="selectUbicacionModal" class="form-control-plaintext" aria-label=".form-select-lg" required>
+                                                <option value="" disabled selected>Seleccione una ubicación...</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="categoria" class="col-sm-3 col-form-label">PERMISOS:</label>
+                                        <div class="col-sm-6 align-items-end">
+                                            <select id="selectCategoriaModal" name="selectCategoriaModal" class="form-control-plaintext" aria-label=".form-select-lg" required>
+                                                <option value="" disabled selected>Seleccione una categoria...</option>
+                                            </select>
+                                        </div>
+                                    </div> -->
+                                    <div class="mb-3 row" id="modalEstado">
+                                        <label for="estado" class="col-sm-3 col-form-label">ESTADO:</label>
+                                        <div class="col-sm-6 align-items-end">
+                                            <input type="text" class="form-control-plaintext" id="estadoModal" value="" placeholder="(Opcional)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <input  id="botonAgregar" type="submit" class="btn btn-success d-none" value="Agregar" onclick="addUser();" >
+                            <input id="botonGuardar" type="submit" class="btn btn-danger d-none"  value="Guardar">
+                            <button id="botonEliminar" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar">Eliminar</button>
+                            <button id="botonEditar" type="button" class="btn btn-success" onclick="editarModal()">Editar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal confirmacion eliminar -->
+
+        <div class="modal fade" id="modalEliminar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Eliminar</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="card-footer">
-                        <small class="text-muted" id="userEstado"></small>
+                    <div class="modal-body">
+                        <p>Esta seguro que desea eliminar el Usuario?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button id="botonEliminarConfirmar" type="button" class="btn btn-danger" data-bs-dismiss="modal">Eliminar</button>
                     </div>
                 </div>
             </div>
-        </template>
         </div>
+
     </div>
+
+    <div class="p-5"></div>
+
     
     <footer-component></footer-component>
 

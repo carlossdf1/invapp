@@ -178,9 +178,9 @@ async function deleteProduct(id) {
 
     console.log(data);
 
-    await addData(data, "product/" + id, "POST");
+    let res = await addData(data, "product/" + id, "POST");
 
-    recargar();
+    recargar(res);
 }
 
 
@@ -442,32 +442,6 @@ function obtenerModal(ventana) {
     return ventana;
 }
 
-/**
- * Permite agregar un producto y recargar la lista para que sea visualizado
- *
- * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
- * @author Emmanuel Correa <ebcorreac[at]gmail.com>
- * 
- * @version 2021-05-12
- */
-
-async function recargar(res) {
-
-    console.log("DATOS EN REGARGA",res);
-    console.log("RESULTADO: ",res.ok);
-
-    if(res.ok===true | res===null){
-        myModal.toggle();
-        localStorage.removeItem("productos");
-        setTimeout(() => imprimir(), 1000);
-    }
-
-    else{
-        alert("Error al realizar la operacion");
-    }
-
-}
-
 //Modal eliminar, animacion vista y captura de datos
 
 function eliminarModal() {
@@ -515,6 +489,32 @@ async function readGetUrl(){
 
     else{
         imprimirLista(await consultaProductos());
+    }
+
+}
+
+/**
+ * Permite agregar un producto y recargar la lista para que sea visualizado
+ *
+ * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
+ * @author Emmanuel Correa <ebcorreac[at]gmail.com>
+ * 
+ * @version 2021-05-12
+ */
+
+ async function recargar(res) {
+
+    console.log("DATOS EN REGARGA",res);
+    console.log("RESULTADO: ",res.ok);
+
+    if(res.ok===true | res===null){
+        myModal.toggle();
+        localStorage.removeItem("productos");
+        setTimeout(() => imprimir(), 1000);
+    }
+
+    else{
+        alert("Error al realizar la operacion");
     }
 
 }

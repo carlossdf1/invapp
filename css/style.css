@@ -18,6 +18,15 @@ body.darkmode {
     color: white !important;
 }
 
+.darkmode input.form-control {
+    background-color: #1a1a1a;
+    color: white !important;
+}
+
+.darkmode input.form-control-plaintext {
+    color: white !important;
+}
+
 header {
     background: url("../img/header2.jpg");
     background-size: cover;
@@ -155,4 +164,11 @@ footer a:hover {
         padding-bottom: 17%;
        
     }
+}
+
+.action{
+    text-align: right;
+    /* align-content: flex-end;
+    align-items: flex-end;
+    align-content: flex-end; */
 }
