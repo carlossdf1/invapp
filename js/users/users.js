@@ -1,37 +1,34 @@
 const users = api + "login/users";
 const rols = api + "rol";
-const modalForm= new bootstrap.Modal(document.getElementById("modalForm"));
+const modalForm = new bootstrap.Modal(document.getElementById("modalForm"));
+const userEmail = localStorage.getItem("email");
 /**
  *
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
  * @version 2021-05-06
  */
 async function consultaUsuarios() {
-    let respuesta = await consulta(users);
-    let listaUsuarios = respuesta.data;
+    const respuesta = await consulta(users);
+    const listaUsuarios = respuesta.data;
     localStorage.setItem("usuarios", JSON.stringify(listaUsuarios));
     return listaUsuarios;
 }
 
 async function consultaRoles() {
-    let respuesta = await consulta(rols);
-    let listaRoles = respuesta.data;
-    console.log(listaRoles);
+    const respuesta = await consulta(rols);
+    const listaRoles = respuesta.data;
     return listaRoles;
 }
 
 function listaUsuarios(datos, roles) {
     //imprime los datos entregados en lista html
-    console.log("DATOS RECIBIDOS");
-    console.log(datos);
-    console.log(roles);
 
     document.getElementById("listaUsuarios").innerHTML = "";
 
     for (let i in datos) {
         const data = datos[i];
         let roluser = "";
-
+        const { uid, name, email, role, active } = data;
         roles.every(function (element, index) {
             if (element.uid == data.role) {
                 roluser = element;
@@ -39,21 +36,17 @@ function listaUsuarios(datos, roles) {
             } else return true;
         });
 
-        let temp = document.importNode(
-            document.querySelector("template").content,
-            true
-        );
+        let temp = document.importNode( document.querySelector("template").content, true );
 
-        temp.getElementById("userNombre").innerHTML = data.name;
-        temp.getElementById("userEmail").innerHTML = data.email;
+        temp.getElementById("userNombre").innerHTML = name;
+        temp.getElementById("userEmail").innerHTML = email;
         temp.getElementById("userRol").innerHTML = roluser.name;
-        temp.getElementById("userEstado").innerHTML = data.active;
-        temp.getElementById("userVer").setAttribute("onclick", "vistaModal('" + data.uid + "')");
-        temp.getElementById("userEditar").setAttribute("onclick", "vistaEditar('" + data.uid + "')");
-        temp.getElementById("userEliminar").setAttribute("onclick", "confirmDelete('" + data.uid + "')");
+        temp.getElementById("userEstado").innerHTML = active;
+        temp.getElementById("userVer").setAttribute("onclick", "vistaModal('" + uid + "')");
+        temp.getElementById("userEditar").setAttribute("onclick", "vistaEditar('" + uid + "')");
+        temp.getElementById("userEliminar").setAttribute("onclick", "confirmDelete('" + uid + "')");
 
-
-        let card = temp.getElementById("CardUser");
+        const card = temp.getElementById("CardUser");
         document.getElementById("listaUsuarios").innerHTML += card.outerHTML;
     }
 }
@@ -150,15 +143,15 @@ function enableEdit() {
 
 function loadUserData(id) {
 
-    let usuarios = JSON.parse(localStorage.getItem("usuarios"));
-    let user = usuarios.filter((data) => data.uid === id);
+    const usuarios = JSON.parse(localStorage.getItem("usuarios"));
+    const user = usuarios.filter((data) => data.uid === id);
     user=user[0];
-    console.log(user);
-
-    document.getElementById("nombreModal").value = user.name;
-    document.getElementById("emailModal").value = user.email;
-    document.getElementById("rolModal").value = user.role;
-    document.getElementById("estadoModal").value = user.active;
+    const { name, email, role, active } = user;
+ 
+    document.getElementById("nombreModal").value = name;
+    document.getElementById("emailModal").value = email;
+    document.getElementById("rolModal").value = role;
+    document.getElementById("estadoModal").value = active;
 }
 
 function confirmDelete(id) {
@@ -168,17 +161,17 @@ function confirmDelete(id) {
 
 async function addUser() {
 
-    let data = JSON.stringify({
+    const data = JSON.stringify({
         "name": document.getElementById("nombreModal").value,
         "email": document.getElementById("emailModal").value,
-        "pass": document.getElementById("passwordModal").value
+        "pass": document.getElementById("passwordModal").value,
+        "user": userEmail
     });
 
-    let resp = await addData(data, "login/new", "POST");
+    const resp = await addData(data, "login/new", "POST");
 
     if (resp.ok){
         modalForm.toggle();
-        console.log("DENTRO DE IF");
         setTimeout(() => imprimir(), 1000);
     }
 
@@ -186,39 +179,30 @@ async function addUser() {
 
 async function editUser(id) {
 
-    let data = JSON.stringify({
+    const data = JSON.stringify({
         "name": document.getElementById("nombreModal").value,
         "email": document.getElementById("emailModal").value,
-        "pass": document.getElementById("passwordModal").value
+        "pass": document.getElementById("passwordModal").value,
+        "user": userEmail
     });
 
-    let resp = await addData(data, "login/"+ id, "PUT");
+    const resp = await addData(data, "login/"+ id, "PUT");
 
     if (resp.ok){
         modalForm.toggle();
-        console.log("DENTRO DE IF");
         setTimeout(() => imprimir(), 1000);
     }
 
 }
 
 async function deleteUser(id) {
+
     modalForm.hide();
-
-    console.log(id);
-
-    let data = JSON.stringify({ "user": email });
-
-    console.log(data);
-
-    let resp = await addData(data, "login/" + id, "POST");
-    let myModal = new bootstrap.Modal(document.getElementById("modalEliminar"));
+    const data = JSON.stringify({ "user": email });
+    const resp = await addData(data, "login/" + id, "POST");
+    const myModal = new bootstrap.Modal(document.getElementById("modalEliminar"));
     myModal.hide();
-    if (resp.ok) {
-        setTimeout(() => imprimir(), 1000);
-    }
-
-
+    if (resp.ok) setTimeout(() => imprimir(), 1000);
 }
 
 
