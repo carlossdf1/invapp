@@ -145,9 +145,8 @@ function loadUserData(id) {
 
     const usuarios = JSON.parse(localStorage.getItem("usuarios"));
     const user = usuarios.filter((data) => data.uid === id);
-    user=user[0];
-    const { name, email, role, active } = user;
- 
+    const { name, email, role, active } = user[0];
+    
     document.getElementById("nombreModal").value = name;
     document.getElementById("emailModal").value = email;
     document.getElementById("rolModal").value = role;
