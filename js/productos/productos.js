@@ -6,6 +6,7 @@ const categoria      = api + "category";
 
 let myModalEliminar = new bootstrap.Modal(document.getElementById("modalEditar"));
 let myModaLRestaurar = new bootstrap.Modal(document.getElementById("modalRestaurar"));
+let myModal = new bootstrap.Modal(document.getElementById("modalEditar"));
 
 let listaUbicacion = consultaUbicacion();
 let listaCategoria = consultaCategoria();
