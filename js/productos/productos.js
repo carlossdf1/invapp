@@ -320,7 +320,7 @@ function vistaModal(id) {
         modalProducto[0].group,
         modalProducto[0].ubication,
         modalProducto[0].category,
-        modalProducto[0].observations
+        modalProducto[0].observations,
     ];
 
     let con = 0;
@@ -328,6 +328,9 @@ function vistaModal(id) {
         document.getElementById(element).value = elementoVacio(arrayProducto[con]);
         con++;
     });
+
+    modalProducto[0].img!="foto" && modalProducto[0].img!="" ? document.getElementById("imgModal").srcset=modalProducto[0].img : document.getElementById("imgModal").srcset="";
+    
 
     toggleInput(idIn, true);
 
