@@ -386,6 +386,7 @@ function redireccionamiento() {
         url = "";
     } else {
         url = "/invapp";
+        //url = "";
     }
 
     return url
