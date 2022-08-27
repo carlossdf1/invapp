@@ -178,8 +178,13 @@ footer a:hover {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    fill: currentColor;
 }
 
 .modal-fullscreen-lg-down .modal-content {
     height: auto;
+}
+
+#svgDefault{
+    width: 30%;
 }

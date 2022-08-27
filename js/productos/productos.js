@@ -94,6 +94,20 @@ async function imprimir() {
 
 }
 
+async function paginado(paginas){
+    
+    for (let index = 0; index < paginas; index++) {
+        document.getElementById("indice").innerHTML+='<li class="page-item"><button class="page-link" onclick="imprimirPagina('+ index*10 + ')">'+ index +'</button></li>';
+    }
+
+}
+
+async function imprimirPagina(index){
+    document.getElementById("indice").innerHTML="";
+    imprimirLista( await consultaProductos(),index);
+
+}
+
 async function createProduct() {
 
     let inputs=idIn.slice();
@@ -244,7 +258,7 @@ async function productosEliminados() {
  * @version 2021-05-11
  */
 
-async function imprimirLista( datos ) {
+async function imprimirLista( datos, index ) {
     //imprime los datos entregados en lista html
     const td = "</td><td>";
     let boton = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalEditar' ";
@@ -252,8 +266,12 @@ async function imprimirLista( datos ) {
 
     document.getElementById("lista").innerHTML ="";
 
-    for (const i in datos ) {
+    //for (const i in datos ) {
 
+    index == null ? index = 0 : index;
+
+    for (let i = index; i < index+10; i++) {
+        
         const data = datos[i];
         const com = '"';
         //console.log(data);
@@ -269,8 +287,11 @@ async function imprimirLista( datos ) {
         //  + td + elementoVacio(data.observations)
         + td + boton + "onclick='vistaModal(" + com + data.uid + com + ");'>Ver</button>" +
         '</td></tr>';
+
+        i + 1 == datos.length ?  i = index + 10 : i;
     }
 
+    paginado(Math.ceil(datos.length/10));
     const gasto = inversion.reduce(( a, b ) => a + b, 0 )
     document.querySelector("#item-total").innerHTML = `Total : ${ datos.length }`;
     document.querySelector("#inversion-total").innerHTML = `Inversion : $ ${ gasto }`;
@@ -375,6 +396,8 @@ function vistaModal(id) {
 function editarModal() {
 
     toggleInput(idIn, false);
+
+    document.getElementById("imgModal").srcset="";
 
     document.formModal.cantidadModal.type = "number";
     document.formModal.precioModal.type = "number";
