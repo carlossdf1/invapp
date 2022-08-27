@@ -239,7 +239,7 @@ function darkMode(){
     document.querySelectorAll("table").forEach(element => { element.classList.add("table-dark") });
     document.querySelectorAll(".modal-content").forEach(element => { element.classList.add("bg-dark","text-white") });
     document.querySelectorAll(".btn-close").forEach(element => { element.classList.add("btn-close-white") });
-    console.log(document.querySelectorAll(".form-control-plaintext"));
+    //console.log(document.querySelectorAll(".form-control-plaintext"));
     document.querySelectorAll(".form-control-plaintext").forEach(element => { element.classList.add("text-white") });
     document.querySelectorAll(".card").forEach(element => { element.classList.add("bg-dark","text-white") });
 }
