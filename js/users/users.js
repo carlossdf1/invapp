@@ -28,26 +28,10 @@ async function consultaRoles() {
 }
 
 function listaUsuarios(datos, roles) {
-=======
-async function consultaUsuarios() {
-    const respuesta = await consulta(users);
-    const listaUsuarios = respuesta.data;
-    localStorage.setItem("usuarios", JSON.stringify(listaUsuarios));
-    return listaUsuarios;
-}
-
-async function consultaRoles() {
-    const respuesta = await consulta(rols);
-    const listaRoles = respuesta.data;
-    return listaRoles;
-}
-
-function listaUsuarios(datos, roles) {
     document.getElementById("listaUsuarios").innerHTML = "";
     for ( const i in datos ) {
         const { name, email, uid, role, active } = datos[i];
         let roluser = "";
-        const { uid, name, email, role, active } = data;
         roles.every(function (element, index) {
             if (element.uid == role) {
                 roluser = element;
