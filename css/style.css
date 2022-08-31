@@ -190,3 +190,7 @@ footer a:hover {
     padding-left: 25%;
     padding-right: 25%;
 }
+
+.pagination{
+    flex-wrap: wrap;
+}
