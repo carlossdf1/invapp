@@ -8,6 +8,7 @@ const userEmail = localStorage.getItem("email");
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
  * @version 2021-05-06
  */
+
 async function consultaUsuarios(update = false ) {
     if ( !localStorage.getItem("usuarios") || update ) {
         const respuesta = await consulta(users);
@@ -27,11 +28,26 @@ async function consultaRoles() {
 }
 
 function listaUsuarios(datos, roles) {
+=======
+async function consultaUsuarios() {
+    const respuesta = await consulta(users);
+    const listaUsuarios = respuesta.data;
+    localStorage.setItem("usuarios", JSON.stringify(listaUsuarios));
+    return listaUsuarios;
+}
+
+async function consultaRoles() {
+    const respuesta = await consulta(rols);
+    const listaRoles = respuesta.data;
+    return listaRoles;
+}
+
+function listaUsuarios(datos, roles) {
     document.getElementById("listaUsuarios").innerHTML = "";
     for ( const i in datos ) {
         const { name, email, uid, role, active } = datos[i];
         let roluser = "";
-
+        const { uid, name, email, role, active } = data;
         roles.every(function (element, index) {
             if (element.uid == role) {
                 roluser = element;
@@ -40,7 +56,6 @@ function listaUsuarios(datos, roles) {
         });
 
         const temp = document.importNode( document.querySelector("template").content, true );
-
         temp.getElementById("userNombre").innerHTML = name;
         temp.getElementById("userEmail").innerHTML = email;
         temp.getElementById("userRol").innerHTML = roluser.name;
@@ -140,7 +155,7 @@ function loadUserData(id) {
     const usuarios = JSON.parse(localStorage.getItem("usuarios"));
     const user = usuarios.filter((data) => data.uid === id);
     const { name, email, role, active } = user[0];
-
+    
     document.getElementById("nombreModal").value = name;
     document.getElementById("emailModal").value = email;
     document.getElementById("rolModal").value = role;
