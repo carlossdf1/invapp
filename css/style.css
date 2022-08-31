@@ -185,3 +185,8 @@ footer a:hover {
 #svgDefault{
     width: 30%;
 }
+
+#btnShowRegister {
+    padding-left: 25%;
+    padding-right: 25%;
+}

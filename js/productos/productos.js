@@ -10,10 +10,10 @@ let myModal = new bootstrap.Modal(document.getElementById("modalEditar"));
 
 let listaUbicacion = consultaUbicacion();
 let listaCategoria = consultaCategoria();
-//let listaProductos = consultaProductos();
+
 
 let idIn = ["nombreModal", "cantidadModal", "precioModal", "selectGrupoModal", "selectUbicacionModal", "selectCategoriaModal", "obsModal"];
-let idData=[ "name","category","quantity","price","ubication","group","observations","user"];
+let idData =[ "name","category","quantity","price","ubication","group","observations","user"];
 let idButton = ["botonAgregar", "botonGuardar", "botonEditar", "botonImprimir", "botonEliminar"]
     /**
      * Función que muestra cada linea de informacion
@@ -22,24 +22,14 @@ let idButton = ["botonAgregar", "botonGuardar", "botonEditar", "botonImprimir", 
      * @version 2021-05-06
      */
 
-async function consultaProductos() {
+async function consultaProductos( update = false ) {
 
-    const data = JSON.parse( localStorage.getItem("productos") );
-
-    if (data) {
-    
-        const filtro = data.filter( ( item ) =>  item.group !== "Eliminados" && item.group !== "Prestamos" && item.active === true );
-        return filtro;
-    } else {
-
+    if ( !localStorage.getItem("productos") || update ) {
         const respuesta = await consulta( productos );
         const filtro = respuesta.data.filter( ( item ) =>  item.group !== "Eliminados" && item.group !== "Prestamos" && item.active === true );
-        localStorage.setItem("productos", JSON.stringify( filtro ));
-     
-        return filtro;
-    }
-        
-
+        localStorage.setItem("productos", JSON.stringify( filtro ));  
+    } 
+    return JSON.parse( localStorage.getItem("productos") );
 };
 
 /**
@@ -52,10 +42,9 @@ async function consultaProductos() {
  */
 
 async function consultaUbicacion() {
-
     const data = JSON.parse( localStorage.getItem("ubicaciones") );
-    if ( data ) return data;
-    const respuesta = await consulta(ubicacion);
+    if ( localStorage.getItem("ubicaciones") ) return data;
+    const respuesta = await consulta( ubicacion );
     localStorage.setItem("ubicaciones", JSON.stringify( respuesta.data ));
     return data;
 };
@@ -69,7 +58,6 @@ async function consultaUbicacion() {
  */
 
 async function consultaCategoria() {
-
     const data = JSON.parse( localStorage.getItem("categorias") );
     if ( data ) return data;
     const respuesta = await consulta(categoria);
@@ -87,11 +75,10 @@ async function consultaCategoria() {
  */
 
 async function imprimir() {
+    selectNamesArray( await consultaUbicacion(), "selectUbicacionModal");
+    selectNamesArray( await consultaGrupos(), "selectGrupoModal");
+    selectNamesArray( await consultaCategoria(), "selectCategoriaModal");
     readGetUrl();
-    selectNamesArray(await consultaUbicacion(), "selectUbicacionModal");
-    selectNamesArray(await consultaGrupos(), "selectGrupoModal");
-    selectNamesArray(await consultaCategoria(), "selectCategoriaModal");
-
 }
 
 async function paginado( paginas, limit = 10){
@@ -104,7 +91,7 @@ async function paginado( paginas, limit = 10){
 
 async function imprimirPagina( index, limit = 10){
     document.getElementById("indice").innerHTML = "";
-    imprimirLista( await consultaProductos(), index, limit = 10);
+    imprimirLista( await consultaProductos(), index, limit);
 }
 
 async function createProduct() {
@@ -166,6 +153,7 @@ async function editProduct(id) {
 async function deleteProduct(id) {
     const data = JSON.stringify({ "user": email });
     const res = await addData( data, "product/" + id, "POST");
+    consultaProductos(true);
     recargar(res);
 }
 
@@ -180,7 +168,7 @@ async function deleteProduct(id) {
 async function deleteProduct(id) {
     const data = JSON.stringify({ "user": email });
     const res = await addData(data, "product/" + id, "POST");
-    console.log(res);
+    consultaProductos(true);
     recargar(res);
 }
 
@@ -218,7 +206,7 @@ async function imprimirLista( data, index, limit = 10 ) {
         const { uid, name, observations, quantity, ubication, price } = data[i];
         inversion.push( price );
         const actions = [
-            `<button type="button" id="btnShowRegister" onclick="vistaModal('${uid}')" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalEditar">VER</button>`,
+            `<button type="button" id="btnShowRegister" onclick="vistaModal('${uid}')" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalEditar">VER</button>`,
         ]
 
         const rowClass  = 'text-center';
