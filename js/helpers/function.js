@@ -203,11 +203,9 @@ function selectMode(){
     console.log("SELECCION DE MODO OBSCURO");
     if (document.getElementById("darkMode").checked) {
         localStorage.setItem('darkmode', true)
-    }
-    else { 
+    } else { 
         localStorage.setItem('darkmode', false)
     }
-
     darkModeChange();
 }
 //CAMBIA A MODO OBSCURO AL CARGAR LAS PAGINAS
@@ -217,9 +215,7 @@ function darkModeChange() {
     if (localStorage.getItem('darkmode')==='true') {
         darkMode();
         setTimeout(() => { document.getElementById("darkMode").checked = true }, 100);
-    } 
-      
-    else {
+    } else {
         lightMode();
     }
 }
@@ -236,64 +232,45 @@ function lightMode(){
 function darkMode(){
     console.log("ACTIVA EL MODO OBSCURO");
     document.body.classList.add("darkmode");
-    document.querySelectorAll("table").forEach(element => { element.classList.add("table-dark") });
-    document.querySelectorAll(".modal-content").forEach(element => { element.classList.add("bg-dark","text-white") });
-    document.querySelectorAll(".btn-close").forEach(element => { element.classList.add("btn-close-white") });
-    //console.log(document.querySelectorAll(".form-control-plaintext"));
-    document.querySelectorAll(".form-control-plaintext").forEach(element => { element.classList.add("text-white") });
-    document.querySelectorAll(".card").forEach(element => { element.classList.add("bg-dark","text-white") });
+    document.querySelectorAll("table").forEach( element => element.classList.add("table-dark") );
+    document.querySelectorAll("thead").forEach( element => element.classList.add("primary-color"));
+    document.querySelectorAll(".modal-content").forEach( element => element.classList.add("bg-dark","text-white") );
+    document.querySelectorAll(".btn-close").forEach( element => element.classList.add("btn-close-white") );
+    document.querySelectorAll(".form-control-plaintext").forEach( element => element.classList.add("text-white") );
+    document.querySelectorAll(".card").forEach( element => element.classList.add("bg-dark","text-white") );
 }
 
 //################### BLOQUEA INPUTS DE TEXTO Y SELECT ##############################
-function readOnly(elemid, est) {
-
-    elemid.forEach(element => {
-        document.getElementById(element).readOnly = est;
-    });
-
-}
+function readOnly( elementId, est ) { elementId.forEach(e => document.getElementById(e).readOnly = est ); }
 
 //################### ADMINISTRADOR DE ELEMENTOS VISIBLES ###########################
 // MUESTRA O OCULTA ELEMENTOS PUNTUALMENTE
-function dNone(elemid, est) {
-
+function dNone( elementId, est = false ) {
     /* resetDnone(idButton); */
-    document.getElementById(elemid).className = document.getElementById(elemid).className.replace(" d-none", "");
-    if (est == false) {
-        document.getElementById(elemid).className += " d-none";
-    }
-    if (est == true) {
-        document.getElementById(elemid).className = document.getElementById(elemid).className.replace(" d-none", "");
-    }
+    document.getElementById(elementId).className = document.getElementById(elementId).className.replace(" d-none", "");
+    ( est ) ? document.getElementById(elementId).className = document.getElementById(elementId).className.replace(" d-none", "") : document.getElementById(elementId).className += " d-none";
 }
 //MUESTRA ELEMENTOS PUESTOS EN UN ARRAYLIST
-function resetDnone(buttons) {
-    buttons.forEach(element => {
-        document.getElementById(element).className = document.getElementById(element).className.replace(" d-none", "");
-    });
+function resetDnone( buttons ) {
+    buttons.forEach( e => document.getElementById( e ).className = document.getElementById( e ).className.replace(" d-none", "") );
 }
 
 //################### ADMINISTRADOR DE VISUALIZACION DE FORMULARIOS #################
 // CONVIERTE INPUTS EDITABLES A LABELS BLOQUEADOS VISUALMENTE Y VICEVERSA
 function toggleInput(elemid, est) {
-
-    let cn = est ? "form-control-plaintext" : "form-control";
-    let cn2 = est ? "form-control" : "form-control-plaintext";
+    const cn = est ? "form-control-plaintext" : "form-control";
+    const cn2 = est ? "form-control" : "form-control-plaintext";
 
     elemid.forEach(element => {
-        document.getElementById(element).disabled = est;
-        document.getElementById(element).classList.remove(cn2);
-        document.getElementById(element).classList.add(cn);
+        document.getElementById( element ).disabled = est;
+        document.getElementById( element ).classList.remove( cn2 );
+        document.getElementById( element ).classList.add( cn );
     });
 
 }
 // CONVIERTE INPUTS A LABELS VISUALMENTE 
 function plainText(elemid) {
-
-    elemid.forEach(element => {
-        document.getElementById(element).className = "form-control-plaintext";
-    });
-
+    elemid.forEach( element => document.getElementById( element ).className = "form-control-plaintext" );
 }
 
 //################### ADMINISTRADOR DE SELECTS ######################################
@@ -304,30 +281,22 @@ function plainText(elemid) {
  * 
  * @version 2021-05-24
  */
-function selectNamesArray(lista, selectId) {
-
+function selectNamesArray( lista, selectId ) {
     let select = [];
-
-    for (let i in lista) {
+    for ( const i in lista ) {
         const fila = lista[i];
         select.push(fila.name);
     }
-
-    //console.log(select);
-    addOptions(selectId, select);
+    addOptions( selectId, select );
     return select;
 }
 // Rutina para agregar opciones a un <select>
-function addOptions(domElement, array) {
-
-    const select = document.getElementsByName(domElement)[0];
-
-    for (value in array) {
-
+function addOptions( domElement, array ) {
+    const select = document.getElementsByName( domElement )[0];
+    for ( value in array ) {
         const option = document.createElement("option");
-        option.text = array[value];
-        select.add(option);
-
+        option.text = array[ value ];
+        select.add( option );
     }
 }
 
@@ -341,9 +310,9 @@ function addOptions(domElement, array) {
  */
  function imprimirElemento(id) {
     //const movil = navigator.userAgentData.mobile;
-    let elemento = document.getElementById(id);
-    let ventana = window.open('', 'PRINT', 'height=400,width=600');
-    let movil = navigator.userAgent.search(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|Firefox/) > -1;  // Detecta si es movil
+    const elemento = document.getElementById(id);
+    const ventana = window.open('', 'PRINT', 'height=400,width=600');
+    const movil = navigator.userAgent.search(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|Firefox/) > -1;  // Detecta si es movil
      
     ventana.document.write('<html><head><title>' + document.title + '</title>');
     ventana.document.write("<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6' crossorigin='anonymous'>");
@@ -355,11 +324,9 @@ function addOptions(domElement, array) {
     ventana.document.write('<script>window.onload=window.print;</script>');
 
 
-    if(!movil){ //si no es movil
+    if( !movil ){ //si no es movil
         ventana.document.write('<script>window.onafterprint=window.close;</script>');
-    }
-
-    else{ //si es movil
+    } else { //si es movil
         ventana.document.write('<script>window.onafterprint=window.focus;</script>');
         ventana.document.write('<script>window.onfocus=window.close;</script>');
     }
@@ -367,9 +334,8 @@ function addOptions(domElement, array) {
     ventana.document.write('</body></html>');
     ventana.document.close();
 
-    if (elemento.id === "vistaModal") ventana = obtenerModal(ventana);
+    if ( elemento.id === "vistaModal" ) ventana = obtenerModal( ventana );
     ventana.focus();
-
     return true;
 }
 
@@ -379,36 +345,18 @@ function gotoIndex(){
 }
 
 function redireccionamiento() {
-
-    let url = "";
-
-    if (origin === "http://127.0.0.1:5500") {
-        url = "";
-    } else {
-        url = "/invapp";
-        //url = "";
-    }
-
-    return url
+    const url = origin === "http://127.0.0.1:5500" ? "" : "/invapp";
+    return url;
 }
 
 function urlAdaptive() {
+    const url = redireccionamiento();
+    const urls = document.querySelectorAll('#url');
 
-    //console.log("REDIRECION INICIO");
-
-    let url = "";
-    url = redireccionamiento();
-
-    let urls = document.querySelectorAll('#url');
-
-    urls.forEach(element => {
-        let link = element.href.replace(origin, "");
-        element.href = url + link;
-        //console.log(element.href);
+    urls.forEach( e => {
+        const link = e.href.replace( origin, "" );
+        e.href = url + link;
     });
-
-    //console.log("REDIRECION FIN");
-
 }
 
 window.onload = setTimeout(() => urlAdaptive(), 500);
@@ -424,7 +372,6 @@ window.onload = setTimeout(() => noLogin(), 0);
  * @version 2021-05-06
  */
 function cortaPalabras(texto) {
-
     let palabras = [];
     let palabra = '';
     for (let letra = 0; letra < texto.length; letra++) {
@@ -450,8 +397,7 @@ function cortaPalabras(texto) {
  * @version 2021-05-06
  */
 function elementoVacio(dato) {
-    (dato === undefined) ? dato = "": dato;
-    (dato === null) ? dato = "": dato;
+    ( dato === undefined || dato === null) ? dato = "": dato;
     return dato;
 }
 
@@ -463,15 +409,12 @@ function elementoVacio(dato) {
  * @version 2021-05-06
  */
 function normalizar(str) {
-    /* console.log(str); */
     if (str == null) {
         str = elementoVacio(str);
     } else {
         str = str.toString();
         str = str.toLowerCase();
         str = str.normalize("NFD").replace(/[\u0300-\u0301]/g, "");
-
     }
-
     return str;
 }

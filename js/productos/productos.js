@@ -10,10 +10,10 @@ let myModal = new bootstrap.Modal(document.getElementById("modalEditar"));
 
 let listaUbicacion = consultaUbicacion();
 let listaCategoria = consultaCategoria();
-//let listaProductos = consultaProductos();
+
 
 let idIn = ["nombreModal", "cantidadModal", "precioModal", "selectGrupoModal", "selectUbicacionModal", "selectCategoriaModal", "obsModal"];
-let idData=[ "name","category","quantity","price","ubication","group","observations","user"];
+let idData =[ "name","category","quantity","price","ubication","group","observations","user"];
 let idButton = ["botonAgregar", "botonGuardar", "botonEditar", "botonImprimir", "botonEliminar"]
     /**
      * Función que muestra cada linea de informacion
@@ -22,24 +22,14 @@ let idButton = ["botonAgregar", "botonGuardar", "botonEditar", "botonImprimir", 
      * @version 2021-05-06
      */
 
-async function consultaProductos() {
+async function consultaProductos( update = false ) {
 
-    const data = JSON.parse( localStorage.getItem("productos") );
-
-    if (data) {
-    
-        const filtro = data.filter( ( item ) =>  item.group !== "Eliminados" && item.group !== "Prestamos" && item.active === true );
-        return filtro;
-    } else {
-
+    if ( !localStorage.getItem("productos") || update ) {
         const respuesta = await consulta( productos );
         const filtro = respuesta.data.filter( ( item ) =>  item.group !== "Eliminados" && item.group !== "Prestamos" && item.active === true );
-        localStorage.setItem("productos", JSON.stringify( filtro ));
-     
-        return filtro;
-    }
-        
-
+        localStorage.setItem("productos", JSON.stringify( filtro ));  
+    } 
+    return JSON.parse( localStorage.getItem("productos") );
 };
 
 /**
@@ -52,10 +42,9 @@ async function consultaProductos() {
  */
 
 async function consultaUbicacion() {
-
     const data = JSON.parse( localStorage.getItem("ubicaciones") );
-    if ( data ) return data;
-    const respuesta = await consulta(ubicacion);
+    if ( localStorage.getItem("ubicaciones") ) return data;
+    const respuesta = await consulta( ubicacion );
     localStorage.setItem("ubicaciones", JSON.stringify( respuesta.data ));
     return data;
 };
@@ -69,7 +58,6 @@ async function consultaUbicacion() {
  */
 
 async function consultaCategoria() {
-
     const data = JSON.parse( localStorage.getItem("categorias") );
     if ( data ) return data;
     const respuesta = await consulta(categoria);
@@ -87,39 +75,32 @@ async function consultaCategoria() {
  */
 
 async function imprimir() {
+    selectNamesArray( await consultaUbicacion(), "selectUbicacionModal");
+    selectNamesArray( await consultaGrupos(), "selectGrupoModal");
+    selectNamesArray( await consultaCategoria(), "selectCategoriaModal");
     readGetUrl();
-    selectNamesArray(await consultaUbicacion(), "selectUbicacionModal");
-    selectNamesArray(await consultaGrupos(), "selectGrupoModal");
-    selectNamesArray(await consultaCategoria(), "selectCategoriaModal");
-
 }
 
-async function paginado(paginas){
-    
-    for (let index = 0; index < paginas; index++) {
-        document.getElementById("indice").innerHTML+='<li class="page-item"><button class="page-link" onclick="imprimirPagina('+ index*10 + ')">'+ index +'</button></li>';
+async function paginado( paginas, limit = 10){
+    const totalPages =  paginas > 32 ? 32 : paginas
+    for (let index = 0; index < totalPages; index++ ) {
+        document.getElementById("indice").innerHTML+= `<li class="page-item"><button class="page-link" onclick="imprimirPagina(${ index * limit })">${ index + 1}</button></li>`;
     }
 
 }
 
-async function imprimirPagina(index){
-    document.getElementById("indice").innerHTML="";
-    imprimirLista( await consultaProductos(),index);
-
+async function imprimirPagina( index, limit = 10){
+    document.getElementById("indice").innerHTML = "";
+    imprimirLista( await consultaProductos(), index, limit);
 }
 
 async function createProduct() {
-
-    let inputs=idIn.slice();
+    const inputs = idIn.slice();
     inputs.pop();
-    let valid=inputs.some(element => {
-        return (document.getElementById(element).value ==="")? true : false;
-    });
+    const valid = inputs.some( e =>  ( document.getElementById(e).value === "" ) ? true : false );
 
-    if(valid===false){
-
-        let data = JSON.stringify({
-
+    if( !valid ){
+        const data = JSON.stringify({
             "name": document.formModal.nombreModal.value,
             "img": "",
             "category": document.formModal.selectCategoriaModal.value,
@@ -130,33 +111,21 @@ async function createProduct() {
             "observations": document.formModal.obsModal.value,
             "user": email
         });
-
-        let resp = await addData(data, "product/new", "POST");
-
+        const resp = await addData( data, "product/new", "POST");
         recargar(resp);
-
-    }
-
-    else{
+    } else {
         alert("COMPLETE EL FORMULARIO");
     }
 
 }
 
 async function editProduct(id) {
-
-    let inputs=idIn.slice();
+    const inputs = idIn.slice();
     inputs.pop();
-    let valid=inputs.some(element => {
-        return (document.getElementById(element).value ==="")? true : false;
-    });
-
-    if(valid===false){
-
-        let data = JSON.stringify({
-
+    const valid = inputs.some( e => document.getElementById(e).value === "" ? true : false );
+    if( valid === false ){
+        const data = JSON.stringify({
             "name": document.formModal.nombreModal.value,
-            "img": "",
             "category": document.formModal.selectCategoriaModal.value,
             "quantity": document.formModal.cantidadModal.value,
             "price": document.formModal.precioModal.value,
@@ -165,17 +134,12 @@ async function editProduct(id) {
             "observations": document.formModal.obsModal.value,
             "user": email
         });
-
-        let res = await addData(data, "product/" + id, "PUT");
+        const res = await addData( data, "product/" + id, "PUT");
         console.log(res);
         recargar(res);
-
-    }
-
-    else{
+    } else {
         alert("COMPLETE EL FORMULARIO");
     }
-
 }
 
 /**
@@ -187,18 +151,12 @@ async function editProduct(id) {
  */
 
 async function deleteProduct(id) {
-
-    console.log(id);
-    let data = JSON.stringify({ "user": email });
-
-    console.log(data);
-
-    let res = await addData(data, "product/" + id, "POST");
-
+    const data = JSON.stringify({ "user": email });
+    const res = await addData( data, "product/" + id, "POST");
+    consultaProductos(true);
     recargar(res);
 }
 
-
 /**
  * Función que imprime la tabla productos en la vista
  * 
@@ -208,46 +166,27 @@ async function deleteProduct(id) {
  */
 
 async function deleteProduct(id) {
-
-    console.log(id);
-    let data = JSON.stringify({ "user": email });
-
-    console.log(data);
-
-    let res = await addData(data, "product/" + id, "POST");
-
-    console.log(res);
-
+    const data = JSON.stringify({ "user": email });
+    const res = await addData(data, "product/" + id, "POST");
+    consultaProductos(true);
     recargar(res);
 }
 
 async function productosPrestados() {
-     const pro = JSON.parse( localStorage.getItem("productosPrestados") );
-    if (pro) {
-        imprimirLista(pro);
-    } else {
-       const query = await consulta(prodPrestados);
-       console.log(query.data);
-       localStorage.setItem("productosPrestados", JSON.stringify(query.data));
-       imprimirLista(query.data);
-    }
-
+    const pro = JSON.parse( localStorage.getItem("productosPrestados") );
+    if (pro) return imprimirLista( pro );
+    const query = await consulta( prodPrestados );
+    console.log(query.data);
+    localStorage.setItem( "productosPrestados", JSON.stringify( query.data ));
+    imprimirLista(query.data);
 }
 
 async function productosEliminados() {
-    const pro = JSON.parse( localStorage.getItem("productosEliminados") );
-    if (pro) {
-        //console.log(pro);
-        //const filtro = pro.filter( ( item ) =>  item.group === "Eliminados");
-        //console.log(filtro);
-        imprimirLista(pro);
-    } else {
-       const query = await consulta(prodEliminados);
-       console.log(query.data);
-       localStorage.setItem("productosEliminados",JSON.stringify(query.data));
-       imprimirLista(query.data);
-    }
-
+    const products = JSON.parse( localStorage.getItem("productosEliminados") );
+    if (products) return imprimirLista(products);
+    const query = await consulta(prodEliminados);
+    localStorage.setItem("productosEliminados",JSON.stringify(query.data));
+    imprimirLista(query.data);
 }
 
 /**
@@ -258,44 +197,30 @@ async function productosEliminados() {
  * @version 2021-05-11
  */
 
-async function imprimirLista( datos, index ) {
+async function imprimirLista( data, index, limit = 10 ) {
     //imprime los datos entregados en lista html
-    const td = "</td><td>";
-    let boton = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modalEditar' ";
     const inversion = [];
-
     document.getElementById("lista").innerHTML ="";
-
-    //for (const i in datos ) {
-
     index == null ? index = 0 : index;
+    for ( let i = index; i < index + limit; i++) {
+        const { uid, name, observations, quantity, ubication, price } = data[i];
+        inversion.push( price );
+        const actions = [
+            `<button type="button" id="btnShowRegister" onclick="vistaModal('${uid}')" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalEditar">VER</button>`,
+        ]
 
-    for (let i = index; i < index+10; i++) {
-        
-        const data = datos[i];
-        const com = '"';
-        //console.log(data);
-        inversion.push( datos[i].price );
-        document.getElementById("lista").innerHTML +=
-        '<tr scope="row"><td>' 
-        + i
-        + td + data.name 
-        // + td + data.price
-        + td + data.quantity
-        // + td +data.category
-        + td + data.ubication
-        //  + td + elementoVacio(data.observations)
-        + td + boton + "onclick='vistaModal(" + com + data.uid + com + ");'>Ver</button>" +
-        '</td></tr>';
+        const rowClass  = 'text-center';
+        const customRow = `<td>${ [  i + 1, name, quantity, ubication, actions ].join('</td><td>') }</td>`;
+        const row       = `<tr class="${ rowClass }">${ customRow }</tr>`;
+        document.getElementById("lista").innerHTML += row;
 
-        i + 1 == datos.length ?  i = index + 10 : i;
+        i + 1 == data.length ?  i = index + limit : i + 1;
     }
 
-    paginado(Math.ceil(datos.length/10));
+    paginado( Math.ceil( data.length / limit ) );
     const gasto = inversion.reduce(( a, b ) => a + b, 0 )
-    document.querySelector("#item-total").innerHTML = `Total : ${ datos.length }`;
+    document.querySelector("#item-total").innerHTML = `Total : ${ data.length }`;
     document.querySelector("#inversion-total").innerHTML = `Inversion : $ ${ gasto }`;
-
 }
 
 /* ##### MODAL FUNCIONES #################### */
@@ -309,30 +234,20 @@ async function imprimirLista( datos, index ) {
  */
 
 function vistaModal(id) {
-
     const valores = window.location.search;
-    const urlParams = new URLSearchParams(valores);
+    const urlParams = new URLSearchParams( valores );
     const estado = urlParams.get('estado');
 
-    let listaProductos={};
-
-    if (estado === "prestamo") {
-        listaProductos = JSON.parse(localStorage.getItem("productosPrestados"));
+    let listaProductos = {};
+    if ( estado === "prestamo" ) listaProductos = JSON.parse( localStorage.getItem("productosPrestados") );
+    if ( estado === "eliminado" ) listaProductos = JSON.parse( localStorage.getItem("productosEliminados") );
+    else {
+        listaProductos = JSON.parse( localStorage.getItem("productos") );
     }
 
-    else if (estado === "eliminado") {
-        listaProductos = JSON.parse(localStorage.getItem("productosEliminados"));
-    }
-
-    else{
-        listaProductos = JSON.parse(localStorage.getItem("productos"));
-    }
-
-    
-    if (document.getElementById("nombreModal").className !== "form-control-plaintext") bloquearModal();
+    if ( document.getElementById("nombreModal").className !== "form-control-plaintext" ) bloquearModal();
     const modalProducto = listaProductos.filter( data => data.uid === id );
-
-    if (localStorage.getItem('darkmode')==='true') document.querySelectorAll(".form-control-plaintext").forEach(element => { element.classList.add("text-white") });
+    if ( localStorage.getItem('darkmode') === 'true' ) document.querySelectorAll(".form-control-plaintext").forEach( e => e.classList.add("text-white") );
 
     let arrayProducto = [
         modalProducto[0].name,
@@ -350,12 +265,10 @@ function vistaModal(id) {
         con++;
     });
 
-    modalProducto[0].img!="foto" && modalProducto[0].img!="" ? document.getElementById("imgModal").srcset=modalProducto[0].img : document.getElementById("imgModal").srcset="";
-    
-
+    document.getElementById("imgModal").srcset = modalProducto[0].img != "foto" && modalProducto[0].img != "" ? modalProducto[0].img : "";
     toggleInput(idIn, true);
 
-    if (modalProducto[0].active === true) {
+    if ( modalProducto[0].active === true ) {
         dNone("botonAgregar", false);
         dNone("botonGuardar", false);
         dNone("botonEditar", true);
@@ -376,12 +289,11 @@ function vistaModal(id) {
         document.getElementById("botonRestaurar").setAttribute('onClick', 'restaurarModalSalir("' + id + '");');        
     }
 
-    if (modalProducto[0].ubication == "Prestamo") {
+    if ( modalProducto[0].ubication == "Prestamo" ) {
         dNone("botonRestaurar", true);
         document.getElementById("botonGuardar").setAttribute('onClick', 'editProduct("' + id + '");');
         document.getElementById("botonRestaurar").setAttribute('onClick', 'restaurarModalSalir("' + id + '");');     
     }
-
 }
 
 /**
@@ -394,20 +306,15 @@ function vistaModal(id) {
  */
 
 function editarModal() {
-
-    toggleInput(idIn, false);
-
-    document.getElementById("imgModal").srcset="";
-
+    toggleInput( idIn, false );
+    document.getElementById("imgModal").srcset = "";
     document.formModal.cantidadModal.type = "number";
     document.formModal.precioModal.type = "number";
-    if (localStorage.getItem('darkmode')==='true') document.querySelectorAll(".form-control").forEach(element => { element.classList.remove("text-white") });
-
+    if ( localStorage.getItem('darkmode') === 'true' ) document.querySelectorAll(".form-control").forEach( e =>  e.classList.remove("text-white") );
     dNone("botonGuardar", true);
     dNone("botonEditar", false);
     dNone("botonImprimir", false);
     dNone("botonEliminar", false);
-
 }
 
 /**
@@ -420,12 +327,9 @@ function editarModal() {
  */
 
 function bloquearModal() {
-
     toggleInput(idIn, true);
-
     document.formModal.cantidadModal.type = "text";
     document.formModal.precioModal.type = "text";
-
 }
 
 /**
@@ -438,18 +342,12 @@ function bloquearModal() {
  */
 
 function agregarModal() {
-
     editarModal();
-
-    idIn.forEach(element => {
-        document.getElementById(element).value = "";
-    });
-
+    idIn.forEach( e =>  document.getElementById(e).value = "" );
     dNone("botonGuardar", false);
     dNone("botonEditar", false);
     dNone("botonImprimir", false);
     dNone("botonAgregar", true);
-
 }
 
 /**
@@ -460,13 +358,9 @@ function agregarModal() {
  * @version 2021-05-06
  */
 
-function obtenerModal(ventana) {
-
-    idIn.forEach(element => {
-        ventana.document.getElementById(element).value = document.getElementById(element).value;
-    });
-
-    return ventana;
+function obtenerModal(element) {
+    idIn.forEach( e => element.document.getElementById(e).value = document.getElementById(e).value );
+    return element;
 }
 
 //Modal eliminar, animacion vista y captura de datos
@@ -486,7 +380,6 @@ function eliminarModalSalir(id) {
 }
 
 //modal restaurar, animacion vista y captura de datos
-
 function restaurarModal() {
     document.getElementById("modalEditar").style = "z-index: 1040; display: block;";
 }
@@ -496,7 +389,6 @@ function restaurarModalCancelar() {
 }
 
 function restaurarModalSalir(id) {
-    //deleteProduct(id);
     document.getElementById("modalEditar").style = "z-index: 1060; display: block;";
     myModaLRestaurar.toggle()
 }
@@ -506,18 +398,9 @@ async function readGetUrl(){
     const urlParams = new URLSearchParams(valores);
     const estado = urlParams.get('estado');
 
-    if (estado === "prestamo") {
-        productosPrestados();
-    }
-
-    else if (estado === "eliminado") {
-        productosEliminados();
-    }
-
-    else{
-        imprimirLista(await consultaProductos());
-    }
-
+    if ( estado === "prestamo" ) return productosPrestados();
+    if ( estado === "eliminado" ) return productosEliminados();
+    imprimirLista( await consultaProductos() );
 }
 
 /**
@@ -530,18 +413,13 @@ async function readGetUrl(){
  */
 
  async function recargar(res) {
-
-    console.log("DATOS EN REGARGA",res);
-    console.log("RESULTADO: ",res.ok);
-
-    if(res.ok===true | res===null){
+    console.log( "DATOS EN REGARGA", res );
+    console.log( "RESULTADO: ", res.ok );
+    if( res.ok | res === null ){
         myModal.toggle();
         localStorage.removeItem("productos");
         setTimeout(() => imprimir(), 1000);
-    }
-
-    else{
+    } else{
         alert("Error al realizar la operacion");
     }
-
 }

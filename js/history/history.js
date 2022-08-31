@@ -1,5 +1,4 @@
 const historial = api + 'historic';
-let listaHistorial;
 
 /**
  * Función que imprime la lista de consulta de historial
@@ -9,53 +8,38 @@ let listaHistorial;
  */
 async function consultaHistorial() {
     const respuesta = await consulta(historial);
-    listaHistorial = respuesta.data;
-    return listaHistorial;
+    return  respuesta.data;
 };
 
-async function imprimirHistorial() {
+async function imprimirHistorial( index = 0, limit = 10 ) {
+    const data = await consultaHistorial()
+    document.getElementById("lista").innerHTML ="";
+    for ( let i = index; i < index + limit; i++) {
+        const { uid, userName, action, description } = data[i];
+        const actions = [
+            `<button type="button" id="btnShowRegister" onclick="vistaModal('${uid}')" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalEditar">VER</button>`,
+        ]
+        const rowClass  = 'text-right';
+        const customRow = `<td>${ [ (i + 1), userName, action, description ].join('</td><td>') }</td>`;
+        const row       = `<tr class="${ rowClass }">${ customRow }</tr>`;
+        document.getElementById("lista").innerHTML += row;
+    }
 
-    const datos = await consultaHistorial()
-    const td = "</td><td>";
+    paginado( Math.ceil( data.length / limit, limit ))
+}
 
-    for (let i in datos) {
-        document.getElementById("lista").innerHTML +=
-            '<tr scope="row">' 
-            + td + datos[i].userName
-            + td + datos[i].action
-            + td + datos[i].description
-            + '</tr>';
+async function imprimirPagina( index, limit = 10 ) {
+    document.getElementById("indice").innerHTML= "";
+    await imprimirHistorial( index, limit );
+}
+
+async function paginado( paginas, limit = 10 ){
+    
+    const totalPages =  paginas > 32 ? 32 : paginas
+    for (let index = 0; index < totalPages; index++ ) {
+        document.getElementById("indice").innerHTML+= `<li class="page-item"><button class="page-link" onclick="imprimirPagina(${ index * limit })">${ index + 1 }</button></li>`;
     }
 
 }
 
-/**
- * Función que imprime la tabla productos en la vista
- * 
- * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
- * @author Emmanuel Correa <ebcorrea[at]gmail.com>
- * @version 2021-05-11
- */
-
-function imprimirLista(datos) {
-    //imprime los datos entregados en lista html
-    console.log("DATOS RECIBIDOS");
-    const td = "</td><td>";
-    let boton = "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal' ";
-    // datos.sort(( a, b ) => a.name.localeCompare ( b.name ));
-
-    for (let i in datos) {
-
-        const data = datos[i];
-        const com = '"';
-
-        document.getElementById("lista").innerHTML +=
-            '<tr><td>' +
-            data.userName + td +
-            data.action + td +
-            data.description + td +
-            // boton + "onclick='vistaModal(" + com + data.uid + com + ");'>Ver</button>" +
-            '</td></tr>';
-    }
-
-}
+imprimirHistorial();
