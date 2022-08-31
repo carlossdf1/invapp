@@ -1,6 +1,7 @@
 const users = api + "login/users";
 const rols = api + "rol";
 const modalForm = new bootstrap.Modal(document.getElementById("modalForm"));
+
 /**
  *
  * @author Emmanuel Correa <ebcorrea[at]gmail.com>
@@ -154,7 +155,8 @@ async function addUser() {
     const data = JSON.stringify({
         "name": document.getElementById("nombreModal").value,
         "email": document.getElementById("emailModal").value,
-        "pass": document.getElementById("passwordModal").value
+        "pass": document.getElementById("passwordModal").value,
+        "user": email
     });
 
     const resp = await addData(data, "login/new", "POST");
@@ -170,7 +172,8 @@ async function editUser(id) {
     const data = JSON.stringify({
         "name": document.getElementById("nombreModal").value,
         "email": document.getElementById("emailModal").value,
-        "pass": document.getElementById("passwordModal").value
+        "pass": document.getElementById("passwordModal").value,
+        "user": email
     });
 
     const resp = await addData(data, "login/"+ id, "PUT");
@@ -190,3 +193,5 @@ async function deleteUser(id) {
     myModal.hide();
     ( resp.ok ) ? await consultaUsuarios(true) : console.log( 'Error al eliminar usuario - ' + resp.msg );
 }
+
+imprimir();

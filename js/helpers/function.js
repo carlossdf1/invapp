@@ -233,6 +233,7 @@ function darkMode(){
     console.log("ACTIVA EL MODO OBSCURO");
     document.body.classList.add("darkmode");
     document.querySelectorAll("table").forEach( element => element.classList.add("table-dark") );
+    document.querySelectorAll("thead").forEach( element => element.classList.add("primary-color"));
     document.querySelectorAll(".modal-content").forEach( element => element.classList.add("bg-dark","text-white") );
     document.querySelectorAll(".btn-close").forEach( element => element.classList.add("btn-close-white") );
     document.querySelectorAll(".form-control-plaintext").forEach( element => element.classList.add("text-white") );
