@@ -21,8 +21,7 @@
         <h1 class="text-center">Lista de Usuarios</h1>
     </div>
 
-    <div class="container-xxl my-md-4 bd-layout ">
-
+    <div class="container-xxl my-md-4 bd-layout">
         <div class="row">
             <div class="col-11"></div>
             <div class="col-1">
@@ -52,8 +51,8 @@
                             <td id="userRol"></td>
                             <td id="userEstado"></td>
                             <td class="action">
-                                <button type="button" class="btn btn-secondary btn-sm" id="userEditar" data-bs-toggle="modal" data-bs-target="#modalForm">Editar</button>
                                 <button type="button" class="btn btn-primary btn-sm" id="userVer" data-bs-toggle="modal" data-bs-target="#modalForm">Ver</button>
+                                <button type="button" class="btn btn-success btn-sm" id="userEditar" data-bs-toggle="modal" data-bs-target="#modalForm">Editar</button>
                                 <button type="button" class="btn btn-danger btn-sm" id="userEliminar" data-bs-toggle="modal" data-bs-target="#modalEliminar">Eliminar</button>
                                 <a href="#" class="btn btn-dark btn-sm">Cambiar Contraseña</a>
                             </td>
@@ -93,35 +92,11 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 row d-none" id="modalPassword">
-                                        <label for="rol" class="col-sm-3 col-form-label">CONTRSEÑA:</label>
+                                        <label for="rol" class="col-sm-3 col-form-label">CONTRASEÑA:</label>
                                         <div class="col-sm-6">
                                             <input type="text" class="form-control" min="0" id="passwordModal" value="" placeholder="0" required>
                                         </div>
                                     </div>
-                                    <!-- <div class="mb-3 row">
-                                        <label for="grupo" class="col-sm-3 col-form-label">GRUPO:</label>
-                                        <div class="col-sm-6">
-                                            <select id="selectGrupoModal" name="selectGrupoModal" class="form-control-plaintext" aria-label=".form-select-lg" required>
-                                                <option value="" disabled selected>Seleccione un grupo...</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 row">
-                                        <label for="ubicacion" class="col-sm-3 col-form-label">OPCIONES DE MENU:</label>
-                                        <div class="col-sm-6">
-                                            <select id="selectUbicacionModal" name="selectUbicacionModal" class="form-control-plaintext" aria-label=".form-select-lg" required>
-                                                <option value="" disabled selected>Seleccione una ubicación...</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 row">
-                                        <label for="categoria" class="col-sm-3 col-form-label">PERMISOS:</label>
-                                        <div class="col-sm-6 align-items-end">
-                                            <select id="selectCategoriaModal" name="selectCategoriaModal" class="form-control-plaintext" aria-label=".form-select-lg" required>
-                                                <option value="" disabled selected>Seleccione una categoria...</option>
-                                            </select>
-                                        </div>
-                                    </div> -->
                                     <div class="mb-3 row" id="modalEstado">
                                         <label for="estado" class="col-sm-3 col-form-label">ESTADO:</label>
                                         <div class="col-sm-6 align-items-end">
