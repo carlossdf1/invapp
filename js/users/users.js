@@ -1,6 +1,7 @@
 const users = api + "login/users";
 const rols = api + "rol";
 const modalForm = new bootstrap.Modal(document.getElementById("modalForm"));
+const modalChangePassword = new bootstrap.Modal(document.getElementById("modalChangePassword"));
 const userEmail = localStorage.getItem("email");
 
 /**
@@ -191,6 +192,21 @@ async function deleteUser(id) {
     const myModal = new bootstrap.Modal(document.getElementById("modalEliminar"));
     myModal.hide();
     ( resp.ok ) ? await consultaUsuarios(true) : console.log( 'Error al eliminar usuario - ' + resp.msg );
+}
+
+async function changePassword(){
+    // modalForm.hide();
+    modalChangePassword.show();
+    const data = JSON.stringify({ "pass": document.getElementById("changePasswordModal").value });
+    console.log(data);
+    
+    // const resp = await addData(data, "login/"+ document.getElementById("emailModal").value);
+    // if ( resp.ok ) {
+    //     await  consultaUsuarios(true);
+    //     modalForm.toggle();
+    // } else {
+    //     console.log( 'Error al eliminar usuario - ' + resp.msg );
+    // }
 }
 
 imprimir();
