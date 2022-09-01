@@ -23,9 +23,9 @@
 
     <div class="container-xxl my-md-4 bd-layout">
         <div class="row">
-            <div class="col-11"></div>
-            <div class="col-1">
-                <button type="button" class="btn btn-success" id="userEditar" data-bs-toggle="modal" data-bs-target="#modalForm" onclick="vistaAgregar();">Agregar</button>
+            <div class="col-10"></div>
+            <div class="col-3">
+                <button type="button" class="btn primary-color btn-lg" id="userEditar" data-bs-toggle="modal" data-bs-target="#modalForm" onclick="vistaAgregar();">Crear Nuevo Usuario</button>
             </div>
             <div class="p-3"></div>
         </div>
@@ -46,15 +46,15 @@
                     </tbody>
                     <template>
                         <tr id="CardUser">
-                            <td id="userNombre"></td>
+                            <td class="uppercase"id="userNombre"></td>
                             <td id="userEmail"></td>
                             <td id="userRol"></td>
                             <td id="userEstado"></td>
-                            <td class="action">
+                            <td class="text-right ">
                                 <button type="button" class="btn btn-primary btn-sm" id="userVer" data-bs-toggle="modal" data-bs-target="#modalForm">Ver</button>
                                 <button type="button" class="btn btn-success btn-sm" id="userEditar" data-bs-toggle="modal" data-bs-target="#modalForm">Editar</button>
                                 <button type="button" class="btn btn-danger btn-sm" id="userEliminar" data-bs-toggle="modal" data-bs-target="#modalEliminar">Eliminar</button>
-                                <a href="#" class="btn btn-dark btn-sm">Cambiar Contraseña</a>
+                                <button type="button" class="btn btn-secondary btn-sm" id="userChangePassword" data-bs-toggle="modal" data-bs-target="#modalChangePassword">Cambiar contraseña</button>
                             </td>
                         </tr>
                     </template>  
@@ -139,7 +139,50 @@
             </div>
         </div>
 
+    
+
+         <!-- MODAL ChangePassword -->
+         <div class="modal fade" id="modalChangePassword" tabindex="-1" data-bs-keyboard="false" aria-hidden="true"  aria-labelledby="ModalLabel">
+            <div class="modal-dialog modal-xl modal-fullscreen-lg-down">
+                <div class="modal-content">
+                    <form class="changePasswordForm" role="presentation" id="formModalChangePassword" >
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="ModalLabel">Cambiar contraseña</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" fill="currentColor"></button>
+                        </div>
+                        <div class="modal-body" id="vistaModalChangePassword">
+                            <div class="row">
+                                <div class="col">
+        
+                                    <div class="mb-3 row d-none" id="modalPassword">
+                                        <label for="rol" class="col-sm-3 col-form-label">CONTRASEÑA:</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="changePasswordModal" value="" placeholder="INGRESE CONTRASEÑA" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row d-none" id="modalPassword2">
+                                        <label for="rol" class="col-sm-3 col-form-label"> CONFIRMAR CONTRASEÑA</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="changePasswordModal" value="" placeholder="INGRESE CONTRASEÑA" required>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="modal-footer">
+                            <button id="btnChangePassword" type="button" class="btn btn-primary" onclick="changePassword()">Cambiar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
     </div>
+    
 
     <div class="p-5"></div>
 

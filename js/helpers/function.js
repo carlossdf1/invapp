@@ -5,7 +5,7 @@ const roleName       = localStorage.getItem('roleName');
 const menu           = JSON.parse( localStorage.getItem('menu') );
 const group          = JSON.parse( localStorage.getItem('group'));
 
-const api = "https://inv-api.herokuapp.com/api/";
+const api = "https://invapi.onrender.com/api/";
 
 
 // ###################################################### FUNCIONES DE MODELO ###############################################################
