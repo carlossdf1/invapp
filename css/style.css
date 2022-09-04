@@ -171,7 +171,7 @@ footer a:hover {
 }
 
 .card-img-top {
-    width: 50%;
+    /* width: 60%; */
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -183,8 +183,16 @@ footer a:hover {
 }
 
 #svgDefault{
-    width: 30%;
+    width: 60%;
 }
+
+@media screen and (max-width: 900px) {
+    #svgDefault{
+        width: 100%;
+    }
+}
+
+
 @media screen and (min-width: 900px) {
     #btnShowRegister {
         padding-left: 25%;

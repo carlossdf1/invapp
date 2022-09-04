@@ -345,7 +345,8 @@ function gotoIndex(){
 }
 
 function redireccionamiento() {
-    const url = origin === "http://127.0.0.1:5500" ? "" : "/invapp";
+    // const url = origin === "http://127.0.0.1:5500" ? "" : "/invapp";
+    const url = origin === "http://127.0.0.1:5500" || origin.includes('http://192.168.1.') ? "" : "/invapp";
     return url;
 }
 
