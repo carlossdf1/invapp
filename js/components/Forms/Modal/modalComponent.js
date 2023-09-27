@@ -94,7 +94,7 @@ class Modal extends HTMLElement {
                         <input id="botonGuardar" type="submit" class="btn btn-danger" value="Guardar" onclick="">
                         <button id="botonEliminar" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar" onclick="eliminarModal()">Eliminar</button>
                         <button id="botonEditar" type="button" class="btn btn-success" onclick="editarModal()">Editar</button>
-                        <button id="botonRestaurar" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalRestaurar" onclick="restaurarModal()">Restaurar</button>
+                        <button id="botonRestaurar" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalRestaurar" onclick="eliminarModal()">Restaurar</button>
                         <button id="botonImprimir" type="button" class="btn btn-primary" onclick="imprimirElemento('vistaModal')">Imprimir</button>
                     </div>
                 </form>

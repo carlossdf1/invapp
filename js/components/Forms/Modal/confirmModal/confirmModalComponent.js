@@ -39,7 +39,7 @@ class confirmModal extends HTMLElement {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                            onclick="restaurarModalCancelar()">Cancelar</button>
+                            onclick="eliminarModalCancelar()">Cancelar</button>
                         <button id="botonRestaurarConfirmar" type="button" class="btn btn-success"
                             data-bs-dismiss="modal" onclick="restaurarModalSalir()">Restaurar</button>
                     </div>

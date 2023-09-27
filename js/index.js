@@ -34,5 +34,7 @@ function hiddenElements() {
     dNone('btn-eliminado', false );
 }
 
-darkModeChange();
-consultaData();
+window.addEventListener("load", async() => {
+    darkModeChange();
+    await consultaData();
+})

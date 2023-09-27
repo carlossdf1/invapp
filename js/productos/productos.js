@@ -1,15 +1,6 @@
-const productos = ( roleName == 'admin' || group.length > 1 ) ? api +  "product/products" : api +  `product/products/?group=${ group[0].name }`;
-const prodPrestados = ( roleName == 'admin') ? api + "product/products/?group=Prestamos"  : null;
-const prodEliminados = ( roleName == 'admin') ? api + "product/products/?group=Eliminados" : null;
-const ubicacion = api + "ubication";
-const categoria = api + "category";
-
 let myModalEliminar = new bootstrap.Modal(document.getElementById("modalEditar"));
 let myModaLRestaurar = new bootstrap.Modal(document.getElementById("modalRestaurar"));
 let myModal = new bootstrap.Modal(document.getElementById("modalEditar"));
-
-let listaUbicacion = consultaUbicacion();
-let listaCategoria = consultaCategoria();
 
 let idIn = ["nombreModal", "cantidadModal", "precioModal", "selectGrupoModal", "selectUbicacionModal", "selectCategoriaModal", "obsModal"];
 let idData = [ "name","category","quantity","price","ubication","group","observations","user"];
@@ -115,7 +106,7 @@ function vistaModal(id) {
         con++;
     });
 
-    document.getElementById("imgModal").srcset = modalProducto[0].img != "foto" && modalProducto[0].img != "" ? modalProducto[0].img : "";
+    document.getElementById("imgModal").srcset =  modalProducto[0].img ?? "";
     toggleInput(idIn, true);
 
     if ( modalProducto[0].active === true ) {
@@ -229,16 +220,7 @@ function eliminarModalSalir(id) {
     myModalEliminar.toggle()
 }
 
-//modal restaurar, animacion vista y captura de datos
-function restaurarModal() {
-    document.getElementById("modalEditar").style = "z-index: 1040; display: block;";
-}
-
-function restaurarModalCancelar() {
-    document.getElementById("modalEditar").style = "z-index: 1060; display: block;";
-}
-
-function restaurarModalSalir(id) {
+function restaurarModalSalir() {
     document.getElementById("modalEditar").style = "z-index: 1060; display: block;";
     myModaLRestaurar.toggle()
 }
@@ -267,8 +249,10 @@ async function readGetUrl(){
     if( !!res.ok | res !== null ) alert("Error al realizar la operacion");
     myModal.toggle();
     localStorage.removeItem("productos");
-    setTimeout(() => imprimir(), 1000 );
+    await imprimir();
 }
 
-imprimir();
-darkModeChange();
+window.addEventListener("load", async() => {
+    darkModeChange();
+    await imprimir();
+})
