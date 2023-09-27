@@ -1,88 +1,9 @@
-const email          = localStorage.getItem('email');
-const nombre         = localStorage.getItem('username');
-const roleId         = localStorage.getItem('roleId');
-const roleName       = localStorage.getItem('roleName');
-const menu           = JSON.parse( localStorage.getItem('menu') );
-const group          = JSON.parse( localStorage.getItem('group'));
-
-const api = "https://invapi.onrender.com/api/";
-
-
-// ###################################################### FUNCIONES DE MODELO ###############################################################
-
-/**
- * Función que permite agregar atravez de un objeto un nuevo producto a la bd
- *
- * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
- * @author Emmanuel Correa <ebcorreac[at]gmail.com>
- * 
- * @version 2021-05-24
- */
- async function addData(data, route, method) {
-
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    const requestOptions = {
-
-        method: method,
-        headers: myHeaders,
-        body: data,
-        redirect: 'follow'
-
-    };
-
-    return new Promise((resolve, reject) => {
-        fetch(api + route, requestOptions)
-            .then( resp => { resolve(resp) })
-            .then( result => { resolve(result) })
-            .catch( error => { resolve(error) });
-    });
-}
-
-/**
- * Permite agregar elemento a la BD indicandole la url, el header y los datos
- *
- * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
- * 
- * @version 2021-05-24
- */
- function agregar(url, myHeaders, data) {
-
-    const requestOptions = {
-
-        method: 'POST',
-        headers: myHeaders,
-        body: data,
-        redirect: 'follow'
-
-    };
-
-    console.log(requestOptions);
-
-    fetch(api + url, requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
-}
-
-/**
- * Función que rescata los datos de la api
- *
- * @author Emmanuel Correa <ebcorrea[at]gmail.com>
- * @author Carlos Correa   <carlos.sdf1[at]gmail.com>
- * @version 2021-05-06
- */
- function consulta(url) {
-    return new Promise((resolve, reject) => {
-        const requestOptions = { method: 'GET', redirect: 'follow' };
-
-        fetch(url, requestOptions)
-            .then(response => response.json())
-            .then(data => { resolve(JSON.parse(JSON.stringify(data))); })
-            .catch(err => console.log(err))
-    });
-}
+const email = localStorage.getItem('email');
+const nombre = localStorage.getItem('username');
+const roleId = localStorage.getItem('roleId');
+const roleName = localStorage.getItem('roleName');
+const menu = JSON.parse( localStorage.getItem('menu') );
+const group = JSON.parse( localStorage.getItem('group'));
 
 // ###################################################### FUNCIONES DE CONTROL ##############################################################
 
@@ -134,8 +55,8 @@ function buscar(autobuscar) {
 
     } else { console.log("NO HAY DATOS") }
 
-    console.log(resultadoBusqueda);
-    imprimirLista(resultadoBusqueda);
+    // console.log(resultadoBusqueda);
+    // printTable(resultadoBusqueda);
     return resultadoBusqueda
 
 }
@@ -165,7 +86,7 @@ async function urlRols() {
 
     if ( roleId !== '5f5b708a0c56761a0246fda7') {
 
-        switch ( window.location.href) {
+        switch ( window.location.href ) {
             case url.children.urlGrupos.children.url.href:
                 gotoIndex();
                 break;
@@ -309,8 +230,7 @@ function addOptions( domElement, array ) {
  * @version 2021-05-06
  */
  function imprimirElemento(id) {
-    //const movil = navigator.userAgentData.mobile;
-    const elemento = document.getElementById(id);
+    const element = document.getElementById(id);
     const ventana = window.open('', 'PRINT', 'height=400,width=600');
     const movil = navigator.userAgent.search(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|Firefox/) > -1;  // Detecta si es movil
      
@@ -318,7 +238,7 @@ function addOptions( domElement, array ) {
     ventana.document.write("<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6' crossorigin='anonymous'>");
     ventana.document.write('<script>window.blur();</script>');
     ventana.document.write('</head><body>');
-    ventana.document.write(elemento.outerHTML);
+    ventana.document.write( element.outerHTML );
     ventana.document.write('<script src="../../js/helpers/function.js" type="text/javascript"></script>');
     ventana.document.write('<script>lightMode();</script>');
     ventana.document.write('<script>window.onload=window.print;</script>');
@@ -334,18 +254,17 @@ function addOptions( domElement, array ) {
     ventana.document.write('</body></html>');
     ventana.document.close();
 
-    if ( elemento.id === "vistaModal" ) ventana = obtenerModal( ventana );
+    if ( element.id === "vistaModal" ) ventana = obtenerModal( ventana );
     ventana.focus();
     return true;
 }
 
 //######################## REDIRECCIONAMIENTO ######################################
 function gotoIndex(){
-    location.replace(origin + redireccionamiento() + '/index.html');
+    location.replace( origin + redireccionamiento() + '/index.html');
 }
 
 function redireccionamiento() {
-    // const url = origin === "http://127.0.0.1:5500" ? "" : "/invapp";
     const url = origin === "http://127.0.0.1:5500" || origin.includes('http://192.168.1.') ? "" : "/invapp";
     return url;
 }

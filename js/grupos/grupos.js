@@ -20,16 +20,9 @@ async function consultaGrupos() {
  * @version 2021-05-06
  */
 
-consultaGrupos();
-
 async function imprimirGrupos() {
-
     const datos = await consultaGrupos()
-    const td = "</td><td>";
-
-    for (let i in datos) {
-        document.getElementById("lista").innerHTML +=
-            '<tr scope="row"><td>' + datos[i].name + '</td></tr>';
-    }
-
+    for (let i in datos)  document.getElementById("lista").innerHTML += '<tr scope="row"><td>' + datos[i].name + '</td></tr>';
 }
+
+consultaGrupos();
