@@ -5,7 +5,6 @@ class Header extends HTMLElement {
 
     connectedCallback() {
         this.innerHTML = `
-        
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark primary-color">
         <div class="container-fluid">
             <a class="navbar-brand" id="url" href="/index.html">Inventario App</a>
@@ -14,19 +13,19 @@ class Header extends HTMLElement {
               </button>
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="enlaces">
-                    <li class="nav-item" id="urlGrupos" >
-                        <a class="nav-link" id="url" href="/view/grupos/grupos.html">Grupos</a>
-                    </li>
                     <li class="nav-item dropdown" id="urlProductos" >
                         <a class="nav-link dropdown-toggle" id="url" href="/view/productos/productos.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Inventario
                         </a>
-                        <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" id="url" href="/view/productos/productos.html" >Disponibles</a></li>
                             <li><a class="dropdown-item" id="url" href="/view/productos/productos.html?estado=prestamo" >En prestamo</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" id="url" href="/view/productos/productos.html?estado=eliminado" >Eliminados</a></li>
                         </ul>
+                    </li>
+                    <li class="nav-item" id="urlGrupos" >
+                        <a class="nav-link" id="url" href="/view/grupos/grupos.html">Grupos</a>
                     </li>
                     <li class="nav-item" id="urlUsuarios" >
                         <a class="nav-link" id="url" href="/view/users/users.html">Usuarios</a>
@@ -83,7 +82,6 @@ class Header extends HTMLElement {
     </nav>
         `;
     }
-
 }
 
 customElements.define('header-component', Header);

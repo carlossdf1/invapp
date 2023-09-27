@@ -9,8 +9,6 @@ body {
     flex-direction: column;
     margin: 0;
     padding: 0;
-    /* line-height: 20px; */
-    /* width: 100%; */
 }
 
 body.darkmode {
@@ -35,7 +33,6 @@ header {
     height: 35rem;
     background-color: rgba(0, 0, 0, 0.5);
     background-blend-mode: darken;
-    /* min-height: 100vh; */
 }
 
 #title-index{
@@ -94,12 +91,6 @@ header {
     background-color: #2196f3;
     color: #fff;
 }
-
-/* background-color: #212529; */
-
-/* #botonUrl {
-    margin: 0% !important;
-} */
         
 footer {
  background-color: #2196f3;
@@ -122,15 +113,12 @@ footer a {
 }
 
 footer a:hover {
-  /* padding-top: 0px; */
   box-shadow: inset 0 -2px 0 0 #333;
-  
 }
 
 .copyright {
   color : #C7C7C7;
   float : right;
-  /* margin : 0; */
 }
 
 .copyright a{
@@ -141,37 +129,11 @@ footer a:hover {
   padding-inline-end  : 0px;
 }
 
-@media screen and (max-width: 1366px) {
-    .container-info{
-    
-        margin-top: -40px;
-        padding-left: 3%;
-        padding-right: 3%;
-        padding-bottom: 10%;
-       
-    }
-}
-
-@media screen and (max-width: 800px) {
-    .container-info{
-    
-        margin-top: 20px;
-        padding-left: 5%;
-        padding-right: 5%;
-        padding-bottom: 17%;
-       
-    }
-}
-
 .action{
     text-align: right;
-    /* align-content: flex-end;
-    align-items: flex-end;
-    align-content: flex-end; */
 }
 
 .card-img-top {
-    /* width: 60%; */
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -186,6 +148,35 @@ footer a:hover {
     width: 60%;
 }
 
+.pagination{
+    flex-wrap: wrap;
+}
+
+#accionesTabla{
+    display: flex;
+    justify-content: center;
+}
+
+
+@media screen and (max-width: 1366px) {
+    .container-info{
+        margin-top: -40px;
+        padding-left: 3%;
+        padding-right: 3%;
+        padding-bottom: 10%;
+       
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .container-info{
+        margin-top: 20px;
+        padding-left: 5%;
+        padding-right: 5%;
+        padding-bottom: 17%; 
+    }
+}
+
 @media screen and (max-width: 900px) {
     #svgDefault{
         width: 100%;
@@ -198,13 +189,4 @@ footer a:hover {
         padding-left: 25%;
         padding-right: 25%;
     }
-}
-
-.pagination{
-    flex-wrap: wrap;
-}
-
-#accionesTabla{
-    display: flex;
-    justify-content: center;
 }
