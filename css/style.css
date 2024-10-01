@@ -7,8 +7,11 @@ html {
 body {
     display: flex;
     flex-direction: column;
+    min-height: 100%;
     margin: 0;
     padding: 0;
+    /* background-color: #FFD600; */
+    /* color: black; */
 }
 
 body.darkmode {
@@ -25,7 +28,58 @@ body.darkmode {
     color: white !important;
 }
 
-header {
+
+table {
+    width: auto;
+    border-collapse: collapse;
+    font-size: 15px;
+    /* background-color: #2196f3; */
+  }
+  
+  th {
+    background-color: #2196f3;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 1px; /* Ajusta este valor según tus necesidades */
+  }
+  
+  th, td {
+    border: 1px solid black;
+    padding: 1px;
+    /* text-align: center; */
+  }
+  tr {
+  
+    height: 1px; /* Ajusta la altura mínima */
+    text-align: center;
+  }
+  
+  /* Ajustar el ancho de las columnas */
+  th:nth-child(1), td:nth-child(1) {
+    width: 20%;
+  }
+  th:nth-child(2), td:nth-child(2) {
+    width: 30%;
+  }
+  th:nth-child(3), td:nth-child(3) {
+    width: 40%;
+  }
+  th:nth-child(4), td:nth-child(4) {
+    width:5%;
+    /* display: flexbox; */
+    /* align-items: center; */
+    /* justify-content: center; */
+  }
+  th:nth-child(5), td:nth-child(5) {
+    width:0%;
+  }
+  th:nth-child(6), td:nth-child(6) {
+    width:10%;
+  }
+
+.welcome {
     background: url("../img/header2.jpg");
     background-size: cover;
     background-position: center;
@@ -91,43 +145,6 @@ header {
     background-color: #2196f3;
     color: #fff;
 }
-        
-footer {
- background-color: #2196f3;
- width: 100%;
- /* padding-top: auto; */
- padding: 0.5% 0.5% 0.5% 0.5%;
- color: #fff;
- bottom: 0;
- position: absolute;
-}
-
-footer section {
-  float: left;
-}
-
-footer a {
-  margin: 0px 1px;
-  color: white;
-  text-decoration: none;
-}
-
-footer a:hover {
-  box-shadow: inset 0 -2px 0 0 #333;
-}
-
-.copyright {
-  color : #C7C7C7;
-  float : right;
-}
-
-.copyright a{
-  text-decoration     : none;
-  color               : white;
-  font-weight         : bold;
-  padding-inline-end  : 0.5rem;
-  padding-inline-end  : 0px;
-}
 
 .action{
     text-align: right;
@@ -155,6 +172,27 @@ footer a:hover {
 #accionesTabla{
     display: flex;
     justify-content: center;
+}
+
+
+
+.fader{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: black;
+}
+
+.fader .message{
+  color: #2196f3;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: message 1s alternate infinite ease-in-out
 }
 
 

@@ -4,62 +4,31 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <link href="css/style.css" rel="stylesheet" type="text/css">
     <script src="js/components/header.js" type="text/javascript" defer></script>
-    <script src="js/config/connection.js" type="text/javascript"></script>
-    <script src="js/helpers/interactionApi.js" type="text/javascript"></script>
-    <script src="js/helpers/function.js" type="text/javascript"></script>
-    <script src="js/components/footer.js" type="text/javascript" defer></script>
+    <!-- <script src="js/components/loader.js" type="text/javascript"></script> -->
+    <script src="js/components/boxsInfo.js" type="text/javascript"></script>
+    <script src="js/components/footer.js" type="text/javascript"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
     <title>InvApp</title>
 </head>
     <body>
-        <header>
+         <!-- <loader-component></loader-component> -->
+
             <header-component></header-component>
-            <div class="d-flex justify-content-center align-items-center">
+            <!-- <div id="alert-msg" class="alert" role="alert" ></div> -->
+            <div  class="d-flex justify-content-center align-items-center welcome">
                 <h1 id="title-index" class="display-4 text-white text-center">Aqui podras ver los datos en tiempo real</h1>
             </div>
-        </header>
-
-        <div class="container-info">
-            <div class="row row-cols-1 row-cols-md-3 g-4">
-                <div class="col-mb-4">
-                    <div class="card text-center">
-                        <div class="card-header">Disponibles</div>
-                        <div class="card-body">
-                            <h2 class="card-title" id="numeroProductos">N°</h2>
-                            <p class="card-text">Listados</p>
-                            <a href="view/productos/productos.html" class="btn btn-index ">Ver</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-mb-4">
-                    <div class="card text-center">
-                        <div class="card-header">Prestados</div>
-                        <div class="card-body">
-                            <h2 class="card-title" id="numeroPrestados">N°</h2>
-                            <p class="card-text">Listados</p>
-                            <a id="btn-prestado" href="view/productos/productos.html?estado=prestamo" class="btn btn-index">Ver</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-mb-4">
-                    <div class="card text-center">
-                        <div class="card-header">Eliminados</div>
-                        <div class="card-body">
-                            <h2 class="card-title" id="numeroEliminados">N°</h2>
-                            <p class="card-text">Listados</p>
-                            <a id="btn-eliminado" href="view/productos/productos.html?estado=eliminado" class="btn btn-index">Ver</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <box-component></box-component>
 
         <footer-component></footer-component>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js " integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf " crossorigin="anonymous "></script>
-        <script src='js/productos/interactionApiProductos.js' type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>   
+        <script src="js/config/connection.js" type="text/javascript"></script>
+        <script src="js/helpers/function.js" type="text/javascript"></script> 
         <script src='js/index.js' type="text/javascript"></script>
     </body>
 </html>
