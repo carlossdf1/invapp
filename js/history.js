@@ -43,3 +43,4 @@ async function paginado( paginas, limit = 10 ){
 }
 
 imprimirHistorial();
+darkModeChange();

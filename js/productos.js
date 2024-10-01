@@ -44,7 +44,7 @@ async function printPage( index, limit = 10){
 
 async function printTable( data, index, limit = 10 ) {
     const inversion = [];
-    document.getElementById("lista").innerHTML ="";
+    document.getElementById("lista").innerHTML = "";
     index == null ? index = 0 : index;
     for ( let i = index; i < index + limit; i++) {
         const { uid, name, quantity, ubication, price } = data[i];
